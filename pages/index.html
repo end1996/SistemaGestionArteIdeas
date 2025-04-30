@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="colegios.html" class="nav-link">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Producción <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Agenda <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Reportes <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Configuración <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span>Bienvenido, Administrador</span>
+                </div>
+            </div>
+
+            <!-- Tarjetas de estadísticas -->
+            <div class="dashboard-cards">
+                <div class="card status-card new">
+                    <h3>Pedidos Nuevos</h3>
+                    <div class="number">12</div>
+                    <a href="pedidos.html" class="btn btn-sm btn-primary">Ver detalles</a>
+                </div>
+                <div class="card status-card in-progress">
+                    <h3>En Producción</h3>
+                    <div class="number">8</div>
+                    <a href="pedidos.html" class="btn btn-sm btn-primary">Ver detalles</a>
+                </div>
+                <div class="card status-card completed">
+                    <h3>Entregados</h3>
+                    <div class="number">25</div>
+                    <a href="pedidos.html" class="btn btn-sm btn-primary">Ver detalles</a>
+                </div>
+                <div class="card status-card alert">
+                    <h3>Stock Bajo</h3>
+                    <div class="number">3</div>
+                    <a href="inventario.html" class="btn btn-sm btn-primary">Ver detalles</a>
+                </div>
+            </div>
+
+            <!-- Alertas -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Alertas de Inventario</h2>
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Stock Bajo:</strong> Papel fotográfico 10x15 (5 unidades restantes)
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Stock Bajo:</strong> Químico Revelador (2 litros restantes)
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Stock Bajo:</strong> Varillas de Marco Tipo A (3 unidades restantes)
+                </div>
+            </div>
+
+            <!-- Pedidos recientes -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Pedidos Recientes</h2>
+                    <a href="pedidos.html" class="btn btn-sm btn-primary">Ver todos</a>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Servicio</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Juan Pérez</td>
+                                <td>Impresión Minilab</td>
+                                <td><span class="badge badge-info">Nuevo</span></td>
+                                <td>15/04/2023</td>
+                                <td class="actions">
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>María López</td>
+                                <td>Enmarcado</td>
+                                <td><span class="badge badge-warning">En Producción</span></td>
+                                <td>12/04/2023</td>
+                                <td class="actions">
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Colegio San José</td>
+                                <td>Recordatorio Escolar</td>
+                                <td><span class="badge badge-warning">En Producción</span></td>
+                                <td>10/04/2023</td>
+                                <td class="actions">
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Sánchez</td>
+                                <td>Retoque Fotográfico</td>
+                                <td><span class="badge badge-success">Entregado</span></td>
+                                <td>08/04/2023</td>
+                                <td class="actions">
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

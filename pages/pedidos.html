@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pedidos - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link active">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="colegios.html" class="nav-link">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Producción <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Agenda <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Reportes <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Configuración <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Pedidos</h1>
+                <button class="btn btn-primary" id="btnNuevoPedido">Nuevo Pedido</button>
+            </div>
+
+            <!-- Filtros de pedidos -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2 class="card-title">Filtros</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroCliente" class="form-label">Cliente</label>
+                            <input type="text" id="filtroCliente" class="form-control" placeholder="Buscar por cliente">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroServicio" class="form-label">Tipo de Servicio</label>
+                            <select id="filtroServicio" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="impresion">Impresión Minilab</option>
+                                <option value="enmarcado">Enmarcado</option>
+                                <option value="recordatorio">Recordatorio Escolar</option>
+                                <option value="retoque">Retoque Fotográfico</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroEstado" class="form-label">Estado</label>
+                            <select id="filtroEstado" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="nuevo">Nuevo</option>
+                                <option value="produccion">En Producción</option>
+                                <option value="entregado">Entregado</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-primary">Aplicar Filtros</button>
+                </div>
+            </div>
+
+            <!-- Tabla de pedidos -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Listado de Pedidos</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente/Colegio</th>
+                                <th>Tipo de Servicio</th>
+                                <th>Estado</th>
+                                <th>Fotografías asociadas</th>
+                                <th>Diseño/plantilla elegida</th>
+                                <th>Materiales utilizados</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P001</td>
+                                <td>Juan Pérez</td>
+                                <td>Impresión Minilab</td>
+                                <td><span class="badge badge-info">Nuevo</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" onclick="mostrarDetalle('P001', 'Juan Pérez', 'Impresión Minilab', 'Nuevo', '15/04/2023', 'S/ 45.00')">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P002</td>
+                                <td>María López</td>
+                                <td>Enmarcado</td>
+                                <td><span class="badge badge-warning">Producción</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" onclick="mostrarDetalle('P002', 'María López', 'Enmarcado', 'En Producción', '12/04/2023', 'S/ 120.00')">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P003</td>
+                                <td>Colegio San José</td>
+                                <td>Recordatorio Escolar</td>
+                                <td><span class="badge badge-warning">Producción</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" onclick="mostrarDetalle('P003', 'Colegio San José', 'Recordatorio Escolar', 'En Producción', '10/04/2023', 'S/ 850.00')">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P004</td>
+                                <td>Carlos Sánchez</td>
+                                <td>Retoque Fotográfico</td>
+                                <td><span class="badge badge-success">Entregado</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" onclick="mostrarDetalle('P004', 'Carlos Sánchez', 'Retoque Fotográfico', 'Entregado', '08/04/2023', 'S/ 75.00')">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P005</td>
+                                <td>Ana Gómez</td>
+                                <td>Enmarcado</td>
+                                <td><span class="badge badge-success">Entregado</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" onclick="mostrarDetalle('P005', 'Ana Gómez', 'Enmarcado', 'Entregado', '05/04/2023', 'S/ 150.00')">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <div class="pagination">
+                        <button class="btn btn-sm">Anterior</button>
+                        <span>Página 1 de 3</span>
+                        <button class="btn btn-sm btn-primary">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de nuevo pedido -->
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal" id="nuevoPedidoModal">
+        <div class="modal-header">
+            <h3 class="modal-title">Nuevo Pedido</h3>
+            <button class="modal-close" id="cerrarModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formNuevoPedido">
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="tipoCliente" class="form-label">Tipo de Cliente</label>
+                            <select id="tipoCliente" class="form-control">
+                                <option value="particular">Particular</option>
+                                <option value="colegio">Colegio</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="cliente" class="form-label">Cliente</label>
+                            <select id="cliente" class="form-control">
+                                <option value="">Seleccione cliente</option>
+                                <option value="1">Juan Pérez</option>
+                                <option value="2">María López</option>
+                                <option value="3">Carlos Sánchez</option>
+                                <option value="4">Ana Gómez</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
+                    <select id="tipoServicio" class="form-control">
+                        <option value="">Seleccione servicio</option>
+                        <option value="impresion">Impresión Minilab</option>
+                        <option value="enmarcado">Enmarcado</option>
+                        <option value="recordatorio">Recordatorio Escolar</option>
+                        <option value="retoque">Retoque Fotográfico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del pedido"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input type="date" id="fecha" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select id="estado" class="form-control">
+                                <option value="nuevo">Nuevo</option>
+                                <option value="produccion">En Producción</option>
+                                <option value="entregado">Entregado</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="total" class="form-label">Total (S/)</label>
+                            <input type="number" id="total" class="form-control" min="0" step="0.01">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelarPedido">Cancelar</button>
+            <button class="btn btn-primary" id="guardarPedido">Guardar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Modal de detalle de pedido -->
+    <div class="modal-backdrop" id="detalleBackdrop" style="display:none;"></div>
+    <div class="modal" id="detallePedidoModal" style="display:none;">
+        <div class="modal-header">
+            <h3 class="modal-title">Detalle del Pedido</h3>
+            <button class="modal-close" onclick="cerrarDetalle()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p><strong>ID:</strong> <span id="detalleId"></span></p>
+            <p><strong>Cliente/Colegio:</strong> <span id="detalleCliente"></span></p>
+            <p><strong>Tipo de Servicio:</strong> <span id="detalleServicio"></span></p>
+            <p><strong>Estado:</strong> <span id="detalleEstado"></span></p>
+            <p><strong>Fecha:</strong> <span id="detalleFecha"></span></p>
+            <p><strong>Total:</strong> <span id="detalleTotal"></span></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="cerrarDetalle()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        function mostrarDetalle(id, cliente, servicio, estado, fecha, total) {
+            document.getElementById('detalleId').textContent = id;
+            document.getElementById('detalleCliente').textContent = cliente;
+            document.getElementById('detalleServicio').textContent = servicio;
+            document.getElementById('detalleEstado').textContent = estado;
+            document.getElementById('detalleFecha').textContent = fecha;
+            document.getElementById('detalleTotal').textContent = total;
+            document.getElementById('detallePedidoModal').style.display = 'block';
+            document.getElementById('detalleBackdrop').style.display = 'block';
+        }
+        function cerrarDetalle() {
+            document.getElementById('detallePedidoModal').style.display = 'none';
+            document.getElementById('detalleBackdrop').style.display = 'none';
+        }
+    </script>
+
+    <style>
+        /* Estilos base */
+        .container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        /* Estilos responsive mejorados */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+            }
+
+            .main-content {
+                width: 100%;
+                padding: 1rem 0.5rem;
+            }
+
+            .card {
+                margin: 0.5rem 0;
+                border-radius: 0;
+            }
+
+            .table-container {
+                margin: 0 -0.5rem;
+                width: calc(100% + 1rem);
+            }
+
+            .form-row {
+                margin: 0;
+            }
+
+            .form-col {
+                padding: 0 0.5rem;
+            }
+
+            /* Ajustes para el menú en móvil */
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-menu.active {
+                display: block;
+            }
+
+            .logo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Ajustes para los filtros en móvil */
+            .card.mb-3 {
+                margin-bottom: 0.5rem !important;
+            }
+
+            .form-control {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Ajustes para la tabla */
+            .table {
+                font-size: 0.875rem;
+            }
+
+            .table th,
+            .table td {
+                padding: 0.5rem;
+            }
+
+            /* Ajustes para los modales */
+            .modal {
+                width: 95%;
+                margin: 2.5% auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            /* Mejoras en la visualización de botones */
+            .actions {
+                display: flex;
+                gap: 0.25rem;
+            }
+
+            .btn-sm {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+            }
+
+            /* Indicador de scroll */
+            .scroll-indicator {
+                position: fixed;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.875rem;
+                z-index: 1000;
+            }
+        }
+
+        /* Estilos para pantallas muy pequeñas */
+        @media screen and (max-width: 375px) {
+            .table th,
+            .table td {
+                padding: 0.25rem;
+                font-size: 0.75rem;
+            }
+
+            .btn-sm {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+
+    <!-- Botón para mostrar/ocultar menú en móvil -->
+    <script>
+        // Función para toggle del menú en móvil
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Ajustar contenido al cargar y al cambiar el tamaño de la ventana
+        function adjustContent() {
+            const isMobile = window.innerWidth <= 768;
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            if (isMobile) {
+                mainContent.style.marginLeft = '0';
+                sidebar.style.position = 'relative';
+            } else {
+                mainContent.style.marginLeft = '250px';
+                sidebar.style.position = 'fixed';
+            }
+        }
+
+        window.addEventListener('load', adjustContent);
+        window.addEventListener('resize', adjustContent);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Colegios - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="colegios.html" class="nav-link active">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Producción <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Agenda <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Reportes <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Configuración <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Colegios</h1>
+                <button class="btn btn-primary" id="btnNuevoColegio">Nuevo Colegio</button>
+            </div>
+
+            <!-- Filtros de colegios -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2 class="card-title">Filtros</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroNombre" class="form-label">Nombre</label>
+                            <input type="text" id="filtroNombre" class="form-control" placeholder="Buscar por nombre">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroDireccion" class="form-label">Dirección</label>
+                            <input type="text" id="filtroDireccion" class="form-control" placeholder="Buscar por dirección">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-primary">Aplicar Filtros</button>
+                </div>
+            </div>
+
+            <!-- Tabla de colegios -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Listado de Colegios</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Contacto</th>
+                                <th>Contratos Activos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>COL001</td>
+                                <td>Colegio San José</td>
+                                <td>Av. Principal 123</td>
+                                <td>01-4562890</td>
+                                <td>1</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>COL002</td>
+                                <td>Colegio Santa María</td>
+                                <td>Jr. Los Olivos 456</td>
+                                <td>01-4562891</td>
+                                <td>2</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>COL003</td>
+                                <td>Colegio Nacional</td>
+                                <td>Av. República 789</td>
+                                <td>01-4562892</td>
+                                <td>0</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>COL004</td>
+                                <td>Colegio Particular ABC</td>
+                                <td>Calle Las Flores 234</td>
+                                <td>01-4562893</td>
+                                <td>1</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <div class="pagination">
+                        <button class="btn btn-sm">Anterior</button>
+                        <span>Página 1 de 1</span>
+                        <button class="btn btn-sm">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de nuevo colegio -->
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal" id="nuevoColegioModal">
+        <div class="modal-header">
+            <h3 class="modal-title">Nuevo Colegio</h3>
+            <button class="modal-close" id="cerrarModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formNuevoColegio">
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" placeholder="Nombre del colegio">
+                </div>
+                <div class="form-group">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" id="direccion" class="form-control" placeholder="Dirección completa">
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" id="telefono" class="form-control" placeholder="Teléfono">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Correo electrónico">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contacto" class="form-label">Persona de Contacto</label>
+                    <input type="text" id="contacto" class="form-control" placeholder="Nombre de la persona de contacto">
+                </div>
+                <div class="form-group">
+                    <label for="observaciones" class="form-label">Observaciones</label>
+                    <textarea id="observaciones" class="form-control" rows="2" placeholder="Observaciones adicionales"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelarColegio">Cancelar</button>
+            <button class="btn btn-primary" id="guardarColegio">Guardar Colegio</button>
+        </div>
+    </div>
+
+    <style>
+        /* Estilos adicionales específicos de colegios */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .card-footer {
+            padding: var(--spacing-md);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</body>
+</html>
