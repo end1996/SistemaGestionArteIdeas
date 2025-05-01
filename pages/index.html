@@ -11,6 +11,9 @@
         <!-- Menú lateral -->
         <div class="sidebar">
             <div class="logo">FotoStudio</div>
+            <button class="menu-toggle" id="menuToggle">
+                <span class="menu-icon"></span>
+            </button>
             <nav class="nav-menu">
                 <ul>
                     <li class="nav-item">
@@ -64,7 +67,7 @@
                     <a href="pedidos.html" class="btn btn-sm btn-primary">Ver detalles</a>
                 </div>
                 <div class="card status-card in-progress">
-                    <h3>En Producción</h3>
+                    <h3>Producción</h3>
                     <div class="number">8</div>
                     <a href="pedidos.html" class="btn btn-sm btn-primary">Ver detalles</a>
                 </div>
@@ -126,7 +129,7 @@
                             <tr>
                                 <td>María López</td>
                                 <td>Enmarcado</td>
-                                <td><span class="badge badge-warning">En Producción</span></td>
+                                <td><span class="badge badge-warning">Producción</span></td>
                                 <td>12/04/2023</td>
                                 <td class="actions">
                                     <a href="#" class="btn btn-sm btn-primary">Ver</a>
@@ -135,7 +138,7 @@
                             <tr>
                                 <td>Colegio San José</td>
                                 <td>Recordatorio Escolar</td>
-                                <td><span class="badge badge-warning">En Producción</span></td>
+                                <td><span class="badge badge-warning">Producción</span></td>
                                 <td>10/04/2023</td>
                                 <td class="actions">
                                     <a href="#" class="btn btn-sm btn-primary">Ver</a>
@@ -156,5 +159,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            this.classList.toggle('menu-active');
+        });
+    </script>
 </body>
 </html> 

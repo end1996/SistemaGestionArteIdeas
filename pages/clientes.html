@@ -5,6 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Clientes - Sistema de Gestión Fotográfica</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        /* Estilos base */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Estilos responsivos */
+        @media screen and (max-width: 768px) {
+            .container {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 0.5rem;
+                width: 100%;
+            }
+
+            /* Ajustes de la tabla para móvil */
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 0.9rem;
+            }
+
+            .table thead {
+                background: #f8f9fa;
+            }
+
+            .table th {
+                padding: 0.8rem;
+                text-align: left;
+                font-weight: 600;
+                color: #333;
+                white-space: nowrap;
+            }
+
+            .table tr {
+                border-bottom: 1px solid #eee;
+            }
+
+            .table td {
+                padding: 0.8rem;
+                white-space: nowrap;
+            }
+
+            /* Ancho de las columnas */
+            .table th:nth-child(1),
+            .table td:nth-child(1) { /* ID */
+                min-width: 80px;
+            }
+
+            .table th:nth-child(2),
+            .table td:nth-child(2) { /* Nombre */
+                min-width: 150px;
+            }
+
+            .table th:nth-child(3),
+            .table td:nth-child(3) { /* Tipo */
+                min-width: 100px;
+            }
+
+            .table th:nth-child(4),
+            .table td:nth-child(4) { /* Contacto */
+                min-width: 120px;
+            }
+
+            .table th:nth-child(5),
+            .table td:nth-child(5) { /* Colegio */
+                min-width: 150px;
+            }
+
+            /* Botones de acción */
+            .actions {
+                white-space: nowrap;
+                min-width: 120px;
+            }
+
+            .btn-sm {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+                border-radius: 4px;
+                margin: 0 0.2rem;
+            }
+
+            .btn-primary {
+                background: #4267B2;
+                color: white;
+                border: none;
+            }
+
+            .btn-secondary {
+                background: #dc3545;
+                color: white;
+                border: none;
+            }
+
+            /* Ajustes de los filtros */
+            .card {
+                margin-bottom: 1rem;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+
+            /* Paginación */
+            .pagination {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.8rem;
+                background: white;
+            }
+
+            .pagination button {
+                padding: 0.5rem 1rem;
+            }
+
+            .pagination-info {
+                color: #666;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -101,55 +229,55 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>C001</td>
-                                <td>Juan Pérez</td>
-                                <td>Particular</td>
-                                <td>987654321</td>
-                                <td>-</td>
+                                <td data-label="ID">C001</td>
+                                <td data-label="Nombre">Juan Pérez</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654321</td>
+                                <td data-label="Colegio">-</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-primary">Ver</button>
                                     <button class="btn btn-sm btn-secondary">Editar</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>C002</td>
-                                <td>María López</td>
-                                <td>Particular</td>
-                                <td>987654322</td>
-                                <td>-</td>
+                                <td data-label="ID">C002</td>
+                                <td data-label="Nombre">María López</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654322</td>
+                                <td data-label="Colegio">-</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-primary">Ver</button>
                                     <button class="btn btn-sm btn-secondary">Editar</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>C003</td>
-                                <td>Colegio San José</td>
-                                <td>Colegio</td>
-                                <td>01-4562890</td>
-                                <td>Colegio San José</td>
+                                <td data-label="ID">C003</td>
+                                <td data-label="Nombre">Colegio San José</td>
+                                <td data-label="Tipo">Colegio</td>
+                                <td data-label="Contacto">01-4562890</td>
+                                <td data-label="Colegio">Colegio San José</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-primary">Ver</button>
                                     <button class="btn btn-sm btn-secondary">Editar</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>C004</td>
-                                <td>Carlos Sánchez</td>
-                                <td>Particular</td>
-                                <td>987654324</td>
-                                <td>-</td>
+                                <td data-label="ID">C004</td>
+                                <td data-label="Nombre">Carlos Sánchez</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654324</td>
+                                <td data-label="Colegio">-</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-primary">Ver</button>
                                     <button class="btn btn-sm btn-secondary">Editar</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>C005</td>
-                                <td>Ana Gómez</td>
-                                <td>Particular</td>
-                                <td>987654325</td>
-                                <td>-</td>
+                                <td data-label="ID">C005</td>
+                                <td data-label="Nombre">Ana Gómez</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654325</td>
+                                <td data-label="Colegio">-</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-primary">Ver</button>
                                     <button class="btn btn-sm btn-secondary">Editar</button>

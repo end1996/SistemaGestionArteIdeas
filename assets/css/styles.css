@@ -233,12 +233,29 @@ button, input, select, textarea {
 
 .status-card {
   text-align: center;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 180px;
+}
+
+.status-card h3 {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-medium);
 }
 
 .status-card .number {
   font-size: 2.5rem;
   font-weight: bold;
-  margin: var(--spacing-md) 0;
+  margin: var(--spacing-sm) 0;
+  line-height: 1;
+}
+
+.status-card .btn {
+  margin-top: auto;
 }
 
 .status-card.new {
@@ -426,36 +443,271 @@ button, input, select, textarea {
   gap: var(--spacing-sm);
 }
 
+/* Botón de menú móvil */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background: var(--dark);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-icon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--white);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--white);
+  position: absolute;
+  transition: transform 0.3s;
+}
+
+.menu-icon::before {
+  top: -6px;
+}
+
+.menu-icon::after {
+  bottom: -6px;
+}
+
+.menu-active .menu-icon {
+  background-color: transparent;
+}
+
+.menu-active .menu-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.menu-active .menu-icon::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .sidebar {
-    width: 0;
-    padding: 0;
-  }
-  
-  .main-content {
-    margin-left: 0;
-  }
-  
-  .mobile-toggle {
-    display: block;
-  }
-  
-  .sidebar.active {
-    width: 250px;
-    padding: var(--spacing-md);
-  }
-  
-  .dashboard-cards {
-    grid-template-columns: 1fr;
-  }
-  
-  .form-row {
+  .container {
     flex-direction: column;
   }
-  
-  .form-col {
+
+  .sidebar {
     width: 100%;
+    height: auto;
+    position: relative;
+    display: none;
     margin-bottom: var(--spacing-sm);
+  }
+
+  .sidebar.active {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: var(--spacing-sm);
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    z-index: 1000;
+    background: var(--primary);
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-sm);
+    margin-top: 0;
+  }
+
+  .header h1 {
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+  }
+
+  .user-info {
+    margin-top: var(--spacing-xs);
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+
+  .status-card {
+    min-height: 150px;
+    padding: var(--spacing-sm);
+  }
+
+  .status-card h3 {
+    font-size: var(--font-size-normal);
+  }
+
+  .status-card .number {
+    font-size: 2rem;
+    margin: var(--spacing-xs) 0;
+  }
+
+  .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .status-card .number {
+    font-size: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 375px) {
+  .main-content {
+    padding: var(--spacing-xs);
+  }
+
+  .card {
+    padding: var(--spacing-sm);
+  }
+
+  .table td, 
+  .table th {
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-small);
+  }
+
+  .header {
+    padding: var(--spacing-md) var(--spacing-xs) var(--spacing-xs);
+  }
+
+  .dashboard-cards {
+    padding: var(--spacing-xs);
+  }
+
+  .status-card {
+    min-height: 120px;
+    padding: var(--spacing-xs);
+  }
+
+  .status-card h3 {
+    font-size: var(--font-size-small);
+  }
+
+  .status-card .number {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-small);
+  }
+}
+
+/* Mejoras para el menú móvil */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+  }
+
+  .nav-item {
+    margin: 0;
+    flex: 1 1 auto;
+  }
+
+  .nav-link {
+    text-align: center;
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-small);
+  }
+
+  .coming-soon {
+    display: none;
+  }
+}
+
+@media (max-width: 375px) {
+  .main-content {
+    padding: 0.05rem;
+  }
+
+  .card {
+    padding: 0.08rem;
+    margin: 0.08rem 0;
+  }
+
+  .form-label {
+    font-size: 0.6rem;
+  }
+
+  .form-control, select.form-control {
+    height: 1rem;
+    font-size: 0.58rem;
+    padding: 0.05rem;
+  }
+
+  .table {
+    font-size: 0.58rem;
+  }
+
+  .table td, .table th {
+    padding: 0.08rem 0.05rem;
+  }
+
+  .table .actions .btn {
+    padding: 0.05rem 0.08rem;
+    font-size: 0.52rem;
+    min-width: 1.5rem;
+  }
+
+  .pagination {
+    font-size: 0.58rem;
   }
 } 

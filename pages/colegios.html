@@ -2,14 +2,135 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gestión de Colegios - Sistema de Gestión Fotográfica</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        /* Estilos base */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Estilos responsivos */
+        @media screen and (max-width: 768px) {
+            .container {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 0.5rem;
+                width: 100%;
+            }
+
+            /* Ajustes de la tabla para móvil */
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .table tr {
+                border-bottom: 1px solid #eee;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0.5rem 0;
+                align-items: center;
+            }
+
+            .table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Ancho de las columnas */
+            td[data-label="ID"] {
+                width: 15%;
+            }
+            td[data-label="Nombre"] {
+                width: 25%;
+            }
+            td[data-label="Dirección"] {
+                width: 20%;
+            }
+            td[data-label="Contacto"] {
+                width: 15%;
+            }
+            td[data-label="Centro Activo"] {
+                width: 10%;
+            }
+            .actions {
+                width: 15%;
+                display: flex;
+                gap: 0.3rem;
+                justify-content: flex-end;
+            }
+
+            /* Botones */
+            .btn-sm {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+                margin: 0;
+                width: auto;
+            }
+
+            .btn-primary {
+                background: #4267B2;
+                color: white;
+            }
+
+            .btn-secondary {
+                background: #dc3545;
+                color: white;
+            }
+
+            /* Ajustes de los filtros */
+            .card {
+                margin: 0.5rem;
+                padding: 0.8rem;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+
+            /* Paginación */
+            .pagination {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.5rem;
+            }
+
+            .pagination-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+
         <!-- Menú lateral -->
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="logo">FotoStudio</div>
             <nav class="nav-menu">
                 <ul>
@@ -73,7 +194,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group text-right">
+                <div class="form-group">
                     <button class="btn btn-primary">Aplicar Filtros</button>
                 </div>
             </div>
@@ -83,70 +204,72 @@
                 <div class="card-header">
                     <h2 class="card-title">Listado de Colegios</h2>
                 </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Dirección</th>
-                                <th>Contacto</th>
-                                <th>Contratos Activos</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>COL001</td>
-                                <td>Colegio San José</td>
-                                <td>Av. Principal 123</td>
-                                <td>01-4562890</td>
-                                <td>1</td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-primary">Ver</button>
-                                    <button class="btn btn-sm btn-secondary">Editar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>COL002</td>
-                                <td>Colegio Santa María</td>
-                                <td>Jr. Los Olivos 456</td>
-                                <td>01-4562891</td>
-                                <td>2</td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-primary">Ver</button>
-                                    <button class="btn btn-sm btn-secondary">Editar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>COL003</td>
-                                <td>Colegio Nacional</td>
-                                <td>Av. República 789</td>
-                                <td>01-4562892</td>
-                                <td>0</td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-primary">Ver</button>
-                                    <button class="btn btn-sm btn-secondary">Editar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>COL004</td>
-                                <td>Colegio Particular ABC</td>
-                                <td>Calle Las Flores 234</td>
-                                <td>01-4562893</td>
-                                <td>1</td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-primary">Ver</button>
-                                    <button class="btn btn-sm btn-secondary">Editar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="table-responsive">
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Dirección</th>
+                                    <th>Contacto</th>
+                                    <th>Contratos Activos</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="ID">COL001</td>
+                                    <td data-label="Nombre">Colegio Principal</td>
+                                    <td data-label="Dirección">Av. Principal 123</td>
+                                    <td data-label="Contacto">01-4562890</td>
+                                    <td data-label="Centro Activo">1</td>
+                                    <td class="actions">
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>COL002</td>
+                                    <td>Colegio Santa María</td>
+                                    <td>Jr. Los Olivos 456</td>
+                                    <td>01-4562891</td>
+                                    <td>2</td>
+                                    <td class="actions">
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>COL003</td>
+                                    <td>Colegio Nacional</td>
+                                    <td>Av. República 789</td>
+                                    <td>01-4562892</td>
+                                    <td>0</td>
+                                    <td class="actions">
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>COL004</td>
+                                    <td>Colegio Particular ABC</td>
+                                    <td>Calle Las Flores 234</td>
+                                    <td>01-4562893</td>
+                                    <td>1</td>
+                                    <td class="actions">
+                                        <button class="btn btn-sm btn-primary">Ver</button>
+                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="card-footer text-right">
+                <div class="card-footer">
                     <div class="pagination">
                         <button class="btn btn-sm">Anterior</button>
-                        <span>Página 1 de 1</span>
+                        <span class="pagination-info">Página 1 de 1</span>
                         <button class="btn btn-sm">Siguiente</button>
                     </div>
                 </div>
@@ -215,5 +338,24 @@
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
     </style>
+
+    <script>
+        // Control del menú móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('menu-active');
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('menu-active');
+            }
+        });
+    </script>
 </body>
 </html>
