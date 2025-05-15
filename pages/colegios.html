@@ -5,122 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gestión de Colegios - Sistema de Gestión Fotográfica</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <style>
-        /* Estilos base */
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Estilos responsivos */
-        @media screen and (max-width: 768px) {
-            .container {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 0.5rem;
-                width: 100%;
-            }
-
-            /* Ajustes de la tabla para móvil */
-            .table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            .table tr {
-                border-bottom: 1px solid #eee;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 0.5rem 0;
-                align-items: center;
-            }
-
-            .table td {
-                padding: 0.5rem;
-                font-size: 0.9rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            /* Ancho de las columnas */
-            td[data-label="ID"] {
-                width: 15%;
-            }
-            td[data-label="Nombre"] {
-                width: 25%;
-            }
-            td[data-label="Dirección"] {
-                width: 20%;
-            }
-            td[data-label="Contacto"] {
-                width: 15%;
-            }
-            td[data-label="Centro Activo"] {
-                width: 10%;
-            }
-            .actions {
-                width: 15%;
-                display: flex;
-                gap: 0.3rem;
-                justify-content: flex-end;
-            }
-
-            /* Botones */
-            .btn-sm {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.8rem;
-                margin: 0;
-                width: auto;
-            }
-
-            .btn-primary {
-                background: #4267B2;
-                color: white;
-            }
-
-            .btn-secondary {
-                background: #dc3545;
-                color: white;
-            }
-
-            /* Ajustes de los filtros */
-            .card {
-                margin: 0.5rem;
-                padding: 0.8rem;
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            }
-
-            /* Paginación */
-            .pagination {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                gap: 1rem;
-                padding: 0.5rem;
-            }
-
-            .pagination-info {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/colegios.css">
+    
 </head>
 <body>
     <div class="container">
@@ -225,8 +111,8 @@
                                     <td data-label="Contacto">01-4562890</td>
                                     <td data-label="Centro Activo">1</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -236,8 +122,8 @@
                                     <td>01-4562891</td>
                                     <td>2</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -247,8 +133,8 @@
                                     <td>01-4562892</td>
                                     <td>0</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -258,8 +144,8 @@
                                     <td>01-4562893</td>
                                     <td>1</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -324,20 +210,7 @@
         </div>
     </div>
 
-    <style>
-        /* Estilos adicionales específicos de colegios */
-        .pagination {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        
-        .card-footer {
-            padding: var(--spacing-md);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-    </style>
+   
 
     <script>
         // Control del menú móvil
