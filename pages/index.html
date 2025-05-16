@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -35,8 +36,8 @@
                     <li class="nav-item coming-soon">
                         <span class="nav-link">Producción <small>(Próximamente)</small></span>
                     </li>
-                    <li class="nav-item">
-                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Agenda </span>
                     </li>
                     <li class="nav-item coming-soon">
                         <span class="nav-link">Reportes <small>(Próximamente)</small></span>
@@ -124,7 +125,7 @@
                                 <td><span class="badge badge-info">Nuevo</span></td>
                                 <td>15/04/2023</td>
                                 <td class="actions">
-                                    <a href="#" class="btn btn-sm-btn-primary">Ver</a>
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
                                 </td>
                             </tr>
                             <tr>
@@ -133,7 +134,7 @@
                                 <td><span class="badge badge-warning">Producción</span></td>
                                 <td>12/04/2023</td>
                                 <td class="actions">
-                                    <a href="#" class="btn btn-sm-btn-primary">Ver</a>
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
                                 </td>
                             </tr>
                             <tr>
@@ -142,7 +143,7 @@
                                 <td><span class="badge badge-warning">Producción</span></td>
                                 <td>10/04/2023</td>
                                 <td class="actions">
-                                    <a href="#" class="btn btn-sm-btn-primary">Ver</a>
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
                                 </td>
                             </tr>
                             <tr>
@@ -151,7 +152,7 @@
                                 <td><span class="badge badge-success">Entregado</span></td>
                                 <td>08/04/2023</td>
                                 <td class="actions">
-                                    <a href="#" class="btn btn-sm-btn-primary">Ver</a>
+                                    <a href="#" class="btn btn-sm btn-primary">Ver</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -162,17 +163,10 @@
     </div>
 
     <script>
-      document.getElementById('menuToggle').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('active');
-    this.classList.toggle('menu-active');
-});
-
-// Prevenir que la barra lateral se oculte al hacer clic en "Agenda"
-document.querySelector('.nav-link[href="agenda.html"]').addEventListener('click', function(event) {
-    // Evitar el comportamiento por defecto del clic (como ocultar la barra lateral)
-    event.stopPropagation();
-});
-
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            this.classList.toggle('menu-active');
+        });
     </script>
 </body>
 </html> 
