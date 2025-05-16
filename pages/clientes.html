@@ -15,6 +15,45 @@
 
         /* Estilos responsivos */
         @media screen and (max-width: 768px) {
+            * {
+                box-sizing: border-box;
+            }
+            .main-content,
+            .card,
+            .form-control,
+            .btn,
+            .btn-primary {
+                max-width: 100%;
+                width: 100%;
+            }
+            .form-group,
+            .form-row,
+            .form-col {
+                max-width: 100%;
+                width: 100%;
+            }
+            .btn,
+            .btn-primary {
+                width: auto;
+                min-width: 120px;
+                max-width: 100%;
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .form-group.text-right {
+                text-align: center !important;
+            }
+            .form-group.text-right .btn {
+                margin-top: 0.5rem;
+                margin-right: 0;
+                margin-left: 0;
+            }
+            .card {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
             .container {
                 display: flex;
                 flex-direction: column;
@@ -23,15 +62,26 @@
 
             .main-content {
                 margin-left: 0;
-                padding: 0.5rem;
+                padding: 0.2rem;
                 width: 100%;
             }
 
             /* Ajustes de la tabla para móvil */
-            .table {
+            .table-container {
+                overflow-x: auto;
                 width: 100%;
-                border-collapse: collapse;
-                font-size: 0.9rem;
+                margin-left: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .table {
+                min-width: unset;
+                width: 100%;
+                font-size: 0.8rem;
+            }
+            .table th, .table td {
+                padding: 0.4rem 0.3rem;
+                font-size: 0.8rem;
             }
 
             .table thead {
@@ -108,7 +158,7 @@
 
             /* Ajustes de los filtros */
             .card {
-                margin-bottom: 1rem;
+                margin-bottom: 0.5rem;
                 background: white;
                 border-radius: 8px;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -130,6 +180,14 @@
 
             .pagination-info {
                 color: #666;
+            }
+
+            .form-control {
+                width: 90%;
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: auto;
+                display: block;
             }
         }
     </style>
@@ -209,7 +267,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group text-right">
+                <div class="form-group">
                     <button class="btn btn-primary">Aplicar Filtros</button>
                 </div>
             </div>

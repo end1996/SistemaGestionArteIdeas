@@ -8,11 +8,23 @@
 </head>
 <body>
     <div class="container">
-        <!-- Botón de menú hamburguesa para móvil (igual que en index.html) -->
+        <!-- Botón de menú hamburguesa para móvil -->
         <button class="menu-toggle" id="menuToggle">
             <span class="menu-icon"></span>
         </button>
-        <!-- Menú lateral -->
+        <script>
+            // Mostrar el botón solo en móvil
+            if (window.innerWidth <= 768) {
+                document.getElementById('menuToggle').style.display = 'block';
+            }
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    document.getElementById('menuToggle').style.display = 'block';
+                } else {
+                    document.getElementById('menuToggle').style.display = 'none';
+                }
+            });
+        </script>
         <div class="sidebar" id="sidebar">
             <div class="logo">FotoStudio</div>
             <nav class="nav-menu">
@@ -50,14 +62,12 @@
                 </ul>
             </nav>
         </div>
-        <!-- Contenido principal -->
         <div class="main-content">
             <div class="header sticky-header">
                 <h1>Gestión de Pedidos</h1>
                 <button class="btn btn-primary" id="btnNuevoPedido">Nuevo Pedido</button>
             </div>
 
-            <!-- Filtros de pedidos -->
             <div class="card mb-3">
                 <div class="card-header">
                     <h2 class="card-title">Filtros</h2>
@@ -98,7 +108,6 @@
                 </div>
             </div>
 
-            <!-- Tabla de pedidos -->
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Listado de Pedidos</h2>
@@ -197,7 +206,6 @@
         </div>
     </div>
 
-    <!-- Modal de nuevo pedido -->
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal" id="nuevoPedidoModal">
         <div class="modal-header">
@@ -277,7 +285,6 @@
         </div>
     </div>
 
-    <!-- Modal de detalle de pedido -->
     <div class="modal-backdrop" id="detalleBackdrop" style="display:none;"></div>
     <div class="modal" id="detallePedidoModal" style="display:none;">
         <div class="modal-header">
@@ -315,7 +322,6 @@
     </script>
 
     <style>
-        /* Estilos base */
         .container {
             display: flex;
             width: 100%;
@@ -403,25 +409,24 @@
             display: none;  /* Oculto por defecto en escritorio */
         }
 
-        /* Estilos responsive mejorados */
         @media screen and (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
 
             .menu-toggle {
-                display: block;
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                z-index: 2200;
-                background: #4267B2;
-                border: none;
-                cursor: pointer;
-                width: 40px;
-                height: 40px;
-                border-radius: 3px;
-                padding: 8px;
+                display: block !important;
+                position: fixed !important;
+                top: 10px !important;
+                left: 10px !important;
+                z-index: 2200 !important;
+                background: #4267B2 !important;
+                border: none !important;
+                cursor: pointer !important;
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 3px !important;
+                padding: 8px !important;
             }
             .sidebar {
                 position: relative;
@@ -432,7 +437,6 @@
                 transform: none;
                 transition: none;
                 display: none;
-                border-radius: 0 0 10px 10px;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.15);
                 padding-bottom: 1rem;
                 margin-bottom: 1rem;
@@ -461,7 +465,7 @@
             }
             .main-content {
                 margin-left: 0 !important;
-                padding-top: 60px;
+                padding-top: 60px !important;
             }
             .sticky-header {
                 padding-left: 60px;
@@ -478,7 +482,6 @@
             }
         }
 
-        /* Estilos para pantallas muy pequeñas */
         @media screen and (max-width: 375px) {
             .table th,
             .table td {
@@ -493,11 +496,21 @@
         }
     </style>
 
-    <!-- Botón para mostrar/ocultar menú en móvil -->
     <script>
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            this.classList.toggle('menu-active');
+        // Control del menú móvil (idéntico a clientes.html)
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('menu-active');
+        });
+
+        // Cerrar menú al hacer clic fuera (solo móvil)
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('menu-active');
+            }
         });
     </script>
 </body>

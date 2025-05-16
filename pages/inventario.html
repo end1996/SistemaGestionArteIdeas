@@ -175,10 +175,7 @@
             .close-menu {
                 display: block;
             }
-            .sidebar:not(.active) ~ .close-menu {
-                display: none !important;
-            }
-            .sidebar.active ~ .menu-toggle {
+            .sidebar:not(.active) .close-menu {
                 display: none !important;
             }
         }
@@ -192,14 +189,26 @@
 <body>
     <div class="container">
         <!-- Botón de menú hamburguesa para móvil -->
-        <button class="menu-toggle" id="menuToggle">
+        <button class="menu-toggle" id="menuToggle" style="display:none;">
             <span class="menu-icon"></span>
         </button>
-        <!-- Botón de cerrar menú para móvil -->
-        <button class="close-menu" id="closeMenu" style="display:none;">&times;</button>
+        <script>
+        // Mostrar el botón solo en móvil
+        if (window.innerWidth <= 768) {
+            document.getElementById('menuToggle').style.display = 'block';
+        }
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('menuToggle').style.display = 'block';
+            } else {
+                document.getElementById('menuToggle').style.display = 'none';
+            }
+        });
+        </script>
         <!-- Menú lateral -->
         <div class="sidebar">
             <div class="logo">FotoStudio</div>
+            <button class="close-menu" id="closeMenu" style="display:none;">&times;</button>
             <nav class="nav-menu">
                 <ul>
                     <li class="nav-item">

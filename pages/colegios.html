@@ -34,53 +34,51 @@
                 width: 100%;
             }
 
-            /* Ajustes de la tabla para móvil */
-            .table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            .table tr {
-                border-bottom: 1px solid #eee;
-                display: flex;
+            .table td.actions {
+                text-align: right;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top: 1px solid #f0f0f0;
+                display: flex !important;
                 flex-direction: row;
-                justify-content: space-between;
-                padding: 0.5rem 0;
-                align-items: center;
+                justify-content: flex-end;
+                gap: 0.5rem;
+                background: none;
             }
 
-            .table td {
-                padding: 0.5rem;
-                font-size: 0.9rem;
+            .actions .btn {
+                min-width: 70px;
+                padding: 0.3rem 0.8rem;
+                font-size: 1rem;
                 white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                margin: 0;
             }
 
             /* Ancho de las columnas */
             td[data-label="ID"] {
-                width: 15%;
+                width: 10%;
             }
             td[data-label="Nombre"] {
-                width: 25%;
+                width: 18%;
             }
             td[data-label="Dirección"] {
-                width: 20%;
+                width: 18%;
             }
             td[data-label="Contacto"] {
-                width: 15%;
+                width: 18%;
             }
             td[data-label="Centro Activo"] {
                 width: 10%;
             }
             .actions {
-                width: 15%;
+                width: 26%;
                 display: flex;
+                flex-direction: column;
                 gap: 0.3rem;
-                justify-content: flex-end;
+                justify-content: center;
+                align-items: flex-end;
             }
 
-            /* Botones */
             .btn-sm {
                 padding: 0.3rem 0.6rem;
                 font-size: 0.8rem;
@@ -110,14 +108,52 @@
             /* Paginación */
             .pagination {
                 display: flex;
-                justify-content: flex-end;
+                flex-direction: row;
+                justify-content: center;
                 align-items: center;
-                gap: 1rem;
-                padding: 0.5rem;
+                gap: 0.5rem;
+                padding: 0.5rem 0;
+                width: 100%;
             }
 
             .pagination-info {
-                font-size: 0.9rem;
+                order: 2;
+                flex: 1;
+                text-align: center;
+                font-size: 1rem;
+            }
+
+            .pagination .btn {
+                min-width: 90px;
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .table tr {
+                border-bottom: 1px solid #e0e0e0;
+                margin-bottom: 8px;
+            }
+            .table td {
+                padding: 0.7rem 0.5rem;
+            }
+            .table tbody tr:last-child {
+                border-bottom: none;
+            }
+            .table tbody tr:nth-child(even) {
+                background: #fafbfc;
+            }
+
+            .table td[data-label="Contacto"], .table td:nth-child(4) {
+                padding-right: 1.2rem;
+            }
+            .table td.actions, .table td:last-child {
+                min-width: 120px;
+            }
+            .table td.actions .btn, .table td:last-child .btn {
+                margin-left: 0.4rem;
+            }
+            .table td.actions .btn:first-child, .table td:last-child .btn:first-child {
+                margin-left: 0;
             }
         }
     </style>
@@ -268,9 +304,9 @@
                 </div>
                 <div class="card-footer">
                     <div class="pagination">
-                        <button class="btn btn-sm">Anterior</button>
+                        <button class="btn btn-secondary btn-sm">Anterior</button>
                         <span class="pagination-info">Página 1 de 1</span>
-                        <button class="btn btn-sm">Siguiente</button>
+                        <button class="btn btn-primary btn-sm">Siguiente</button>
                     </div>
                 </div>
             </div>
