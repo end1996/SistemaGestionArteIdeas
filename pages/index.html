@@ -35,8 +35,8 @@
                     <li class="nav-item coming-soon">
                         <span class="nav-link">Producción <small>(Próximamente)</small></span>
                     </li>
-                    <li class="nav-item coming-soon">
-                        <span class="nav-link">Agenda <small>(Próximamente)</small></span>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
                     </li>
                     <li class="nav-item coming-soon">
                         <span class="nav-link">Reportes <small>(Próximamente)</small></span>
@@ -162,10 +162,17 @@
     </div>
 
     <script>
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            this.classList.toggle('menu-active');
-        });
+      document.getElementById('menuToggle').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('active');
+    this.classList.toggle('menu-active');
+});
+
+// Prevenir que la barra lateral se oculte al hacer clic en "Agenda"
+document.querySelector('.nav-link[href="agenda.html"]').addEventListener('click', function(event) {
+    // Evitar el comportamiento por defecto del clic (como ocultar la barra lateral)
+    event.stopPropagation();
+});
+
     </script>
 </body>
 </html> 

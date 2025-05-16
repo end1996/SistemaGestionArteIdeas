@@ -1,13 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda</title>
-    <link rel="stylesheet" href="../styles/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agenda Fotográfica</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #333;
+      color: white;
+      padding: 1rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-agenda .nav-link.active {
+      background: #555;
+      color: #fff;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 1.5rem;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .calendar-header {
+      font-weight: bold;
+      text-align: center;
+      padding: 8px 0;
+      background: #dee2e6;
+      border-radius: 4px;
+    }
+
+    .calendar-day {
+      text-align: center;
+      padding: 10px 0;
+      background: #e9ecef;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .calendar-day:hover,
+    .calendar-day:focus {
+      background-color: #ced4da;
+      outline: none;
+    }
+
+    .calendar-day.selected {
+      background-color: #495057;
+      color: white;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      border-radius: 6px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .form-col {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: #4267B2;
+      color: white;
+    }
+
+    .btn-secondary {
+      background-color: #8B0000; /* Rojo vino */
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #a31c1c;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .table thead {
+      background: #f8f9fa;
+    }
+
+    .table th, .table td {
+      padding: 0.8rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .calendar {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .main-content {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1></h1>
-    <!-- Contenido de Agenda aquí -->
+  <div class="container">
+    <div class="sidebar sidebar-agenda">
+      <div class="logo">FotoStudio</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="pedidos.html" class="nav-link">Pedidos</a></li>
+          <li class="nav-item"><a href="clientes.html" class="nav-link">Clientes</a></li>
+          <li class="nav-item"><a href="colegios.html" class="nav-link">Colegios</a></li>
+          <li class="nav-item"><a href="inventario.html" class="nav-link">Inventario</a></li>
+          <li class="nav-item coming-soon"><span class="nav-link">Producción <small>(Próximamente)</small></span></li>
+          <li class="nav-item"><a href="agenda.html" class="nav-link active">Agenda</a></li>
+          <li class="nav-item coming-soon"><span class="nav-link">Reportes <small>(Próximamente)</small></span></li>
+          <li class="nav-item coming-soon"><span class="nav-link">Configuración <small>(Próximamente)</small></span></li>
+          <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="main-content">
+      <h1>Agenda Fotográfica</h1>
+
+      <div class="card">
+        <h2>Filtros</h2>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="form-label" for="filterDate">Fecha</label>
+            <input type="date" class="form-control" id="filterDate" />
+          </div>
+          <div class="form-col">
+            <label class="form-label" for="filterCliente">Cliente</label>
+            <input type="text" class="form-control" id="filterCliente" placeholder="Buscar por cliente" />
+          </div>
+        </div>
+        <div style="text-align: right; margin-top: 1rem;">
+          <button class="btn btn-primary">Aplicar filtros</button>
+        </div>
+      </div>
+
+      <div class="calendar-container">
+        <div class="calendar">
+          <div class="calendar-header">Lun</div>
+          <div class="calendar-header">Mar</div>
+          <div class="calendar-header">Mié</div>
+          <div class="calendar-header">Jue</div>
+          <div class="calendar-header">Vie</div>
+          <div class="calendar-header">Sáb</div>
+          <div class="calendar-header">Dom</div>
+
+          <div class="calendar-day" tabindex="0">1</div>
+          <div class="calendar-day" tabindex="0">2</div>
+          <div class="calendar-day" tabindex="0">3</div>
+          <div class="calendar-day" tabindex="0">4</div>
+          <div class="calendar-day" tabindex="0">5</div>
+          <div class="calendar-day" tabindex="0">6</div>
+          <div class="calendar-day" tabindex="0">7</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Sesiones Programadas</h2>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>S001</td>
+                <td>Juan Pérez</td>
+                <td>2025-05-01</td>
+                <td>Confirmada</td>
+                <td>
+                  <button class="btn btn-sm btn-primary">Ver</button>
+                  <button class="btn btn-sm btn-secondary">Editar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>S002</td>
+                <td>María López</td>
+                <td>2025-05-02</td>
+                <td>Pendiente</td>
+                <td>
+                  <button class="btn btn-sm btn-primary">Ver</button>
+                  <button class="btn btn-sm btn-secondary">Editar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.calendar-day').forEach((day) => {
+      day.addEventListener('click', () => {
+        day.classList.toggle('selected');
+      });
+      day.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          day.classList.toggle('selected');
+        }
+      });
+    });
+  </script>
 </body>
-</html> 
+</html>
