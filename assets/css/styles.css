@@ -316,6 +316,12 @@ button, input, select, textarea {
   display: flex;
   gap: var(--spacing-sm);
   justify-content: flex-end;
+  margin-right: 50%;
+}
+.table tbody tr {
+  padding: 100%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .table .actions .btn {

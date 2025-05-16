@@ -34,51 +34,53 @@
                 width: 100%;
             }
 
-            .table td.actions {
-                text-align: right;
-                margin-top: 0.5rem;
-                padding-top: 0.5rem;
-                border-top: 1px solid #f0f0f0;
-                display: flex !important;
-                flex-direction: row;
-                justify-content: flex-end;
-                gap: 0.5rem;
-                background: none;
+            /* Ajustes de la tabla para móvil */
+            .table {
+                width: 100%;
+                border-collapse: collapse;
             }
 
-            .actions .btn {
-                min-width: 70px;
-                padding: 0.3rem 0.8rem;
-                font-size: 1rem;
+            .table tr {
+                border-bottom: 1px solid #eee;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0.5rem 0;
+                align-items: center;
+            }
+
+            .table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
                 white-space: nowrap;
-                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             /* Ancho de las columnas */
             td[data-label="ID"] {
-                width: 10%;
+                width: 15%;
             }
             td[data-label="Nombre"] {
-                width: 18%;
+                width: 25%;
             }
             td[data-label="Dirección"] {
-                width: 18%;
+                width: 20%;
             }
             td[data-label="Contacto"] {
-                width: 18%;
+                width: 15%;
             }
             td[data-label="Centro Activo"] {
                 width: 10%;
             }
             .actions {
-                width: 26%;
+                width: 15%;
                 display: flex;
-                flex-direction: column;
                 gap: 0.3rem;
-                justify-content: center;
-                align-items: flex-end;
+                justify-content: flex-end;
             }
 
+            /* Botones */
             .btn-sm {
                 padding: 0.3rem 0.6rem;
                 font-size: 0.8rem;
@@ -108,52 +110,14 @@
             /* Paginación */
             .pagination {
                 display: flex;
-                flex-direction: row;
-                justify-content: center;
+                justify-content: flex-end;
                 align-items: center;
-                gap: 0.5rem;
-                padding: 0.5rem 0;
-                width: 100%;
+                gap: 1rem;
+                padding: 0.5rem;
             }
 
             .pagination-info {
-                order: 2;
-                flex: 1;
-                text-align: center;
-                font-size: 1rem;
-            }
-
-            .pagination .btn {
-                min-width: 90px;
-                font-size: 1rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .table tr {
-                border-bottom: 1px solid #e0e0e0;
-                margin-bottom: 8px;
-            }
-            .table td {
-                padding: 0.7rem 0.5rem;
-            }
-            .table tbody tr:last-child {
-                border-bottom: none;
-            }
-            .table tbody tr:nth-child(even) {
-                background: #fafbfc;
-            }
-
-            .table td[data-label="Contacto"], .table td:nth-child(4) {
-                padding-right: 1.2rem;
-            }
-            .table td.actions, .table td:last-child {
-                min-width: 120px;
-            }
-            .table td.actions .btn, .table td:last-child .btn {
-                margin-left: 0.4rem;
-            }
-            .table td.actions .btn:first-child, .table td:last-child .btn:first-child {
-                margin-left: 0;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -188,8 +152,8 @@
                     <li class="nav-item coming-soon">
                         <span class="nav-link">Producción <small>(Próximamente)</small></span>
                     </li>
-                    <li class="nav-item coming-soon">
-                        <span class="nav-link">Agenda <small>(Próximamente)</small></span>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
                     </li>
                     <li class="nav-item coming-soon">
                         <span class="nav-link">Reportes <small>(Próximamente)</small></span>
@@ -261,8 +225,8 @@
                                     <td data-label="Contacto">01-4562890</td>
                                     <td data-label="Centro Activo">1</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -272,8 +236,8 @@
                                     <td>01-4562891</td>
                                     <td>2</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -283,8 +247,8 @@
                                     <td>01-4562892</td>
                                     <td>0</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -294,8 +258,8 @@
                                     <td>01-4562893</td>
                                     <td>1</td>
                                     <td class="actions">
-                                        <button class="btn btn-sm btn-primary">Ver</button>
-                                        <button class="btn btn-sm btn-secondary">Editar</button>
+                                        <button class="btn btn-sm-btn-primary">Ver</button>
+                                        <button class="btn btn-sm-btn-secondary">Editar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -360,20 +324,7 @@
         </div>
     </div>
 
-    <style>
-        /* Estilos adicionales específicos de colegios */
-        .pagination {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        
-        .card-footer {
-            padding: var(--spacing-md);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-    </style>
+   
 
     <script>
         // Control del menú móvil
