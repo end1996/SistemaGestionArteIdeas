@@ -1,0 +1,263 @@
+/* Estilos específicos para la página de reportes */
+
+/* Contenedor de filtros */
+.filter-card {
+    margin-bottom: 20px;
+}
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+    padding: 15px;
+}
+
+.filter-controls .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.date-field {
+    flex: 1;
+}
+
+/* Gráficos */
+.chart-container {
+    position: relative;
+    height: 300px;
+    padding: 20px;
+}
+
+/* Secciones de reportes */
+.reports-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.report-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Tablas de reportes */
+.table-container {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f4f9;
+}
+
+.table tfoot th,
+.table tfoot td {
+    font-weight: bold;
+    border-top: 2px solid #dee2e6;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+/* Botones de exportación */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+
+@media (max-width: 474px) {
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        margin-left: 56%;
+        width: 164px;
+        position: relative;
+        top: -38px;
+        
+    }
+    .btn-primary {
+        margin-right: 30%;
+        width: 180px;
+        position: relative;
+        top: -2px;
+    }
+    
+
+}
+
+@media (max-width: 395px) {
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        margin-left: 55%;
+        width: 151px;
+        position: relative;
+        top: -38px;
+        
+    }
+    .btn-primary {
+        width: 160px;
+        position: relative;
+        top: -2px;
+        margin-right: 80%;
+    }
+    
+
+}
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .date-inputs {
+        flex-direction: column;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+       
+    }
+    
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+    
+}
+
+/* Estilos para tarjetas de resumen */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.summary-card .number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.summary-card .label {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.summary-card.income {
+    border-top: 4px solid #28a745;
+}
+
+.summary-card.expenses {
+    border-top: 4px solid #dc3545;
+}
+
+.summary-card.profit {
+    border-top: 4px solid #17a2b8;
+}
+
+.summary-card.rate {
+    border-top: 4px solid #ffc107;
+}
+
+/* Animación para carga de gráficos */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.chart-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilos para selector de fecha */
+input[type="date"] {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Estilos para botones de filtro */
+.filter-controls .btn {
+    padding: 8px 16px;
+    margin-bottom: 0;
+} 
