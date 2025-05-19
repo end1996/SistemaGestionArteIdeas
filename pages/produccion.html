@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Producción - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Si se requiere, agregar: <link rel="stylesheet" href="../assets/css/produccion.css"> -->
+    <style>
+    .close-sidebar {
+      display: none !important;
+    }
+    /* --- INICIO: Ajustes para tabla y botones --- */
+    .table-container {
+      overflow-x: auto;
+      width: 100%;
+    }
+    .table .actions .btn {
+      min-width: 48px;
+      max-width: 64px;
+      padding: 2px 6px;
+      font-size: 0.90rem;
+      margin-bottom: 4px;
+      margin-right: 2px;
+    }
+    .container, .main-content {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    /* --- FIN: Ajustes para tabla y botones --- */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: static;
+        width: 100vw;
+        min-height: 180px;
+        background: #2d2d2d;
+        border-radius: 0;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        display: none;
+        flex-direction: column;
+        padding-bottom: 24px;
+        margin-bottom: 16px;
+        z-index: 1;
+        transition: none;
+        transform: none;
+      }
+      .sidebar.open {
+        display: flex;
+      }
+      .close-sidebar {
+        display: block !important;
+        background: #46639b; /* Azul similar al de tu ejemplo */
+        color: #fff;
+        border: none;
+        font-size: 1.6rem;
+        width: 38px;
+        height: 38px;
+        margin: 16px 0 0 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        align-self: flex-start;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        transition: background 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+      .close-sidebar:hover {
+        background: #365080;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      .logo {
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #fff;
+        margin: -36px auto 20px auto;
+        padding-top: 8px;
+      }
+      .nav-menu {
+        margin-top: 12px;
+        padding-left: 24px;
+      }
+      .modal-backdrop {
+        display: none !important;
+      }
+    }
+    @media (max-width: 500px) {
+      .header.sticky-header h1 {
+        text-align: center;
+        font-size: 1.3rem;
+        width: 100%;
+        margin: 0 auto 12px auto;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      .form-col {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .form-group input,
+      .form-group select {
+        width: 87%;
+        margin: 0 auto;
+        font-size: 0.95rem;
+        padding: 7px 8px;
+      }
+      .form-group.text-right {
+        text-align: center !important;
+      }
+      .btn.btn-primary {
+        min-width: 120px;
+        width: 70%;
+        max-width: 220px;
+        font-size: 1rem;
+        margin: 0 auto;
+        display: block;
+      }
+      .card {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+      .card .form-row, .card .form-group {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      .table-container {
+        overflow-x: auto;
+      }
+      .table {
+        font-size: 0.92rem;
+      }
+    }
+    html, body {
+      width: 100%;
+      min-width: 0;
+      overflow-x: hidden;
+    }
+    .main-content {
+      width: 100%;
+      overflow-x: hidden;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+        <div class="sidebar" id="sidebar">
+            <button class="close-sidebar" id="closeSidebar" style="display:none; background: #3b82f6;">&#10006;</button>
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="colegios.html" class="nav-link">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link active">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Reportes <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Configuración <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="modal-backdrop" id="modalBackdrop" style="display:none;"></div>
+        <div class="main-content">
+            <div class="header sticky-header">
+                <h1>Gestión de Producción</h1>
+                <button class="btn btn-primary" id="btnNuevaOrden">Nueva Orden de Producción</button>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2 class="card-title">Filtros</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroPedido" class="form-label">Pedido Asociado</label>
+                            <input type="text" id="filtroPedido" class="form-control" placeholder="Buscar por pedido">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroEstado" class="form-label">Estado</label>
+                            <select id="filtroEstado" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="en_proceso">En Proceso</option>
+                                <option value="finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroResponsable" class="form-label">Responsable</label>
+                            <input type="text" id="filtroResponsable" class="form-control" placeholder="Buscar por responsable">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-primary">Aplicar Filtros</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Órdenes de Producción</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Pedido Asociado</th>
+                                <th>Estado</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Responsable</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PR001</td>
+                                <td>P001</td>
+                                <td><span class="badge badge-info">Pendiente</span></td>
+                                <td>15/04/2023</td>
+                                <td>-</td>
+                                <td>Juan Pérez</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PR002</td>
+                                <td>P002</td>
+                                <td><span class="badge badge-warning">En Proceso</span></td>
+                                <td>12/04/2023</td>
+                                <td>-</td>
+                                <td>María López</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PR003</td>
+                                <td>P003</td>
+                                <td><span class="badge badge-success">Finalizado</span></td>
+                                <td>10/04/2023</td>
+                                <td>14/04/2023</td>
+                                <td>Carlos Sánchez</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <div class="pagination">
+                        <button class="btn btn-sm">Anterior</button>
+                        <span>Página 1 de 1</span>
+                        <button class="btn btn-sm">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de nueva orden (estructura básica, funcionalidad JS a implementar) -->
+    <div class="modal" id="ordenModal" style="display:none;">
+        <div class="modal-header">
+            <h3 class="modal-title">Nueva Orden de Producción</h3>
+            <button class="modal-close" onclick="cerrarModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formOrden">
+                <div class="form-group">
+                    <label for="pedidoAsociado" class="form-label">Pedido Asociado</label>
+                    <input type="text" id="pedidoAsociado" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="estadoOrden" class="form-label">Estado</label>
+                    <select id="estadoOrden" class="form-control">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en_proceso">En Proceso</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInicio" class="form-label">Fecha Inicio</label>
+                    <input type="date" id="fechaInicio" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="fechaFin" class="form-label">Fecha Fin</label>
+                    <input type="date" id="fechaFin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="responsable" class="form-label">Responsable</label>
+                    <input type="text" id="responsable" class="form-control" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+            <button class="btn btn-primary">Guardar Orden</button>
+        </div>
+    </div>
+    <script>
+        // Aquí puedes agregar la lógica JS para abrir/cerrar el modal y manejar el formulario
+        function cerrarModal() {
+            document.getElementById('ordenModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        }
+        document.getElementById('btnNuevaOrden').onclick = function() {
+            document.getElementById('ordenModal').style.display = 'block';
+            document.getElementById('modalBackdrop').style.display = 'block';
+        };
+
+        // Lógica para abrir/cerrar la sidebar en móvil sin superponer el contenido
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+          sidebar.classList.add('open');
+          closeSidebar.style.display = 'block';
+          menuToggle.style.display = 'none';
+        }
+        function closeSidebarFunc() {
+          sidebar.classList.remove('open');
+          closeSidebar.style.display = 'none';
+          menuToggle.style.display = 'block';
+        }
+        menuToggle.onclick = openSidebar;
+        closeSidebar.onclick = closeSidebarFunc;
+    </script>
+</body>
+</html> 

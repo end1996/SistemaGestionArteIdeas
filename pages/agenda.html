@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agenda Fotográfica</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/agenda.css" />
+  
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="colegios.html" class="nav-link active">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Reportes <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Configuración <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    <div class="main-content">
+      <h1>Agenda Fotográfica</h1>
+
+      <div class="card">
+        <h2>Filtros</h2>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="form-label" for="filterDate">Fecha</label>
+            <input type="date" class="form-control" id="filterDate" />
+          </div>
+          <div class="form-col">
+            <label class="form-label" for="filterCliente">Cliente</label>
+            <input type="text" class="form-control" id="filterCliente" placeholder="Buscar por cliente" />
+          </div>
+        </div>
+        <div style="text-align: right; margin-top: 1rem;">
+          <button class="btn btn-primary">Aplicar filtros</button>
+        </div>
+      </div>
+
+      <div class="calendar-container">
+        <div class="calendar">
+          <div class="calendar-header">Lun</div>
+          <div class="calendar-header">Mar</div>
+          <div class="calendar-header">Mié</div>
+          <div class="calendar-header">Jue</div>
+          <div class="calendar-header">Vie</div>
+          <div class="calendar-header">Sáb</div>
+          <div class="calendar-header">Dom</div>
+
+          <div class="calendar-day" tabindex="0">1</div>
+          <div class="calendar-day" tabindex="0">2</div>
+          <div class="calendar-day" tabindex="0">3</div>
+          <div class="calendar-day" tabindex="0">4</div>
+          <div class="calendar-day" tabindex="0">5</div>
+          <div class="calendar-day" tabindex="0">6</div>
+          <div class="calendar-day" tabindex="0">7</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Sesiones Programadas</h2>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>S001</td>
+                <td>Juan Pérez</td>
+                <td>2025-05-01</td>
+                <td>Confirmada</td>
+                <td>
+                  <button class="btn btn-sm btn-primary">Ver</button>
+                  <button class="btn btn-sm btn-secondary">Editar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>S002</td>
+                <td>María López</td>
+                <td>2025-05-02</td>
+                <td>Pendiente</td>
+                <td>
+                  <button class="btn btn-sm btn-primary">Ver</button>
+                  <button class="btn btn-sm btn-secondary">Editar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.calendar-day').forEach((day) => {
+      day.addEventListener('click', () => {
+        day.classList.toggle('selected');
+      });
+      day.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          day.classList.toggle('selected');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

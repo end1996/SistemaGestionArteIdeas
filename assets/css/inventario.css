@@ -1,0 +1,259 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.menu-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background: white;
+    height: 60px;
+    z-index: 1000;
+    display: none;
+}
+
+.menu-button {
+    display: none;
+    width: 35px;
+    height: 35px;
+    background: #3B5998;
+    border: none;
+    padding: 7px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.menu-button span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: white;
+    margin: 3px auto;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    overflow-y: auto;
+}
+
+.main-content {
+    margin-left: 250px;
+    flex: 1;
+    padding: 20px;
+    background: white;
+    position: relative;
+}
+
+ /* Estilos adicionales específicos de inventario */
+ .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.card-footer {
+    padding: var(--spacing-md);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos responsive */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .header div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .header button {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-col {
+        width: 100%;
+    }
+
+    /* Hacer la tabla scrolleable horizontalmente */
+    .table-container {
+        overflow-x: auto;
+    }
+
+    /* Ajustes para los modales en móvil */
+    .modal {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .modal-footer button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu-button {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .header {
+        padding-left: 60px;
+    }
+
+    .header h1 {
+        font-size: 1.4rem;
+    }
+
+    .header-buttons {
+        padding-left: 45px;
+    }
+
+    .header-buttons button {
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .menu-button {
+        display: none !important;
+    }
+
+    .header-buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .header-buttons button {
+        width: auto;
+    }
+}
+
+.header {
+    margin-bottom: 2rem;
+    padding: 15px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header-buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header-buttons button {
+    width: 100%;
+    max-width: 300px;
+}
+
+.menu-toggle:hover {
+    background: #344e86;
+}
+
+.header-title {
+    margin: 0;
+    padding: 1rem;
+}
+
+.close-menu {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    background: var(--primary);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1.7rem;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+.close-menu:hover {
+    background: var(--primary-dark);
+}
+@media (max-width: 768px) {
+    .close-menu {
+        display: block;
+    }
+    .sidebar:not(.active) .close-menu {
+        display: none !important;
+    }
+}
+@media (min-width: 769px) {
+    .close-menu {
+        display: none !important;
+    }
+}

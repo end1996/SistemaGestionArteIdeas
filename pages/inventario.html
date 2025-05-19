@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gestión de Inventario - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/inventario.css">
+   
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle" style="display:none;">
+            <span class="menu-icon"></span>
+        </button>
+        <script>
+        // Mostrar el botón solo en móvil
+        if (window.innerWidth <= 768) {
+            document.getElementById('menuToggle').style.display = 'block';
+        }
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('menuToggle').style.display = 'block';
+            } else {
+                document.getElementById('menuToggle').style.display = 'none';
+            }
+        });
+        </script>
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <button class="close-menu" id="closeMenu" style="display:none;">&times;</button>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="colegios.html" class="nav-link">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link active">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Reportes <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item coming-soon">
+                        <span class="nav-link">Configuración <small>(Próximamente)</small></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Inventario</h1>
+                <div class="header-buttons">
+                    <button class="btn btn-secondary" id="btnMovimiento">Registrar Movimiento</button>
+                    <button class="btn btn-primary" id="btnNuevoProducto">Nuevo Producto</button>
+                </div>
+            </div>
+
+            <!-- Alertas de stock -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2 class="card-title">Alertas de Stock</h2>
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Stock Bajo:</strong> Papel fotográfico 10x15 (5 unidades restantes)
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Stock Bajo:</strong> Químico Revelador (2 litros restantes)
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Stock Bajo:</strong> Varillas de Marco Tipo A (3 unidades restantes)
+                </div>
+            </div>
+
+            <!-- Filtros de inventario -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2 class="card-title">Filtros</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroNombre" class="form-label">Nombre</label>
+                            <input type="text" id="filtroNombre" class="form-control" placeholder="Buscar por nombre">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroTipo" class="form-label">Tipo de Producto</label>
+                            <select id="filtroTipo" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="papel">Papel Fotográfico</option>
+                                <option value="quimico">Químicos</option>
+                                <option value="marco">Marcos y Varillas</option>
+                                <option value="otro">Otros</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroStock" class="form-label">Stock</label>
+                            <select id="filtroStock" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="bajo">Stock Bajo</option>
+                                <option value="normal">Stock Normal</option>
+                                <option value="alto">Stock Alto</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-primary">Aplicar Filtros</button>
+                </div>
+            </div>
+
+            <!-- Tabla de productos -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Listado de Productos</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Unidad</th>
+                                <th>Stock Actual</th>
+                                <th>Stock Mínimo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P001</td>
+                                <td>Papel fotográfico 10x15</td>
+                                <td>Papel Fotográfico</td>
+                                <td>Unidad</td>
+                                <td><span class="badge badge-danger">5</span></td>
+                                <td>10</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P002</td>
+                                <td>Químico Revelador</td>
+                                <td>Químicos</td>
+                                <td>Litro</td>
+                                <td><span class="badge badge-warning">2</span></td>
+                                <td>5</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P003</td>
+                                <td>Varillas de Marco Tipo A</td>
+                                <td>Marcos y Varillas</td>
+                                <td>Unidad</td>
+                                <td><span class="badge badge-danger">3</span></td>
+                                <td>15</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P004</td>
+                                <td>Papel fotográfico 13x18</td>
+                                <td>Papel Fotográfico</td>
+                                <td>Unidad</td>
+                                <td><span class="badge badge-success">25</span></td>
+                                <td>10</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P005</td>
+                                <td>Químico Fijador</td>
+                                <td>Químicos</td>
+                                <td>Litro</td>
+                                <td><span class="badge badge-success">12</span></td>
+                                <td>5</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary">Ver</button>
+                                    <button class="btn btn-sm btn-secondary">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <div class="pagination">
+                        <button class="btn btn-sm">Anterior</button>
+                        <span>Página 1 de 2</span>
+                        <button class="btn btn-sm btn-primary">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de nuevo producto -->
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal" id="nuevoProductoModal">
+        <div class="modal-header">
+            <h3 class="modal-title">Nuevo Producto</h3>
+            <button class="modal-close" id="cerrarModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formNuevoProducto">
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" placeholder="Nombre del producto">
+                </div>
+                <div class="form-group">
+                    <label for="tipo" class="form-label">Tipo de Producto</label>
+                    <select id="tipo" class="form-control">
+                        <option value="papel">Papel Fotográfico</option>
+                        <option value="quimico">Químicos</option>
+                        <option value="marco">Marcos y Varillas</option>
+                        <option value="otro">Otros</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="unidad" class="form-label">Unidad de Medida</label>
+                            <select id="unidad" class="form-control">
+                                <option value="unidad">Unidad</option>
+                                <option value="litro">Litro</option>
+                                <option value="rollo">Rollo</option>
+                                <option value="metro">Metro</option>
+                                <option value="kg">Kilogramo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="stockInicial" class="form-label">Stock Inicial</label>
+                            <input type="number" id="stockInicial" class="form-control" min="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="stockMinimo" class="form-label">Stock Mínimo</label>
+                            <input type="number" id="stockMinimo" class="form-control" min="0">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="precio" class="form-label">Precio Unitario (S/)</label>
+                            <input type="number" id="precio" class="form-control" min="0" step="0.01">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea id="descripcion" class="form-control" rows="2" placeholder="Descripción del producto"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelarProducto">Cancelar</button>
+            <button class="btn btn-primary" id="guardarProducto">Guardar Producto</button>
+        </div>
+    </div>
+
+    <!-- Modal de registro de movimiento -->
+    <div class="modal" id="movimientoModal">
+        <div class="modal-header">
+            <h3 class="modal-title">Registrar Movimiento de Inventario</h3>
+            <button class="modal-close" id="cerrarModalMovimiento">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formMovimiento">
+                <div class="form-group">
+                    <label for="productoMovimiento" class="form-label">Producto</label>
+                    <select id="productoMovimiento" class="form-control">
+                        <option value="">Seleccione producto</option>
+                        <option value="1">Papel fotográfico 10x15</option>
+                        <option value="2">Químico Revelador</option>
+                        <option value="3">Varillas de Marco Tipo A</option>
+                        <option value="4">Papel fotográfico 13x18</option>
+                        <option value="5">Químico Fijador</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tipoMovimiento" class="form-label">Tipo de Movimiento</label>
+                    <select id="tipoMovimiento" class="form-control">
+                        <option value="entrada">Entrada</option>
+                        <option value="salida">Salida</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input type="number" id="cantidad" class="form-control" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="fechaMovimiento" class="form-label">Fecha</label>
+                    <input type="date" id="fechaMovimiento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="referencia" class="form-label">Referencia</label>
+                    <input type="text" id="referencia" class="form-control" placeholder="Pedido, Factura, etc.">
+                </div>
+                <div class="form-group">
+                    <label for="notasMovimiento" class="form-label">Notas</label>
+                    <textarea id="notasMovimiento" class="form-control" rows="2" placeholder="Notas adicionales"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelarMovimiento">Cancelar</button>
+            <button class="btn btn-primary" id="guardarMovimiento">Registrar Movimiento</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables para el control del scroll
+        let lastScrollTop = 0;
+        const menuHeader = document.querySelector('.menu-header');
+
+        // Función para manejar el scroll
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop) {
+                // Scroll hacia abajo
+                menuHeader.classList.add('hide');
+            } else {
+                // Scroll hacia arriba
+                menuHeader.classList.remove('hide');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Control del menú móvil SOLO con el botón hamburguesa y la X
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const sidebar = document.querySelector('.sidebar');
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('menu-active');
+            if (sidebar.classList.contains('active')) {
+                closeMenu.style.display = 'block';
+                menuToggle.style.display = 'none';
+            } else {
+                closeMenu.style.display = 'none';
+                menuToggle.style.display = 'block';
+            }
+        });
+        closeMenu.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            menuToggle.classList.remove('menu-active');
+            closeMenu.style.display = 'none';
+            menuToggle.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html> 
