@@ -166,12 +166,84 @@
 @media screen and (max-width: 375px) {
     .table th,
     .table td {
-        padding: 0.25rem;
-        font-size: 0.75rem;
+        padding: 7px;
+        font-size: 14px;
     }
 
     .btn-sm {
         padding: 0.2rem 0.4rem;
-        font-size: 0.75rem;
+        font-size: 15px;
     }
+     /* Paginación */
+     .pagination {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem;
+        background: white;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .pagination button {
+        padding: 0.5rem 1rem;
+    }
+
+    .pagination-info {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+   
+
+}
+
+@media screen and (max-width: 569px) {
+    .table th,
+    .table td {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .btn-sm {
+        padding: 10px;
+        font-size: 15px;
+    }
+    .table .actions {
+        display: flex;
+        gap: var(--spacing-sm);
+        justify-content: flex-end;
+        margin-left: 5px;
+        width: 80px;
+        font-size: 20px;
+    }
+     /* Paginación */
+     .pagination {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem;
+        background: white;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .pagination button {
+        padding: 0.5rem 1rem;
+    }
+
+    .pagination-info {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+   
+
+}
+@media screen and (max-width: 569px) {
+    .table th {
+        padding: 25px;
+        font-size: 15px;
+    }
+
 }

@@ -316,7 +316,7 @@ button, input, select, textarea {
   display: flex;
   gap: var(--spacing-sm);
   justify-content: flex-end;
-  margin-right: 50%;
+  margin-right: 66%;
 }
 .table tbody tr {
   padding: 100%;
@@ -525,6 +525,18 @@ button, input, select, textarea {
   bottom: 0;
 }
 
+@media (max-width: 971px) {
+  .table .actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    margin-right: 50px;
+    top: -30px
+}
+   
+
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .container {
@@ -580,6 +592,10 @@ button, input, select, textarea {
     grid-template-columns: 1fr;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
+    font-size: 9px;
+    transform: scale(0.9); /* 80% del tamaño original */
+    transform-origin: top center
+    ;
   }
 
   .status-card {
@@ -652,6 +668,14 @@ button, input, select, textarea {
   .coming-soon {
     display: none;
   }
+  .table .actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    margin-right: 16%;
+    margin-top: 12px;
+  }
+  
 }
 
 @media (max-width: 480px) {
@@ -700,6 +724,12 @@ button, input, select, textarea {
     display: inline-block;
     margin: var(--spacing-xs) 0;
   }
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+
 }
 
 @media (max-width: 375px) {
@@ -709,6 +739,9 @@ button, input, select, textarea {
 
   .card {
     padding: var(--spacing-sm);
+    width: 99%;
+    font-size: 14px;
+   
   }
 
   .table td, 
@@ -756,6 +789,7 @@ button, input, select, textarea {
   .table td,
   .table th {
     padding: 0.5rem 0.3rem;
+    font-size: 90%;
   }
 
   .table .badge {
@@ -768,16 +802,28 @@ button, input, select, textarea {
     font-size: 0.75rem;
     min-width: 50px;
   }
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 300px) {
   .main-content {
     padding: 0.05rem;
+  }
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    width: 310px;   /* Ancho del botón */
+  
   }
 
   .card {
     padding: 0.08rem;
-    margin: 0.08rem 0;
+    width: 110%;
   }
 
   .form-label {
@@ -791,20 +837,22 @@ button, input, select, textarea {
   }
 
   .table {
-    font-size: 0.58rem;
+    font-size: 15px;
   }
 
   .table td, .table th {
-    padding: 0.08rem 0.05rem;
+    padding:10px;
   }
 
   .table .actions .btn {
-    padding: 0.05rem 0.08rem;
-    font-size: 0.52rem;
-    min-width: 1.5rem;
+    padding: 3px;
+    font-size: 12px;
+    top:-20;
+   
   }
 
   .pagination {
     font-size: 0.58rem;
   }
+  
 } 
