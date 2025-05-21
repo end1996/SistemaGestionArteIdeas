@@ -106,18 +106,19 @@ body {
     cursor: pointer;
     font-weight: 600;
   }
-
-  .btn-primary {
-    background: #4267B2;
+  .btn-ver{
+    width: 60px;
+    background:  #345291;
     color: white;
   }
-
-  .btn-secondary {
-    background-color: #8B0000; /* Rojo vino */
+  .btn-editar{
+    width: 60px;
+    background:  #913434;
     color: white;
   }
+  
 
-  .btn-secondary:hover {
+  .btn-editar:hover {
     background-color: #a31c1c;
   }
 
@@ -147,7 +148,16 @@ body {
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 789px) {
+    .btn-ver{
+      width: 60px;
+      background:  #345291;
+     
+    }
+    .btn-editar{
+      width: 60px;
+      background:  #913434;
+    }
     .container {
       flex-direction: column;
     }
@@ -168,3 +178,45 @@ body {
       padding: 1rem;
     }
   }
+
+  @media (max-width: 768px) {
+    
+    
+    
+    .table {
+      width: 120%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      height: 100%;
+    }
+  
+    .table thead {
+      background: #f8f9fa;
+      
+      
+    }
+  
+    .table th, .table td {
+      padding: 0.8rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+  
+    
+    .calendar{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .btn-primary{
+    width: 150px;
+    font-size: 13px;
+  }
+      
+}
