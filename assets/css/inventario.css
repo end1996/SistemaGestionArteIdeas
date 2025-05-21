@@ -3,6 +3,20 @@ html, body {
     padding: 0;
     overflow-x: hidden;
 }
+/* Estilos base para la tabla */
+.table-container {
+    width: 100%;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+}
+/* Ajustes de la tabla para móvil */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
 
 .menu-header {
     position: -webkit-sticky;
@@ -12,6 +26,27 @@ html, body {
     height: 60px;
     z-index: 1000;
     display: none;
+}
+.btn-sm{
+    background: #345291;
+    color: white;
+}
+.btn-ver{
+    background: #345291;
+    color: white;
+    width: 80px;
+}
+.btn-editar{
+    background: #913434;
+    color: white;
+    width: 90px;
+}
+.table .actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    width: 8px;
+    margin-left: 5%;
 }
 
 .menu-button {
@@ -76,6 +111,14 @@ html, body {
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
+    }
+    /* Ajustes de la tabla para móvil */
+    .table-container {
+        overflow-x: auto;
+        width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .sidebar {
@@ -256,4 +299,103 @@ html, body {
     .close-menu {
         display: none !important;
     }
+}
+@media (min-width: 978px) {
+    .btn-ver{
+        height: 30px;
+        width: 80px;
+    }
+    .btn-editar{
+        
+        width: 100px;
+    }
+    .table .actions {
+        display: flex;
+        gap: var(--spacing-sm);
+        justify-content: flex-end;
+        width: 150px;
+        margin-left: 4px;
+        top: -100px;
+    }
+    /* Ajustes de la tabla para móvil */
+    .table-container {
+        overflow-x: auto;
+        width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media (min-width: 400px) {
+    
+    .btn-ver{
+        
+        width: 70px;
+    }
+    .btn-editar{
+        
+        width: 70px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem;
+        background: white;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .pagination button {
+        padding: 0.5rem 1rem;
+    }
+
+    .pagination-info {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+    
+
+}
+@media (min-width: 300px) {
+    
+    .btn-ver{
+        
+        width: 70px;
+    }
+    .btn-editar{
+        
+        width: 70px;
+    }
+    .table .actions {
+        display: flex;
+        gap: var(--spacing-sm);
+        justify-content: flex-end;
+        width: 150px;
+        margin-left: 10px;
+        top: -100px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem;
+        background: white;
+        font-size: 15px;
+        white-space: nowrap;
+        margin-left: 180px;
+    }
+
+    .pagination button {
+        padding: 0.5rem 1rem;
+    }
+
+    .pagination-info {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+    
+
 }

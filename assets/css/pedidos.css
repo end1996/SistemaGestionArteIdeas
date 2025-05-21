@@ -213,7 +213,7 @@
         display: flex;
         gap: var(--spacing-sm);
         justify-content: flex-end;
-        margin-left: 20%;
+        margin-left: 100%;
         width: 80px;
         font-size: 20px;
     }
