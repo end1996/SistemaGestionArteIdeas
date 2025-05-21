@@ -89,10 +89,38 @@
         font-size: 0.8rem;
     }
     .table th, .table td {
-        padding: 0.4rem 0.3rem;
-        font-size: 0.8rem;
+        padding: 0.2rem 0.1rem;
+        font-size: 0.75rem;
+        text-align: left;
+        min-width: unset;
     }
-
+    .table th,
+    .table td {
+        min-width: unset !important;
+    }
+    .table th:nth-child(1),
+    .table td:nth-child(1),
+    .table th:nth-child(2),
+    .table td:nth-child(2),
+    .table th:nth-child(3),
+    .table td:nth-child(3),
+    .table th:nth-child(4),
+    .table td:nth-child(4),
+    .table th:nth-child(5),
+    .table td:nth-child(5) {
+        min-width: 40px !important;
+    }
+    .actions {
+        min-width: 60px;
+        gap: 0.1rem;
+    }
+    .btn-sm {
+        padding: 0.15rem 0.3rem;
+        font-size: 0.7rem;
+        min-width: unset;
+        max-width: 60px;
+        word-break: break-word;
+    }
     .table thead {
         background: #f8f9fa;
     }
@@ -117,42 +145,30 @@
     /* Ancho de las columnas */
     .table th:nth-child(1),
     .table td:nth-child(1) { /* ID */
-        min-width: 80px;
+        min-width: 55px;
     }
 
     .table th:nth-child(2),
     .table td:nth-child(2) { /* Nombre */
-        min-width: 150px;
+        min-width: 90px;
     }
 
     .table th:nth-child(3),
     .table td:nth-child(3) { /* Tipo */
-        min-width: 100px;
+        min-width: 70px;
     }
 
     .table th:nth-child(4),
     .table td:nth-child(4) { /* Contacto */
-        min-width: 120px;
+        min-width: 80px;
     }
 
     .table th:nth-child(5),
     .table td:nth-child(5) { /* Colegio */
-        min-width: 150px;
+        min-width: 90px;
     }
 
     /* Botones de acción */
-    .actions {
-        white-space: nowrap;
-        min-width: 120px;
-    }
-
-    .btn-sm {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.8rem;
-        border-radius: 4px;
-        margin: 0 0.2rem;
-    }
-
     .btn-primary {
         background: #4267B2;
         color: white;
@@ -197,5 +213,47 @@
         margin-left: 0;
         margin-right: auto;
         display: block;
+    }
+
+    /* Centrar columna Tipo, Colegio y Acciones */
+    .table th:nth-child(3),
+    .table td:nth-child(3),
+    .table th:nth-child(5),
+    .table td:nth-child(5),
+    .table th:nth-child(6),
+    .table td:nth-child(6) {
+        text-align: center !important;
+    }
+
+    .table .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+        min-width: 100px;
+        margin-right: 0 !important;
+    }
+    .table td.actions {
+        min-width: 110px;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .table th:last-child,
+    .table td.actions {
+        min-width: 150px;
+        text-align: center !important;
+    }
+    .table td.actions {
+        vertical-align: middle;
+    }
+    .table .actions {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-right: 0 !important;
     }
 }

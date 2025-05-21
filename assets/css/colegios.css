@@ -39,9 +39,12 @@
 /* Contenedor de botones de acción */
 .table .actions {
     display: flex;
-    gap: var(--spacing-sm); /* Espaciado entre botones */
-    justify-content: flex-end;
-    margin-right: 55%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    justify-content: center;
+    margin: 0;
+    width: auto;
 }
 
 /* Estilos para la paginación */
@@ -89,6 +92,22 @@
         vertical-align: middle;
         font-size: 14px;
     }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .table {
+        min-width: 600px;
+    }
+
+    .table th:nth-child(5) {
+        font-size: 0.95em;
+        min-width: 110px;
+        max-width: 140px;
+        white-space: nowrap;
+        word-break: normal;
+    }
 }
 
 /* RESPONSIVE: Hasta 750px */
@@ -127,12 +146,7 @@
     }
 
     .table tr {
-        display: flex;
-        flex-direction: row;
-        padding: 0.2rem;
-        width: 20px;
-        font-size: 0.8rem;
-        border-bottom: 1px solid #eee;
+        display: table-row;
     }
 
     .table th, .table td {
@@ -146,15 +160,19 @@
     .table th:nth-child(1), .table td:nth-child(1) { min-width: 80px; }
     .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
     .table th:nth-child(3), .table td:nth-child(3) { min-width: 100px; }
-    .table th:nth-child(4), .table td:nth-child(4) { min-width: 120px; }
-    .table th:nth-child(5), .table td:nth-child(5) { min-width: 150px; }
-
+    .table th:nth-child(4), .table td:nth-child(4), /* Contacto */
+    .table th:nth-child(5), .table td:nth-child(5), /* Contratos Activos */
+    .table th:nth-child(6), .table td:nth-child(6)  /* Acciones */ {
+        min-width: 90px;
+        max-width: 120px;
+        text-align: center;
+    }
     .table .actions {
         display: flex;
         gap: var(--spacing-sm);
-        justify-content: flex-end;
-        width: 70px;
-        margin-left: 26px;
+        justify-content: center;
+        width: auto;
+        margin-left: 0;
     }
 
     /* Estilos para botones pequeños */
@@ -199,6 +217,17 @@
     .pagination-info {
         font-size: 0.9rem;
     }
+
+    .table th:nth-child(4) {
+        min-width: 120px;
+        max-width: 150px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .table th:nth-child(6) {
+        text-align: center;
+    }
 }
 
 /* RESPONSIVE: Hasta 400px */
@@ -228,12 +257,7 @@
     }
 
     .table tr {
-        display: flex;
-        flex-direction: row;
-        padding: 0.2rem;
-        width: 10px;
-        font-size: 0.8rem;
-        border-bottom: 1px solid #eee;
+        display: table-row;
     }
 
     .table th {
@@ -258,12 +282,19 @@
         gap: 5px;
     }
 
+    .table th:nth-child(4), .table td:nth-child(4), /* Contacto */
+    .table th:nth-child(5), .table td:nth-child(5), /* Contratos Activos */
+    .table th:nth-child(6), .table td:nth-child(6)  /* Acciones */ {
+        min-width: 90px;
+        max-width: 120px;
+        text-align: center;
+    }
     .table .actions {
         display: flex;
         gap: var(--spacing-sm);
-        justify-content: flex-end;
-        width: 70px;
-        margin-left: 26px;
+        justify-content: center;
+        width: auto;
+        margin-left: 0;
     }
 
     .btn-sm-btn-primary {
@@ -301,6 +332,17 @@
     .tbody {
         padding: 10px;
     }
+
+    .table th:nth-child(4) {
+        min-width: 120px;
+        max-width: 150px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .table th:nth-child(6) {
+        text-align: center;
+    }
 }
 
 /* RESPONSIVE: Hasta 374px */
@@ -332,12 +374,7 @@
     }
 
     .table tr {
-        border-bottom: 1px solid #eee;
-        display: flex;
-        flex-direction: row;
-        padding: 0.2rem;
-        width: 20px;
-        font-size: 0.7rem;
+        display: table-row;
     }
 
     .table th {
@@ -352,11 +389,19 @@
         width: 0.5rem;
     }
 
+    .table th:nth-child(4), .table td:nth-child(4), /* Contacto */
+    .table th:nth-child(5), .table td:nth-child(5), /* Contratos Activos */
+    .table th:nth-child(6), .table td:nth-child(6)  /* Acciones */ {
+        min-width: 90px;
+        max-width: 120px;
+        text-align: center;
+    }
     .table .actions {
         display: flex;
         gap: var(--spacing-sm);
-        justify-content: flex-end;
-        margin-left: 5px;
+        justify-content: center;
+        width: auto;
+        margin-left: 0;
     }
 
     .btn-sm-btn-primary {
@@ -388,4 +433,49 @@
     .tbody {
         padding: 10px;
     }
+
+    .table th:nth-child(4) {
+        min-width: 120px;
+        max-width: 150px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .table th:nth-child(6) {
+        text-align: center;
+    }
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th:nth-child(4), .table td:nth-child(4), /* Contacto */
+.table th:nth-child(5), .table td:nth-child(5), /* Contratos Activos */
+.table th:nth-child(6), .table td:nth-child(6)  /* Acciones */ {
+    min-width: 90px;
+    max-width: 120px;
+    text-align: center;
+}
+
+.btn-sm-btn-primary,
+.btn-sm-btn-secondary {
+    min-width: 60px;
+    max-width: 80px;
+    width: auto !important;
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.8rem;
+    margin: 0.1rem auto;
+    display: block;
+}
+
+.table .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    justify-content: center;
+    margin: 0;
+    width: auto;
 }
