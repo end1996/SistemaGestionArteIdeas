@@ -1,0 +1,156 @@
+
+html, body {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+  .main-content {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .close-sidebar {
+    display: none !important;
+  }
+  /* --- INICIO: Ajustes para tabla y botones --- */
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .container, .main-content {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+/* Ajustes de la tabla para móvil */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+.btn-editar{
+    background: #a74a4a;
+    color: white;
+    width: 50px;
+}
+.btn-ver{
+    background:  #2a406e;
+    color: white;
+    width: 50px;
+}
+
+.actions{
+    margin-left: 50px;
+    margin-top: 8px;
+}
+
+@media (max-width: 300px){
+    .btn-ver{
+        width: 50px;
+        
+    }
+    .btn-editar{
+        width: 50px;
+    }
+    .actions{
+        margin-left:90px;
+        margin-top: 8px;
+    }
+}
+@media (max-width: 400px){
+    .btn-ver{
+        width: 500%;
+        height: 200%;
+    }
+    .btn-editar{
+        width: 100px;
+    }
+    .actions{
+        margin-left:30px;
+        
+        width: 100px;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table tr {
+        display: table-row;
+    }
+
+    .table th {
+        padding: 30px;
+        height: 50px;
+        color: #333;
+        text-align: center;
+    }
+    
+}
+@media (max-width: 1170px){
+    .btn-ver{
+        width: 60px;
+    }
+    .btn-editar{
+        width: 60px;
+    }
+    .actions{
+        margin-left: 90px;
+        margin-top: 8px;
+    }
+    
+}
+@media (max-width: 700px){
+    .btn-ver{
+        width: 60px;
+        height: 30px;
+        text-align: center;
+    }
+    .btn-editar{
+        width: 60px;
+        height: 30px;
+        text-align: center;
+    }
+    .actions{
+        margin-left: 33px;
+        margin-top: 8px;
+    }
+    .table-container {
+        overflow-x: auto;
+      }
+}
+@media (max-width: 849px){
+    
+    .actions{
+        margin-left: 60px;
+        margin-top: 8px;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table tr {
+        display: table-row;
+    }
+
+    .table th {
+        padding: 30px;
+        height: 50px;
+        color: #333;
+        text-align: center;
+    }
+}
+@media (max-width: 969px){
+    .actions{
+        margin-left: 30px;
+        margin-top: 8px;
+    }
+    .table th {
+        padding: 30px;
+        height: 50px;
+        color: #333;
+        text-align: center;
+    }
+}

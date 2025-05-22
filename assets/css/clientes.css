@@ -1,9 +1,25 @@
- /* Estilos base */
- .table-container {
+html, body {
     width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+  .main-content {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .close-sidebar {
+    display: none !important;
+  }
+  /* --- INICIO: Ajustes para tabla y botones --- */
+  .table-container {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
+    width: 100%;
+  }
+  .container, .main-content {
+    width: 100%;
+    box-sizing: border-box;
+  }/* Estilos base */
+ 
 .table .actions {
  display: flex;
  gap: var(--spacing-sm);
@@ -78,11 +94,7 @@
     /* Ajustes de la tabla para móvil */
     .table-container {
         overflow-x: auto;
-        width: 100%;
-        margin-left: 0;
-        padding-left: 0;
-        padding-right: 0;
-    }
+      }
     .table {
         min-width: unset;
         width: 100%;

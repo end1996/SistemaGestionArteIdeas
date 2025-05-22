@@ -1,14 +1,25 @@
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-/* Estilos base para la tabla */
-.table-container {
     width: 100%;
-    overflow-x: auto; 
-    -webkit-overflow-scrolling: touch; 
-}
+    min-width: 0;
+    overflow-x: hidden;
+  }
+  .main-content {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .close-sidebar {
+    display: none !important;
+  }
+  /* --- INICIO: Ajustes para tabla y botones --- */
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .container, .main-content {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
 /* Ajustes de la tabla para móvil */
 .table-container {
     overflow-x: auto;
@@ -26,6 +37,58 @@ html, body {
     height: 60px;
     z-index: 1000;
     display: none;
+}
+.header {
+    margin-bottom: 2rem;
+    padding: 15px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header-buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header-buttons button {
+    width: 100%;
+    max-width: 300px;
+}
+
+.menu-toggle:hover {
+    background: #344e86;
+}
+
+.header-title {
+    margin: 0;
+    padding: 1rem;
+}
+
+.close-menu {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    background: var(--primary);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1.7rem;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+.close-menu:hover {
+    background: var(--primary-dark);
 }
 .btn-sm{
     background: #345291;
@@ -46,7 +109,7 @@ html, body {
     gap: var(--spacing-sm);
     justify-content: flex-end;
     width: 8px;
-    margin-left: 5%;
+    left: 2%;
 }
 
 .menu-button {
@@ -235,58 +298,7 @@ html, body {
     }
 }
 
-.header {
-    margin-bottom: 2rem;
-    padding: 15px;
-}
 
-.header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.header-buttons {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.header-buttons button {
-    width: 100%;
-    max-width: 300px;
-}
-
-.menu-toggle:hover {
-    background: #344e86;
-}
-
-.header-title {
-    margin: 0;
-    padding: 1rem;
-}
-
-.close-menu {
-    display: none;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 1100;
-    background: var(--primary);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    cursor: pointer;
-    color: var(--white);
-    font-size: 1.7rem;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-}
-.close-menu:hover {
-    background: var(--primary-dark);
-}
 @media (max-width: 768px) {
     .close-menu {
         display: block;

@@ -7,7 +7,7 @@
  display: flex;
  gap: var(--spacing-sm);
  justify-content: flex-end;
- margin-right: 30%;
+ margin-right: 20%;
 }
 .sidebar {
     width: 250px;
