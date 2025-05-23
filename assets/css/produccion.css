@@ -22,7 +22,7 @@
     position: relative; /* o absolute */
     left: 50px;
     
-}
+  }
   /* --- FIN: Ajustes para tabla y botones --- */
   @media (max-width: 768px) {
     .sidebar {
