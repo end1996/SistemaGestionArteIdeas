@@ -9,6 +9,7 @@
  justify-content: flex-end;
  margin-right: 20%;
 }
+
 .sidebar {
     width: 250px;
     background: #333;
@@ -27,6 +28,16 @@
     padding: 1rem;
     margin-left: 250px;
     overflow-x: hidden;
+}
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: white;
+    font-size: 15px;
+    white-space: nowrap;
 }
 
 .sticky-header {
@@ -89,10 +100,28 @@
 .close-menu {
     display: none;  /* Oculto por defecto en escritorio */
 }
+@media screen and (max-width: 1300px) {
+.pagination {
+    margin-top: 1px;
+}
+}
 
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
+    }
+    .btn-anterior{
+    width: 90px;
+    margin-right: 25px;
+    }
+    .btn-siguiente{
+        width: 90px;
+        margin-left:25px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+       
     }
 
     .menu-toggle {
@@ -155,6 +184,7 @@
         text-align: center;
         margin-bottom: 1rem;
     }
+    
 }
 
 @media (min-width: 769px) {
@@ -163,7 +193,7 @@
     }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 389px) {
     .table th,
     .table td {
         padding: 7px;
@@ -198,7 +228,7 @@
 
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 400px) {
     .table th,
     .table td {
         padding: 10px;
@@ -218,25 +248,30 @@
         font-size: 20px;
     }
      /* Paginación */
-     .pagination {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 1rem;
-        padding: 0.8rem;
-        background: white;
-        font-size: 15px;
-        white-space: nowrap;
-    }
+     .btn-anterior{
+        width: 90px;
+        margin-right: 1px;
+        }
+        .btn-siguiente{
+            width: 90px;
+            margin-left:1px;
+        }
+        .pagination {
+            display: flex;
+            margin-left:280px;
+            
+           
+        }
 
-    .pagination button {
+
+        .pagination button {
         padding: 0.5rem 1rem;
-    }
+        }
 
-    .pagination-info {
+        .pagination span {
         font-size: 15px;
         letter-spacing: 1px;
-    }
+         }
    
 
 }
@@ -255,3 +290,41 @@
     }
 
 }
+@media screen and (max-width: 389px) {
+    .btn-anterior{
+        width: 90px;
+        margin-right: 1px;
+        }
+        .btn-siguiente{
+            width: 90px;
+            margin-left:px;
+        }
+        .pagination {
+            display: flex;
+            margin-right:3px;
+            gap: 2px;
+            
+           
+        }
+        
+    }
+
+    
+    @media screen and (max-width: 422px) {
+        .btn-anterior{
+            width: 90px;
+            margin-right: 1px;
+            }
+            .btn-siguiente{
+                width: 90px;
+                margin-left:1px;
+            }
+            .pagination {
+                display: flex;
+                margin-left:10px;
+                
+                
+               
+            }
+    }
+    

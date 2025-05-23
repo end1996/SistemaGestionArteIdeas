@@ -209,6 +209,7 @@ html, body {
         gap: 1rem;
         padding: 0.8rem;
         background: white;
+        
     }
 
     .pagination button {
@@ -268,4 +269,26 @@ html, body {
         gap: 0.5rem;
         margin-right: 0 !important;
     }
+}
+@media screen and (max-width: 350px) {
+    .btn-anterior{
+        width: 50px;
+        margin-right: 10px;
+        }
+        .btn-siguiente{
+            width: 50px;
+            margin-left:20px;
+        }
+        .pagination {
+            display: flex;
+            margin-left:309px; 
+            align-items: center;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .pagination-info {
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+        
 }
