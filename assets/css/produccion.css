@@ -18,10 +18,12 @@
     width: 100%;
     box-sizing: border-box;
   }
-  .actions{
-    position: relative; /* o absolute */
-    left: 50px;
-    
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    align-items: center;
+    gap: 8px;
   }
   /* --- FIN: Ajustes para tabla y botones --- */
   @media (max-width: 768px) {
@@ -130,6 +132,28 @@
       font-size: 0.92rem;
     }
   }
+  @media (max-width: 600px) {
+    th.acciones, td.actions {
+      min-width: 100px;
+      width: 100%;
+      max-width: none;
+      padding-left: 0;
+      text-align: center;
+    }
+    .actions {
+      justify-content: center !important;
+      text-align: center !important;
+      gap: 8px;
+      padding-left: 0;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .actions .btn {
+      min-width: 70px;
+      width: 80px;
+      margin-bottom: 4px;
+    }
+  }
   html, body {
     width: 100%;
     min-width: 0;
@@ -138,4 +162,10 @@
   .main-content {
     width: 100%;
     overflow-x: hidden;
+  }
+  th.acciones, td.actions {
+    min-width: 120px;
+    width: 120px;
+    max-width: 140px;
+    box-sizing: border-box;
   }

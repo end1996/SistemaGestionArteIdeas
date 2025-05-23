@@ -6,6 +6,34 @@
     <title>Gestión de Producción - Sistema de Gestión Fotográfica</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/produccion.css">
+    <style>
+        .btn-ver {
+            background-color: #345291 !important;
+            color: white !important;
+        }
+        .btn-editar {
+            background-color: #913434 !important;
+            color: white !important;
+        }
+        th.acciones {
+            text-align: left;
+            padding-left: 8px;
+        }
+        td.actions {
+            text-align: center;
+            vertical-align: middle;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        @media (max-width: 600px) {
+            th.acciones {
+                text-align: center;
+                padding-left: 0;
+            }
+        }
+    </style>
     <!-- Si se requiere, agregar: <link rel="stylesheet" href="../assets/css/produccion.css"> -->
    
     
@@ -109,7 +137,7 @@
                                 <th>Fecha Inicio</th>
                                 <th>Fecha Fin</th>
                                 <th>Responsable</th>
-                                <th>Acciones</th>
+                                <th class="acciones">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -229,6 +257,17 @@
         }
         menuToggle.onclick = openSidebar;
         closeSidebar.onclick = closeSidebarFunc;
+
+        // Resalta automáticamente el enlace del menú según el archivo actual
+        document.querySelectorAll('.nav-link').forEach(link => {
+          const href = link.getAttribute('href');
+          const currentPage = window.location.pathname.split('/').pop();
+          if (href === currentPage) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
     </script>
 </body>
 </html> 
