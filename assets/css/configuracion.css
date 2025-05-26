@@ -3,6 +3,14 @@
 .config-sections {
     padding: 1rem;
 }
+.mb-1{
+    width: 80%;
+  margin-left: 140px;  
+}
+.form-control{
+    width: 90% !important;
+   
+}
 
 .config-sections .card {
     margin-bottom: 2rem;
@@ -209,6 +217,23 @@ input[type="checkbox"] {
     display: none;
 }
 
+@media (max-width: 1541px) {
+.mb-1{
+  width: 80%;
+  margin-left: 120px;  
+}
+}
+@media (max-width: 1249px) {
+    .mb-1{
+        width: 95%;
+        margin-left: 20px;  
+    }
+    .form-control{
+        width: 95% !important;
+       
+    }
+}
+
 /* Solo mostrar el botón en pantallas pequeñas */
 @media (max-width: 768px) {
     .close-menu {
@@ -229,6 +254,14 @@ input[type="checkbox"] {
     }
     .close-menu:hover {
         background: #2d4373;
+    }
+    .mb-1{
+        width: 95%;
+        margin-left: 20px;  
+    }
+    .form-control{
+        width: 100% !important;
+       
     }
 }
 
