@@ -45,7 +45,6 @@ html, body {
 
 .header h1 {
     margin: 0;
-    font-size: 1.5rem;
 }
 
 .header-buttons {
@@ -238,6 +237,10 @@ html, body {
 
     .modal-footer button {
         width: 100%;
+    }
+
+    .header h1 {
+        margin: var(--spacing-md) 0 var(--spacing-sm);
     }
 }
 
