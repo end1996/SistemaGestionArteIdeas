@@ -55,10 +55,31 @@
 
 /* Estilos para la paginación */
 .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+    padding-right: 20px !important;
+    width: 100% !important;
+}
+
+.btn-anterior,
+.btn-siguiente {
+    background: var(--wild-Blue) !important;
+    color: var(--white) !important;
+    width: 86px !important;
+    height: 25px !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.pagination-info {
+    font-size: 14px !important;
+    margin: 0 10px !important;
 }
 
 /* Pie de tarjeta */
@@ -234,10 +255,14 @@
 
     .pagination {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
-        gap: 1rem;
         padding: 0.5rem;
+        /* Ajustar el ancho máximo para evitar que se extiendan demasiado */
+        .btn-anterior, .btn-siguiente {
+            max-width: 120px; /* Puedes ajustar este valor según sea necesario */
+            width: auto;
+        }
     }
 
     .pagination-info {
@@ -346,10 +371,14 @@
 
     .pagination {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         padding: 0.5rem;
-        margin-left: 10%;
+        /* Ajustar el ancho máximo para evitar que se extiendan demasiado */
+        .btn-anterior, .btn-siguiente {
+            max-width: 120px; /* Puedes ajustar este valor según sea necesario */
+            width: auto;
+        }
     }
 
     .pagination-info {
@@ -447,8 +476,15 @@
     .pagination {
         display: flex;
         justify-content: center;
+        align-items: center;
         padding: 0.9rem;
-        margin-left: 10%;
+        margin-left: 0;
+        gap: 5px;
+        /* Ajustar el ancho máximo para evitar que se extiendan demasiado */
+        .btn-anterior, .btn-siguiente {
+            max-width: 120px; /* Puedes ajustar este valor según sea necesario */
+            width: auto;
+        }
     }
 
     .pagination-info {
@@ -505,4 +541,17 @@
     justify-content: center;
     margin: 0;
     width: auto;
+}
+
+@media screen and (min-width: 757px) and (max-width: 1965px) {
+    .pagination {
+        justify-content: flex-end !important;
+        padding-right: 20px !important;
+    }
+    
+    .btn-anterior,
+    .btn-siguiente {
+        width: 86px !important;
+        height: 25px !important;
+    }
 }
