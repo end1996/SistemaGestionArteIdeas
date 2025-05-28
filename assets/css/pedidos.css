@@ -2,7 +2,10 @@
     display: flex;
     width: 100%;
     min-height: 100vh;
+    margin-top: -40px;
 }
+ 
+
 .table .actions {
  display: flex;
  gap: var(--spacing-sm);
@@ -22,12 +25,41 @@
     z-index: 1000;
     transition: transform 0.3s ease;
 }
+.btn-ver {
+    background: #345291;
+    color: white;
+    border: none;
+    width: 38px;
+    height: 28px;
+    font-size: 14px;
+}
 
+.btn-editar {
+    background: #a74a4a;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 28px;
+    font-size: 14px;
+}
+.btn-ver:hover {
+    background-color: #2a406e;
+}
+
+.btn-editar:hover {
+    background-color: #913434 ;
+}
 .main-content {
     flex: 1;
     padding: 1rem;
     margin-left: 250px;
     overflow-x: hidden;
+}
+.btn-siguiente,
+.btn-anterior{
+    font-size: 13px;
+    width: 86px ;
+    height: 25px ;
 }
 .pagination {
     display: flex;
@@ -59,7 +91,6 @@
     cursor: pointer;
     width: 40px;
     height: 40px;
-    position: fixed;
     top: 10px;
     left: 10px;
     z-index: 2000;
@@ -78,7 +109,7 @@
 
 .menu-toggle.active {
     background: transparent;
-    position: fixed;
+    
 }
 
 .menu-toggle.active span {
@@ -105,10 +136,51 @@
     margin-top: 1px;
 }
 }
+@media screen and (max-width:1629px){
+    .container {
+        display: flex;
+        
+        margin-top: 5px;
+    }
+}
 
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
+        display: flex;
+
+        margin-top: -50px;
+    }
+    .table .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+        min-width: 100px;
+        margin-right: 0 !important;
+    }
+
+    .btn-ver {
+        width: 50px;
+        height: 30px;
+        
+        justify-content: center;
+    }
+    
+    .btn-editar {
+        width: 50px;
+        height: 30px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+    .btn-ver:hover {
+        background-color: #2a406e;
+    }
+    
+    .btn-editar:hover {
+        background-color: #913434 ;
     }
     .btn-anterior{
     width: 90px;
@@ -126,7 +198,6 @@
 
     .menu-toggle {
         display: block !important;
-        position: fixed !important;
         top: 10px !important;
         left: 10px !important;
         z-index: 2200 !important;
@@ -170,7 +241,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        margin: 0;
+        margin-top: 50px;
         padding: 0;
     }
     .main-content {

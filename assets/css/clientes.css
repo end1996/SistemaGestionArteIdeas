@@ -21,76 +21,64 @@ html, body {
   }/* Estilos base */
  
 .table .actions {
- display: flex;
- gap: var(--spacing-sm);
- justify-content: flex-end;
- margin-right: 60%;
+   display: flex;
+   gap: var(--spacing-sm);
+   justify-content: flex-end;
+   margin-right: 53%;
 }
 /* Estilos adicionales específicos de clientes */
 .pagination {
     display: flex;
-    align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: white;
+    font-size: 15px;
+    white-space: nowrap;
 }
 
 .card-footer {
     padding: var(--spacing-md);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.btn-ver {
+    background: #345291;
+    color: white;
+    border: none;
+    width: 38px;
+    height: 28px;
+    font-size: 14px;
+}
+
+.btn-editar {
+    background: #a74a4a;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 28px;
+    font-size: 14px;
+}
+.btn-ver:hover {
+    background-color: #2a406e;
+}
+
+.btn-editar:hover {
+    background-color: #913434 ;
+}
+
+.btn-siguiente,
+.btn-anterior{
+    font-size: 13px;
+    width: 86px ;
+    height: 25px ;
+}  
+
 /* Estilos responsivos */
-@media screen and (max-width: 768px) {
-    * {
-        box-sizing: border-box;
-    }
-    .main-content,
-    .card,
-    .form-control,
-    .btn,
-    .btn-primary {
-        max-width: 100%;
-        width: 100%;
-    }
-    .form-group,
-    .form-row,
-    .form-col {
-        max-width: 100%;
-        width: 100%;
-    }
-    .btn,
-    .btn-primary {
-        width: auto;
-        min-width: 120px;
-        max-width: 100%;
-        display: inline-block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .form-group.text-right {
-        text-align: center !important;
-    }
-    .form-group.text-right .btn {
-        margin-top: 0.5rem;
-        margin-right: 0;
-        margin-left: 0;
-    }
-    .card {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 0.2rem;
-        width: 100%;
-    }
-
+@media screen and (max-width: 1457px) {
+    
+    
     /* Ajustes de la tabla para móvil */
     .table-container {
         overflow-x: auto;
@@ -98,11 +86,11 @@ html, body {
     .table {
         min-width: unset;
         width: 100%;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
     .table th, .table td {
         padding: 0.2rem 0.1rem;
-        font-size: 0.75rem;
+        font-size: 15px;
         text-align: left;
         min-width: unset;
     }
@@ -181,16 +169,22 @@ html, body {
     }
 
     /* Botones de acción */
-    .btn-primary {
-        background: #4267B2;
+    .btn-ver {
+        background: #345291;
         color: white;
         border: none;
+        width: 50px;
+        height: 30px;
+        font-size: 14px;
     }
 
-    .btn-secondary {
-        background: #dc3545;
+    .btn-editar {
+        background: #a74a4a;
         color: white;
         border: none;
+        width: 50px;
+        height: 30px;
+        font-size: 14px;
     }
 
     /* Ajustes de los filtros */
@@ -246,49 +240,76 @@ html, body {
         gap: 0.3rem;
         min-width: 100px;
         margin-right: 0 !important;
+        margin-top: 10px;
     }
     .table td.actions {
         min-width: 110px;
         padding-top: 0.4rem;
         padding-bottom: 0.4rem;
     }
+    .btn-anterior{
+    text-align: center;
+    display: inline-flex;         
+    align-items: center;           
+    justify-content: center;  
+    margin-right: 20px;
+    }
+    .btn-siguiente{
+    text-align: center;
+    display: inline-flex;         
+    align-items: center;           
+    justify-content: center;
+    margin-left: 20px;  
+    }
+
+}
+@media screen and (max-width: 764px) {
+    .btn-anterior{
+        width: 110px;
+     }
+     .btn-siguiente{
+         width: 110px;
+      }
+}
+@media screen and (max-width: 700px) {
+    .btn-ver{
+        width: 50px;
+    }
+    .btn-editar{
+        width: 52px;
+    }
 }
 
-@media (min-width: 769px) {
-    .table th:last-child,
-    .table td.actions {
-        min-width: 150px;
-        text-align: center !important;
-    }
-    .table td.actions {
-        vertical-align: middle;
-    }
-    .table .actions {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-right: 0 !important;
-    }
+@media screen and (max-width: 428px) {
+ .pagination{
+    margin-left: 230px;
+ }
+ .table th, .table td {
+    padding: 0.2rem 0.9rem;
+    font-size: 15px;
+    text-align: left;
+    min-width: unset;
 }
-@media screen and (max-width: 350px) {
+  
+}
+
+@media screen and (max-width: 413px) {
     .btn-anterior{
-        width: 50px;
-        margin-right: 10px;
-        }
-        .btn-siguiente{
-            width: 50px;
-            margin-left:20px;
-        }
-        .pagination {
-            display: flex;
-            margin-left:309px; 
-            align-items: center;
-            display: flex;
-            justify-content: flex-start;
-        }
-        .pagination-info {
-            font-size: 15px;
-            letter-spacing: 1px;
-        }
+       width: 80px;
+    }
+    .btn-siguiente{
+        width: 80px;
+     }
+    
+   }
+   @media screen and (max-width: 380px) {
+    .pagination{
+       margin-left: 270px;
+       gap: 1px;
+    }
+    .table th, .table td {
+        padding: 0.2rem 0.9rem;
+        font-size: 14px;
         
-}
+    }
+   }

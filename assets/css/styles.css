@@ -214,12 +214,12 @@ button, input, select, textarea {
 .btn-siguiente {
   background: var(--wild-Blue);
   color: var(--white);
-  width: 86px;
+  width: 96px;
   height: 25px;
   font-size: 13px;
   align-items: center;
   display: flex;
-  justify-content: flex-start;
+  text-align: left;
 }
 .pagination span {
   font-size: 14px;
@@ -704,6 +704,10 @@ button, input, select, textarea {
     justify-content: flex-end;
     margin-right: 16%;
     margin-top: 12px;
+  }
+
+  .btn-anterior{
+    text-align: center;
   }
   
 }
