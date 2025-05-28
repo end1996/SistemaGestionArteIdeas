@@ -14,12 +14,13 @@
 }
 
 .filter-controls .form-group {
-    flex: 1;
-    min-width: 200px;
+    min-width: 150px;
+    width: 100%;
 }
 
 .date-inputs {
     display: flex;
+    flex-direction: column;
     gap: 15px;
     width: 100%;
 }
@@ -131,17 +132,12 @@
         background-color: #6c757d;
         border-color: #6c757d;
         color: white;
-        margin-left: 56%;
-        width: 164px;
-        position: relative;
-        top: -38px;
-        
     }
     .btn-primary {
-        margin-right: 30%;
-        width: 180px;
-        position: relative;
-        top: -2px;
+        margin-right: 0;
+        width: auto;
+        position: static;
+        top: auto;
     }
     
 
@@ -152,17 +148,12 @@
         background-color: #6c757d;
         border-color: #6c757d;
         color: white;
-        margin-left: 55%;
-        width: 151px;
-        position: relative;
-        top: -38px;
-        
     }
     .btn-primary {
-        width: 160px;
-        position: relative;
-        top: -2px;
-        margin-right: 80%;
+        width: auto;
+        position: static;
+        top: auto;
+        margin-right: 0;
     }
     
 
@@ -172,6 +163,7 @@
     .filter-controls {
         flex-direction: column;
         align-items: stretch;
+        padding: 15px 8px;
     }
     
     .date-inputs {
@@ -180,6 +172,7 @@
     
     .chart-container {
         height: 250px;
+        padding: 10px;
     }
     .btn-secondary {
         background-color: #6c757d;
@@ -193,6 +186,29 @@
         border-color: #545b62;
     }
     
+    /* Estilos para el grupo de botones en móvil */
+    .filter-controls .form-group:last-child {
+        display: flex;
+        flex-direction: row;
+        gap: 10px; /* Espacio entre botones */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Alinear verticalmente al centro */
+        flex-wrap: wrap; /* Permite que los botones se envuelvan si el espacio es muy reducido */
+    }
+
+    .filter-controls .form-group:last-child .btn {
+        flex: 1; /* Permitir que los botones compartan el espacio */
+        padding: 8px 12px;
+        min-width: 120px; /* Establecer un ancho mínimo razonable */
+        max-width: 180px; /* Establecer un ancho máximo para que no sean demasiado grandes */
+    }
+
+    /* Estilos para los campos de selección en móvil */
+    .filter-controls .form-group .form-control {
+        max-width: 100%; /* Permitir que ocupe el 100% del contenedor */
+        width: 100%; /* Asegurar que sea responsivo */
+        box-sizing: border-box; /* Incluir padding y borde en el ancho total */
+    }
 }
 
 /* Estilos para tarjetas de resumen */
