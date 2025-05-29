@@ -7,7 +7,7 @@
 
 /* Botón primario pequeño */
 .btn-sm-btn-primary {
-    background: #4a6da7;
+    background:  #345291;
     color: white;
     padding: 0.2rem 0.6rem;
     font-size: 0.8rem;
@@ -18,7 +18,7 @@
 
 /* Botón secundario pequeño */
 .btn-sm-btn-secondary {
-    background: #a74a4a;
+    background:#a74a4a;
     color: white;
     padding: px; /* Error: falta el valor de padding */
     font-size: 0.8rem;
@@ -27,7 +27,13 @@
     left: 100%;
     width: 100%;
 }
+.btn-sm-btn-primary:hover {
+    background-color: #2a406e;
+}
 
+.btn-sm-btn-secondary:hover {
+    background-color: #913434 ;
+}
 /* Encabezados de tabla */
 .table {
     width: 100%;
