@@ -29,6 +29,7 @@ html, body {
     padding-right: 0;
 }
 
+
 .menu-header {
     position: -webkit-sticky;
     position: sticky;
@@ -52,11 +53,6 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.header-buttons button {
-    width: 100%;
-    max-width: 300px;
 }
 
 .menu-toggle:hover {
@@ -92,24 +88,34 @@ html, body {
 .btn-sm{
     background: #345291;
     color: white;
+  
 }
-.btn-ver{
+.btn-ver {
     background: #345291;
     color: white;
-    width: 80px;
+    border: none;
+    width: 5px;
+    height: 30px;
+    font-size: 14px;
+   
 }
-.btn-editar{
-    background: #913434;
+
+.btn-editar {
+    background: #a74a4a;
     color: white;
-    width: 90px;
+    border: none;
+    width: 50px;
+    height: 28px;
+    font-size: 14px;
 }
-.table .actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: flex-end;
-    width: 8px;
-    margin-left: 20%;
+.btn-ver:hover {
+    background-color: #2a406e;
 }
+
+.btn-editar:hover {
+    background-color: #913434 ;
+}
+
 
 .menu-button {
     display: none;
@@ -156,6 +162,28 @@ html, body {
     position: relative;
 }
 
+.btn-movimiento{
+    background: #a74a4a;
+    color: white;
+    border: none;
+}
+.btn-movimiento{
+    background: #a74a4a;
+    color: white;
+    border: none;
+}
+.btn-nuevo{
+    background:  #345291;
+    color: white;
+    border: none;
+}
+.btn-nuevo:hover {
+    background-color: #2a406e;
+}
+
+.btn-movimiento:hover {
+    background-color: #913434 ;
+}
  /* Estilos adicionales específicos de inventario */
 
 
@@ -163,6 +191,108 @@ html, body {
     padding: var(--spacing-md);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.table th {
+    padding: 35px;
+    justify-content: center;
+    height: 1px;
+    border-collapse: collapse;
+}
+
+
+.table td {
+    padding:  20px;
+    border-collapse: collapse;
+}
+
+.btn-siguiente,
+.btn-anterior{
+    font-size: 13px;
+    width: 86px ;
+    height: 25px ;
+} 
+@media screen and (max-width: 1629px){
+   
+    
+      
+      .btn-movimiento{
+        white-space: nowrap;
+        margin-right: 10%;
+      }
+      .btn-nuevo {
+       
+        white-space: nowrap;
+        margin-right: 50%;
+        
+    }
+    .header h1{
+     white-space: nowrap !important;
+        
+    }
+}
+@media screen and (max-width: 1299px){
+   
+    
+      
+    .btn-movimiento{
+        white-space: nowrap;
+      margin-right: 10% !important;
+    }
+    .btn-nuevo {
+     
+      white-space: nowrap;
+      margin-right: 100% !important;
+      
+  }
+  .header h1{
+   white-space: nowrap !important;
+      
+  }
+}
+@media screen and (max-width:964px){
+    .btn-ver {
+        
+        height: 28px;
+       
+       
+    }
+    .actions{
+        margin-top: 35px;
+    }
+    .btn-movimiento{
+        white-space: nowrap;
+      margin-right: 1% !important;
+      width: 10px;
+      font-size: 13px;
+    }
+    .btn-nuevo {
+        font-size: 13px;
+      white-space: nowrap;
+      margin-right: 110% !important;
+      
+  }
+
+}
+@media screen and (max-width:886px){
+    .btn-movimiento{
+        white-space: nowrap;
+      margin-right: 1% !important;
+      width: 10px;
+      font-size: 13px;
+    }
+    .btn-nuevo {
+        font-size: 13px;
+      white-space: nowrap;
+      margin-right: 98% !important;
+      
+  }
+  .header h1{
+    font-size: 26px;
+       
+   }
+
+}
+
 
 /* Estilos responsive */
 @media screen and (max-width: 768px) {
@@ -324,15 +454,21 @@ html, body {
         display: none !important;
     }
 }
-@media (min-width: 978px) {
-    .btn-ver{
-        height: 30px;
-        width: 80px;
-    }
-    .btn-editar{
+@media (min-width: 750px) {
+    .header-buttons  {
+        display: flex;
+        justify-content: flex-end; /* Alinea el contenido a la derecha */
+        margin-left: 55% !important;
+        margin-top: 1px;
         
-        width: 100px;
     }
+    .header-buttons button {
+    padding: 12px;
+    
+    }
+}
+@media (min-width: 978px) {
+    
     .table .actions {
         display: flex;
         gap: var(--spacing-sm);
@@ -362,15 +498,15 @@ html, body {
     }
 
 }
-@media (min-width: 480px) {
+@media (max-width: 480px) {
     
     .btn-ver{
         
-        width: 70px;
+        width: 5px;
     }
     .btn-editar{
         
-        width: 70px;
+        width: 5px;
     }
     .pagination {
         display: flex;

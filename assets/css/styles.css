@@ -342,12 +342,7 @@ button, input, select, textarea {
   text-align: center;
 }
 
-.table .actions {
-  display: flex;
-  gap: var(--spacing-sm);
-  justify-content: flex-end;
-  margin-right: 66%;
-}
+
 .table tbody tr {
   padding: 100%;
   text-align: center;

@@ -28,9 +28,7 @@
                     <li class="nav-item">
                         <a href="clientes.html" class="nav-link active">Clientes</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="colegios.html" class="nav-link">Colegios</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a href="inventario.html" class="nav-link">Inventario</a>
                     </li>
@@ -101,17 +99,21 @@
                                 <th>Nombre</th>
                                 <th>Tipo</th>
                                 <th>Contacto</th>
-                                <th>Colegio</th>
+                                <th>Nombre I.E</th>
+                                <th>Dirección</th>
+                                <th>Detalles Adicionales</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td data-label="ID">C001</td>
-                                <td data-label="Nombre">Juan Pérez</td>
-                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Nombre">Valentina Olivos</td>
+                                <td data-label="Tipo">Colegio</td>
                                 <td data-label="Contacto">987654321</td>
-                                <td data-label="Colegio">-</td>
+                                <td data-label="Nombre I.E"> I.E Gotitas</td>
+                                <td data-label="Dirección">Av. Lima 123</td>
+                                <td data-label="Detalles Adicionales">Aula patitos</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -122,7 +124,9 @@
                                 <td data-label="Nombre">María López</td>
                                 <td data-label="Tipo">Particular</td>
                                 <td data-label="Contacto">987654322</td>
-                                <td data-label="Colegio">-</td>
+                                <td data-label="Nombre I.E">-</td>
+                                <td data-label="Dirección">Jr. Cusco 456</td>
+                                <td data-label="Detalles Adicionales"> Cliente frecuente</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -130,10 +134,12 @@
                             </tr>
                             <tr>
                                 <td data-label="ID">C003</td>
-                                <td data-label="Nombre">Colegio San José</td>
+                                <td data-label="Nombre">Arlond Villareal</td>
                                 <td data-label="Tipo">Colegio</td>
                                 <td data-label="Contacto">01-4562890</td>
-                                <td data-label="Colegio">Colegio San José</td>
+                                <td data-label="Nombre I.E">I.E San José</td>
+                                <td data-label="Dirección">Av. Arequipa 789</td>
+                                <td data-label="Detalles Adicionales">Grado 6-B</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -144,7 +150,9 @@
                                 <td data-label="Nombre">Carlos Sánchez</td>
                                 <td data-label="Tipo">Particular</td>
                                 <td data-label="Contacto">987654324</td>
-                                <td data-label="Colegio">-</td>
+                                <td data-label="Nombre I.E">-</td>
+                                <td data-label="Dirección">Calle Los Pinos 234</td>
+                                <td data-label="Detalles Adicionales">-</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -155,7 +163,9 @@
                                 <td data-label="Nombre">Ana Gómez</td>
                                 <td data-label="Tipo">Particular</td>
                                 <td data-label="Contacto">987654325</td>
-                                <td data-label="Colegio">-</td>
+                                <td data-label="Nombre I.E">-</td>
+                                <td data-label="Dirección">Jr. Las Flores 567</td>
+                                <td data-label="Detalles Adicionales">Cliente nuevo</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -192,29 +202,24 @@
                     <label for="tipoCliente" class="form-label">Tipo de Cliente</label>
                     <select id="tipoCliente" class="form-control">
                         <option value="particular">Particular</option>
-                        <option value="colegio">Colegio</option>
+                        <option value="institucion">Institución Educativa</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="contacto" class="form-label">Contacto</label>
                     <input type="text" id="contacto" class="form-control" placeholder="Teléfono o correo">
                 </div>
-                <div class="form-group" id="colegioGroup" style="display: none;">
-                    <label for="colegio" class="form-label">Colegio</label>
-                    <select id="colegio" class="form-control">
-                        <option value="">Seleccione colegio</option>
-                        <option value="1">Colegio San José</option>
-                        <option value="2">Colegio Santa María</option>
-                        <option value="3">Colegio Nacional</option>
-                    </select>
+                <div class="form-group" id="nombreIEGroup">
+                    <label for="nombreIE" class="form-label">Nombre de la I.E</label>
+                    <input type="text" id="nombreIE" class="form-control" placeholder="Nombre de la Institución Educativa">
                 </div>
                 <div class="form-group">
                     <label for="direccion" class="form-label">Dirección</label>
                     <input type="text" id="direccion" class="form-control" placeholder="Dirección completa">
                 </div>
                 <div class="form-group">
-                    <label for="observaciones" class="form-label">Observaciones</label>
-                    <textarea id="observaciones" class="form-control" rows="2" placeholder="Observaciones adicionales"></textarea>
+                    <label for="detallesAdicionales" class="form-label">Detalles Adicionales</label>
+                    <textarea id="detallesAdicionales" class="form-control" rows="2" placeholder="Detalles adicionales del cliente"></textarea>
                 </div>
             </form>
         </div>
