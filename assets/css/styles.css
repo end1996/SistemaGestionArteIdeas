@@ -589,6 +589,8 @@ button, input, select, textarea {
     margin-left: 0;
     padding: var(--spacing-sm);
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .menu-toggle {
@@ -710,6 +712,17 @@ button, input, select, textarea {
     text-align: center;
   }
   
+  .main-content,
+  .reports-container {
+    overflow-x: hidden; /* Ocultar cualquier desbordamiento horizontal */
+    width: 100%; /* Asegurar que ocupen el 100% del ancho */
+    padding-left: 0; /* Eliminar padding izquierdo si existiera y causara desbordamiento */
+    padding-right: 0; /* Eliminar padding derecho si existiera y causara desbordamiento */
+  }
+
+  .card {
+    width: 100%; /* Asegurar que las tarjetas dentro se ajusten */
+  }
 }
 
 @media (max-width: 480px) {
@@ -773,9 +786,8 @@ button, input, select, textarea {
 
   .card {
     padding: var(--spacing-sm);
-    width: 99%;
+    width: 100%;
     font-size: 14px;
-   
   }
 
   .table td, 
@@ -845,19 +857,17 @@ button, input, select, textarea {
 
 @media (max-width: 300px) {
   .main-content {
-    padding: 0.05rem;
+    padding: var(--spacing-xs);
   }
   .dashboard-cards {
     grid-template-columns: 1fr;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
-    width: 310px;   /* Ancho del botón */
-  
   }
 
   .card {
-    padding: 0.08rem;
-    width: 110%;
+    padding: var(--spacing-xs);
+    width: 100%;
   }
 
   .form-label {
