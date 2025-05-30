@@ -243,3 +243,386 @@ th.acciones, td.actions {
          
       }
 }
+
+.material-item {
+    background: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.material-item .form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.material-item .form-col {
+    flex: 1;
+}
+
+.stock-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.stock-info.bajo {
+    color: #dc3545;
+}
+
+.stock-info.normal {
+    color: #28a745;
+}
+
+.alertas-section {
+    margin-top: 15px;
+}
+
+.alertas-section .alert {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+/* Estilos para el resumen de inventario */
+.inventario-resumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.inventario-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.inventario-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.material-icon {
+    font-size: 2rem;
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info {
+    flex: 1;
+}
+
+.info h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.stock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stock-bajo {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.stock-normal {
+    color: #28a745;
+}
+
+.btn-link {
+    color: #345291;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .inventario-resumen {
+        grid-template-columns: 1fr;
+    }
+    
+    .inventario-item {
+        padding: 0.75rem;
+    }
+    
+    .material-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Estilos para el dashboard de producción */
+.production-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.dashboard-card .card-header {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dashboard-card .card-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Estilos para el estado de producción */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
+
+.status-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.status-icon {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.status-icon.pendiente {
+    color: #ffc107;
+}
+
+.status-icon.proceso {
+    color: #17a2b8;
+}
+
+.status-icon.finalizado {
+    color: #28a745;
+}
+
+.status-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.status-info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Estilos para la línea de tiempo */
+.timeline {
+    padding: 1rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 2.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-marker {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Estilos para las badges de estado */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.proceso {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status-badge.finalizado {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* Estilos para la barra de progreso */
+.progress {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #17a2b8;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Estilos para el catálogo de órdenes */
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-box input {
+    padding-right: 2.5rem;
+}
+
+.search-box i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.filter-group {
+    min-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .production-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        flex-direction: column;
+    }
+
+    .search-box,
+    .filter-group {
+        width: 100%;
+    }
+
+    .timeline-item::before {
+        left: 2rem;
+    }
+
+    .timeline-marker {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}

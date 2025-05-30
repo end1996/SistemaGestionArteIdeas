@@ -68,72 +68,116 @@
             <div class="header">
                 <h1>Gestión de Inventario</h1>
                 <div class="header-buttons">
-                    <button class="btn btn-movimiento" id="btnMovimiento">Registrar Movimiento</button>
-                    <button class="btn btn-nuevo" id="btnNuevoProducto">Nuevo Producto</button>
+                    <button class="btn btn-nuevo" id="btnNuevoProducto">
+                        <i class="fas fa-plus"></i> Nuevo Producto
+                    </button>
                 </div>
             </div>
 
-            <!-- Alertas de stock -->
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h2 class="card-title">Alertas de Stock</h2>
+            <!-- Panel de Control de Inventario -->
+            <div class="inventory-dashboard">
+                <div class="dashboard-card stock-alerts">
+                    <div class="card-header">
+                        <h2>Alertas de Stock</h2>
+                    </div>
+                    <div class="alert-list">
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="alert-content">
+                                <strong>Stock Crítico</strong>
+                                <p>Papel fotográfico 10x15 (5 unidades restantes)</p>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-content">
+                                <strong>Stock Bajo</strong>
+                                <p>Químico Revelador (2 litros restantes)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="alert alert-danger">
-                    <strong>Stock Bajo:</strong> Papel fotográfico 10x15 (5 unidades restantes)
-                </div>
-                <div class="alert alert-warning">
-                    <strong>Stock Bajo:</strong> Químico Revelador (2 litros restantes)
-                </div>
-                <div class="alert alert-danger">
-                    <strong>Stock Bajo:</strong> Varillas de Marco Tipo A (3 unidades restantes)
+
+                <div class="dashboard-card stock-summary">
+                    <div class="card-header">
+                        <h2>Resumen de Stock</h2>
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-icon">📄</span>
+                            <div class="summary-info">
+                                <h3>Papel Fotográfico</h3>
+                                <p>30 unidades total</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-icon">🧪</span>
+                            <div class="summary-info">
+                                <h3>Químicos</h3>
+                                <p>14 litros total</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-icon">🖼️</span>
+                            <div class="summary-info">
+                                <h3>Marcos</h3>
+                                <p>18 unidades total</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Filtros de inventario -->
+            <!-- Sección de Movimientos de Inventario -->
             <div class="card mb-3">
                 <div class="card-header">
-                    <h2 class="card-title">Filtros</h2>
+                    <h2>Movimientos de Inventario</h2>
+                    <button class="btn btn-movimiento" id="btnMovimiento">
+                        <i class="fas fa-exchange-alt"></i> Registrar Movimiento
+                    </button>
                 </div>
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="filtroNombre" class="form-label">Nombre</label>
-                            <input type="text" id="filtroNombre" class="form-control" placeholder="Buscar por nombre">
+                <div class="movements-timeline">
+                    <div class="timeline-item entrada">
+                        <div class="timeline-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Entrada de Material</h4>
+                            <p>Papel fotográfico 10x15 - 50 unidades</p>
+                            <span class="timeline-date">15/04/2023</span>
                         </div>
                     </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="filtroTipo" class="form-label">Tipo de Producto</label>
-                            <select id="filtroTipo" class="form-control">
-                                <option value="">Todos</option>
-                                <option value="papel">Papel Fotográfico</option>
-                                <option value="quimico">Químicos</option>
-                                <option value="marco">Marcos y Varillas</option>
-                                <option value="otro">Otros</option>
-                            </select>
+                    <div class="timeline-item salida">
+                        <div class="timeline-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Salida de Material</h4>
+                            <p>Químico Revelador - 2 litros</p>
+                            <span class="timeline-date">14/04/2023</span>
                         </div>
                     </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="filtroStock" class="form-label">Stock</label>
-                            <select id="filtroStock" class="form-control">
-                                <option value="">Todos</option>
-                                <option value="bajo">Stock Bajo</option>
-                                <option value="normal">Stock Normal</option>
-                                <option value="alto">Stock Alto</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-primary">Aplicar Filtros</button>
                 </div>
             </div>
 
             <!-- Tabla de productos -->
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Listado de Productos</h2>
+                    <h2>Catálogo de Productos</h2>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar producto..." class="form-control">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-group">
+                            <select class="form-control">
+                                <option value="">Tipo de Producto</option>
+                                <option value="papel">Papel Fotográfico</option>
+                                <option value="quimico">Químicos</option>
+                                <option value="marco">Marcos</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="table">
@@ -223,12 +267,63 @@
         </div>
     </div>
 
+    <!-- Modal de registro de movimiento -->
+    <div class="modal-backdrop" id="movimientoModalBackdrop" style="display:none;"></div>
+    <div class="modal" id="movimientoModal" style="display:none;">
+        <div class="modal-header">
+            <h3 class="modal-title">Registrar Movimiento de Inventario</h3>
+            <button class="modal-close" id="cerrarModalMovimiento">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formMovimiento">
+                <div class="form-group">
+                    <label for="productoMovimiento" class="form-label">Producto</label>
+                    <select id="productoMovimiento" class="form-control">
+                        <option value="">Seleccione producto</option>
+                        <option value="1">Papel fotográfico 10x15</option>
+                        <option value="2">Químico Revelador</option>
+                        <option value="3">Varillas de Marco Tipo A</option>
+                        <option value="4">Papel fotográfico 13x18</option>
+                        <option value="5">Químico Fijador</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tipoMovimiento" class="form-label">Tipo de Movimiento</label>
+                    <select id="tipoMovimiento" class="form-control">
+                        <option value="entrada">Entrada</option>
+                        <option value="salida">Salida</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input type="number" id="cantidad" class="form-control" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="fechaMovimiento" class="form-label">Fecha</label>
+                    <input type="date" id="fechaMovimiento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="referencia" class="form-label">Referencia</label>
+                    <input type="text" id="referencia" class="form-control" placeholder="Pedido, Factura, etc.">
+                </div>
+                <div class="form-group">
+                    <label for="notasMovimiento" class="form-label">Notas</label>
+                    <textarea id="notasMovimiento" class="form-control" rows="2" placeholder="Notas adicionales"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelarMovimiento">Cancelar</button>
+            <button class="btn btn-primary" id="guardarMovimiento">Registrar Movimiento</button>
+        </div>
+    </div>
+
     <!-- Modal de nuevo producto -->
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal" id="nuevoProductoModal">
+    <div class="modal-backdrop" id="nuevoProductoModalBackdrop" style="display:none;"></div>
+    <div class="modal" id="nuevoProductoModal" style="display:none;">
         <div class="modal-header">
             <h3 class="modal-title">Nuevo Producto</h3>
-            <button class="modal-close" id="cerrarModal">&times;</button>
+            <button class="modal-close" id="cerrarModalNuevoProducto">&times;</button>
         </div>
         <div class="modal-body">
             <form id="formNuevoProducto">
@@ -291,55 +386,6 @@
         </div>
     </div>
 
-    <!-- Modal de registro de movimiento -->
-        <div class="modal-header">
-            <h3 class="modal-title">Registrar Movimiento de Inventario</h3>
-            <button class="modal-close" id="cerrarModalMovimiento">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="formMovimiento">
-                <div class="form-group">
-                    <label for="productoMovimiento" class="form-label">Producto</label>
-                    <select id="productoMovimiento" class="form-control">
-                        <option value="">Seleccione producto</option>
-                        <option value="1">Papel fotográfico 10x15</option>
-                        <option value="2">Químico Revelador</option>
-                        <option value="3">Varillas de Marco Tipo A</option>
-                        <option value="4">Papel fotográfico 13x18</option>
-                        <option value="5">Químico Fijador</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tipoMovimiento" class="form-label">Tipo de Movimiento</label>
-                    <select id="tipoMovimiento" class="form-control">
-                        <option value="entrada">Entrada</option>
-                        <option value="salida">Salida</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="cantidad" class="form-label">Cantidad</label>
-                    <input type="number" id="cantidad" class="form-control" min="1">
-                </div>
-                <div class="form-group">
-                    <label for="fechaMovimiento" class="form-label">Fecha</label>
-                    <input type="date" id="fechaMovimiento" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="referencia" class="form-label">Referencia</label>
-                    <input type="text" id="referencia" class="form-control" placeholder="Pedido, Factura, etc.">
-                </div>
-                <div class="form-group">
-                    <label for="notasMovimiento" class="form-label">Notas</label>
-                    <textarea id="notasMovimiento" class="form-control" rows="2" placeholder="Notas adicionales"></textarea>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" id="cancelarMovimiento">Cancelar</button>
-            <button class="btn btn-primary" id="guardarMovimiento">Registrar Movimiento</button>
-        </div>
-    </div>
-
     <script>
         // Variables para el control del scroll
         let lastScrollTop = 0;
@@ -381,6 +427,96 @@
             closeMenu.style.display = 'none';
             menuToggle.style.display = 'block';
         });
+    </script>
+
+    <script>
+        // Lógica para mostrar/ocultar el botón del menú móvil según el ancho de la ventana
+        function checkMobileView() {
+            const menuToggle = document.getElementById('menuToggle');
+            if (window.innerWidth <= 768) {
+                menuToggle.style.display = 'block';
+            } else {
+                menuToggle.style.display = 'none';
+            }
+        }
+
+        // Ejecutar al cargar y al redimensionar
+        checkMobileView();
+        window.addEventListener('resize', checkMobileView);
+
+        // Lógica para abrir/cerrar la sidebar en móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const sidebar = document.querySelector('.sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('menu-active');
+            if (sidebar.classList.contains('active')) {
+                closeMenu.style.display = 'block';
+                menuToggle.style.display = 'none';
+            } else {
+                closeMenu.style.display = 'none';
+                menuToggle.style.display = 'block';
+            }
+        });
+
+        closeMenu.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            menuToggle.classList.remove('menu-active');
+            closeMenu.style.display = 'none';
+            menuToggle.style.display = 'block';
+        });
+
+        // Lógica para abrir/cerrar el modal de movimiento de inventario
+        const btnMovimiento = document.getElementById('btnMovimiento');
+        const movimientoModal = document.getElementById('movimientoModal');
+        const movimientoModalBackdrop = document.getElementById('movimientoModalBackdrop');
+        const cerrarModalMovimiento = document.getElementById('cerrarModalMovimiento');
+        const cancelarMovimiento = document.getElementById('cancelarMovimiento');
+
+        function abrirMovimientoModal() {
+            movimientoModal.style.display = 'block';
+            movimientoModalBackdrop.style.display = 'block';
+        }
+
+        function cerrarMovimientoModal() {
+            movimientoModal.style.display = 'none';
+            movimientoModalBackdrop.style.display = 'none';
+        }
+
+        btnMovimiento.addEventListener('click', abrirMovimientoModal);
+        cerrarModalMovimiento.addEventListener('click', cerrarMovimientoModal);
+        cancelarMovimiento.addEventListener('click', cerrarMovimientoModal);
+
+        // Cerrar modal de movimiento haciendo clic fuera de él (en el backdrop)
+        movimientoModalBackdrop.addEventListener('click', cerrarMovimientoModal);
+
+        // Lógica para abrir/cerrar el modal de nuevo producto
+        const btnNuevoProducto = document.getElementById('btnNuevoProducto');
+        const nuevoProductoModal = document.getElementById('nuevoProductoModal');
+        const nuevoProductoModalBackdrop = document.getElementById('nuevoProductoModalBackdrop'); // Usar el backdrop específico para este modal
+        const cerrarModalNuevoProducto = document.getElementById('cerrarModalNuevoProducto');
+        const cancelarProducto = document.getElementById('cancelarProducto');
+        const guardarProducto = document.getElementById('guardarProducto');
+
+        function abrirNuevoProductoModal() {
+            nuevoProductoModal.style.display = 'block';
+            nuevoProductoModalBackdrop.style.display = 'block';
+        }
+
+        function cerrarNuevoProductoModal() {
+            nuevoProductoModal.style.display = 'none';
+            nuevoProductoModalBackdrop.style.display = 'none';
+        }
+
+        btnNuevoProducto.addEventListener('click', abrirNuevoProductoModal);
+        cerrarModalNuevoProducto.addEventListener('click', cerrarNuevoProductoModal);
+        cancelarProducto.addEventListener('click', cerrarNuevoProductoModal);
+
+        // Cerrar modal de nuevo producto haciendo clic fuera de él (en el backdrop)
+        nuevoProductoModalBackdrop.addEventListener('click', cerrarNuevoProductoModal);
+
     </script>
 
 </body>

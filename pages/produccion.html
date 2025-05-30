@@ -53,68 +53,117 @@
         <div class="main-content">
             <div class="header sticky-header">
                 <h1>Gestión de Producción</h1>
-                <button class="btn btn-primary" id="btnNuevaOrden">Nueva Orden de Producción</button>
+                <button class="btn btn-primary" id="btnNuevaOrden">
+                    <i class="fas fa-plus"></i> Nueva Orden
+                </button>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h2 class="card-title">Filtros</h2>
-                </div>
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="filtroPedido" class="form-label">Pedido Asociado</label>
-                            <input type="text" id="filtroPedido" class="form-control" placeholder="Buscar por pedido">
+            <!-- Panel de Control de Producción -->
+            <div class="production-dashboard">
+                <div class="dashboard-card production-status">
+                    <div class="card-header">
+                        <h2>Estado de Producción</h2>
+                    </div>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-icon pendiente">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Pendientes</h3>
+                                <p>3 órdenes</p>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon proceso">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>En Proceso</h3>
+                                <p>2 órdenes</p>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon finalizado">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Finalizadas</h3>
+                                <p>5 órdenes</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="filtroEstado" class="form-label">Estado</label>
-                            <select id="filtroEstado" class="form-control">
-                                <option value="">Todos</option>
+                </div>
+
+                <div class="dashboard-card production-timeline">
+                    <div class="card-header">
+                        <h2>Línea de Tiempo</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>P001 - Impresión Minilab</h4>
+                                <p>Inicio: 15/04/2023</p>
+                                <span class="status-badge pendiente">Pendiente</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>P002 - Enmarcado</h4>
+                                <p>Inicio: 12/04/2023</p>
+                                <span class="status-badge proceso">En Proceso</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Órdenes Activas -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2>Órdenes Activas</h2>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar orden..." class="form-control">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-group">
+                            <select class="form-control">
+                                <option value="">Estado</option>
                                 <option value="pendiente">Pendiente</option>
-                                <option value="en_proceso">En Proceso</option>
+                                <option value="proceso">En Proceso</option>
                                 <option value="finalizado">Finalizado</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="filtroResponsable" class="form-label">Responsable</label>
-                            <input type="text" id="filtroResponsable" class="form-control" placeholder="Buscar por responsable">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-primary">Aplicar Filtros</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Órdenes de Producción</h2>
                 </div>
                 <div class="table-container">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Pedido Asociado</th>
+                                <th>Pedido</th>
                                 <th>Estado</th>
                                 <th>Fecha Inicio</th>
-                                <th>Fecha Fin</th>
                                 <th>Responsable</th>
-                                <th class="acciones">Acciones</th>
+                                <th>Progreso</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>PR001</td>
                                 <td>P001</td>
-                                <td><span class="badge badge-info">Pendiente</span></td>
+                                <td><span class="status-badge pendiente">Pendiente</span></td>
                                 <td>15/04/2023</td>
-                                <td>-</td>
                                 <td>Juan Pérez</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -123,22 +172,14 @@
                             <tr>
                                 <td>PR002</td>
                                 <td>P002</td>
-                                <td><span class="badge badge-warning">En Proceso</span></td>
+                                <td><span class="status-badge proceso">En Proceso</span></td>
                                 <td>12/04/2023</td>
-                                <td>-</td>
                                 <td>María López</td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-ver">Ver</button>
-                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 60%"></div>
+                                    </div>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>PR003</td>
-                                <td>P003</td>
-                                <td><span class="badge badge-success">Finalizado</span></td>
-                                <td>10/04/2023</td>
-                                <td>14/04/2023</td>
-                                <td>Carlos Sánchez</td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
@@ -146,13 +187,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="card-footer text-right">
-                    <div class="pagination">
-                        <button class="btn btn-anterior">Anterior</button>
-                        <span>Página 1 de 1</span>
-                        <button class="btn btn-siguiente">Siguiente</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -188,6 +222,40 @@
                 <div class="form-group">
                     <label for="responsable" class="form-label">Responsable</label>
                     <input type="text" id="responsable" class="form-control" required>
+                </div>
+                
+                <!-- Nueva sección de materiales -->
+                <div class="form-group">
+                    <h4>Materiales Necesarios</h4>
+                    <div id="materialesLista">
+                        <div class="material-item">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <select class="form-control material-select">
+                                        <option value="">Seleccionar Material</option>
+                                        <option value="papel_10x15">Papel 10x15</option>
+                                        <option value="papel_13x18">Papel 13x18</option>
+                                        <option value="quimico_revelador">Químico Revelador</option>
+                                        <option value="marco_20x30">Marco 20x30</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <input type="number" class="form-control" placeholder="Cantidad" min="1">
+                                </div>
+                                <div class="form-col">
+                                    <span class="stock-info">Stock: <span class="stock-cantidad">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm mt-2" id="agregarMaterial">
+                        + Agregar Material
+                    </button>
+                </div>
+
+                <!-- Sección de alertas de inventario -->
+                <div id="alertasInventario" class="alertas-section">
+                    <!-- Las alertas se mostrarán aquí dinámicamente -->
                 </div>
             </form>
         </div>
@@ -236,5 +304,6 @@
           }
         });
     </script>
+    <script src="../assets/js/produccion.js"></script>
 </body>
 </html> 

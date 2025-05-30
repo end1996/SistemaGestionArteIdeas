@@ -577,3 +577,315 @@ html, body {
     
 
 }
+
+/* Estilos para el resumen de producción */
+.produccion-resumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.produccion-item {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: transform 0.2s;
+}
+
+.produccion-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.produccion-item .info h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.estado-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.estado-pendiente {
+    background: #cce5ff;
+    color: #004085;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.estado-proceso {
+    background: #fff3cd;
+    color: #856404;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.fecha {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.materiales-uso {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .produccion-resumen {
+        grid-template-columns: 1fr;
+    }
+    
+    .produccion-item {
+        padding: 0.75rem;
+    }
+}
+
+/* Estilos para el dashboard de inventario */
+.inventory-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.dashboard-card .card-header {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dashboard-card .card-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Estilos para las alertas */
+.alert-list {
+    padding: 1rem;
+}
+
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+}
+
+.alert i {
+    font-size: 1.2rem;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-content strong {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.alert-content p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.alert-danger {
+    background: #fff5f5;
+    border-left: 4px solid #dc3545;
+}
+
+.alert-warning {
+    background: #fff8e6;
+    border-left: 4px solid #ffc107;
+}
+
+/* Estilos para el resumen de stock */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
+
+.summary-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.summary-icon {
+    font-size: 2rem;
+    background: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.summary-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.summary-info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Estilos para la línea de tiempo de movimientos */
+.movements-timeline {
+    padding: 1rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 2.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-icon {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.timeline-item.entrada .timeline-icon {
+    color: #28a745;
+}
+
+.timeline-item.salida .timeline-icon {
+    color: #dc3545;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.timeline-date {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* Estilos para el catálogo de productos */
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-box input {
+    padding-right: 2.5rem;
+}
+
+.search-box i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.filter-group {
+    min-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .inventory-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        flex-direction: column;
+    }
+
+    .search-box,
+    .filter-group {
+        width: 100%;
+    }
+
+    .timeline-item::before {
+        left: 2rem;
+    }
+
+    .timeline-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
