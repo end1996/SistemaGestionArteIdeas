@@ -6,52 +6,63 @@
   <title>Agenda Fotográfica</title>
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/agenda.css" />
-  
+  <style>
+    .event-label {
+      display: block;
+      font-size: 0.75rem;
+      color: #555;
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .task-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .task-list li {
+      padding: 4px 0;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .progress-bar {
+      background-color: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      height: 10px;
+      width: 100px;
+    }
+    .progress {
+      background-color: #4caf50;
+      height: 100%;
+      transition: width 0.3s;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-    <!-- Botón de menú hamburguesa para móvil -->
-        <button class="menu-toggle" id="menuToggle">
-           <span class="menu-icon"></span>
-        </button>
-        <div class="sidebar" id="sidebar">
-            <div class="logo">FotoStudio</div>
-            <nav class="nav-menu">
-                <ul>
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pedidos.html" class="nav-link">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="clientes.html" class="nav-link">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="inventario.html" class="nav-link">Inventario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="produccion.html" class="nav-link">Producción</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="agenda.html" class="nav-link active">Agenda</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="reportes.html" class="nav-link">Reportes</a>
-                  </li>
-                    <li class="nav-item">
-                        <a href="configuracion.html" class="nav-link">Configuración</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+  <div class="container">
+    <button class="menu-toggle" id="menuToggle">
+      <span class="menu-icon"></span>
+    </button>
+    <div class="sidebar" id="sidebar">
+      <div class="logo">FotoStudio</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="pedidos.html" class="nav-link">Pedidos</a></li>
+          <li class="nav-item"><a href="clientes.html" class="nav-link">Clientes</a></li>
+          <li class="nav-item"><a href="inventario.html" class="nav-link">Inventario</a></li>
+          <li class="nav-item"><a href="produccion.html" class="nav-link">Producción</a></li>
+          <li class="nav-item"><a href="agenda.html" class="nav-link active">Agenda</a></li>
+          <li class="nav-item"><a href="reportes.html" class="nav-link">Reportes</a></li>
+          <li class="nav-item"><a href="configuracion.html" class="nav-link">Configuración</a></li>
+          <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
 
     <div class="main-content">
       <div class="header">
-      <h1>Agenda Fotográfica</h1>
+        <h1>Agenda Fotográfica</h1>
       </div>
 
       <div class="card">
@@ -72,23 +83,7 @@
       </div>
 
       <div class="calendar-container">
-        <div class="calendar">
-          <div class="calendar-header">Lun</div>
-          <div class="calendar-header">Mar</div>
-          <div class="calendar-header">Mié</div>
-          <div class="calendar-header">Jue</div>
-          <div class="calendar-header">Vie</div>
-          <div class="calendar-header">Sáb</div>
-          <div class="calendar-header">Dom</div>
-
-          <div class="calendar-day" tabindex="0">1</div>
-          <div class="calendar-day" tabindex="0">2</div>
-          <div class="calendar-day" tabindex="0">3</div>
-          <div class="calendar-day" tabindex="0">4</div>
-          <div class="calendar-day" tabindex="0">5</div>
-          <div class="calendar-day" tabindex="0">6</div>
-          <div class="calendar-day" tabindex="0">7</div>
-        </div>
+        <div class="calendar" id="calendar"></div>
       </div>
 
       <div class="card">
@@ -101,6 +96,7 @@
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Avance</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -110,6 +106,9 @@
                 <td>Juan Pérez</td>
                 <td>2025-05-01</td>
                 <td>Confirmada</td>
+                <td>
+                  <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </td>
                 <td>
                   <button class="btn btn-sm btn-ver">Ver</button>
                   <button class="btn btn-sm btn-editar">Editar</button>
@@ -121,6 +120,9 @@
                 <td>2025-05-02</td>
                 <td>Pendiente</td>
                 <td>
+                  <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
+                </td>
+                <td>
                   <button class="btn btn-sm btn-ver">Ver</button>
                   <button class="btn btn-sm btn-editar">Editar</button>
                 </td>
@@ -130,39 +132,90 @@
         </div>
       </div>
 
+      <div class="card">
+        <h2>Tareas por Proyecto</h2>
+        <ul class="task-list">
+          <li><strong>S001</strong> - Preparar equipo de luces</li>
+          <li><strong>S002</strong> - Confirmar asistencia del cliente</li>
+          <li><strong>S002</strong> - Imprimir formularios de consentimiento</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <script>
-    document.querySelectorAll('.calendar-day').forEach((day) => {
-      day.addEventListener('click', () => {
-        day.classList.toggle('selected');
-      });
-      day.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          day.classList.toggle('selected');
-        }
-      });
-    });
-  </script>
-  <script>
-    // Control del menú móvil
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        menuToggle.classList.toggle('menu-active');
+    const calendarEl = document.getElementById('calendar');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    dayNames.forEach(day => {
+      const header = document.createElement('div');
+      header.className = 'calendar-header';
+      header.textContent = day;
+      calendarEl.appendChild(header);
     });
 
-    // Cerrar menú al hacer clic fuera
-    document.addEventListener('click', (e) => {
-        if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-            menuToggle.classList.remove('menu-active');
+    const sessions = [
+      { day: 1, label: 'Colegio San Juan' },
+      { day: 2, label: 'María López' },
+    ];
+
+    for (let i = 0; i < firstDay; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'calendar-day empty';
+      calendarEl.appendChild(empty);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      const dayEl = document.createElement('div');
+      dayEl.className = 'calendar-day';
+      dayEl.setAttribute('tabindex', '0');
+      const dayNum = document.createElement('span');
+      dayNum.className = 'day-number';
+      dayNum.textContent = i;
+      dayEl.appendChild(dayNum);
+
+      const session = sessions.find(s => s.day === i);
+      if (session) {
+        const label = document.createElement('span');
+        label.className = 'event-label';
+        label.textContent = session.label;
+        dayEl.appendChild(label);
+      }
+
+      dayEl.addEventListener('click', () => {
+        dayEl.classList.toggle('selected');
+      });
+      dayEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dayEl.classList.toggle('selected');
         }
+      });
+
+      calendarEl.appendChild(dayEl);
+    }
+
+    // Menú móvil
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      menuToggle.classList.toggle('menu-active');
     });
-</script>
+
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        menuToggle.classList.remove('menu-active');
+      }
+    });
+  </script>
 </body>
 </html>
+
