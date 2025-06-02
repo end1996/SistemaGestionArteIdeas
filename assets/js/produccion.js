@@ -19,20 +19,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function mostrarModal() {
         ordenModal.style.display = 'block';
         modalBackdrop.style.display = 'block';
+        document.body.classList.add('no-scroll');
+        if (materialesLista.querySelectorAll('.material-item').length === 0) {
+            agregarFilaMaterial();
+        }
+        if (edicionesLista.querySelectorAll('.edicion-item').length === 0) {
+            agregarFilaEdicion();
+        }
     }
 
     // Función para cerrar el modal
     function cerrarModal() {
         ordenModal.style.display = 'none';
         modalBackdrop.style.display = 'none';
-        // Limpiar el formulario
+        document.body.classList.remove('no-scroll');
         document.getElementById('formOrden').reset();
-        // Limpiar materiales
         materialesLista.innerHTML = '';
-        // Limpiar alertas
-        alertasInventario.innerHTML = '';
-        // Agregar primera fila de material
+        edicionesLista.innerHTML = '';
         agregarFilaMaterial();
+        agregarFilaEdicion();
     }
 
     // Función para agregar una nueva fila de material
@@ -53,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="form-col">
                     <input type="number" class="form-control" placeholder="Cantidad" min="1">
                 </div>
-                <div class="form-col">
+                <div class="form-col stock-col">
                     <span class="stock-info">Stock: <span class="stock-cantidad">0</span></span>
                 </div>
             </div>
@@ -117,10 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event Listeners
-    btnNuevaOrden.addEventListener('click', function() {
-        mostrarModal();
-        agregarFilaMaterial();
-    });
+    btnNuevaOrden.addEventListener('click', mostrarModal);
 
     btnAgregarMaterial.addEventListener('click', agregarFilaMaterial);
 
@@ -129,4 +131,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cerrar modal al hacer clic en el botón de cerrar
     document.querySelector('.modal-close').addEventListener('click', cerrarModal);
+
+    // Lógica para agregar detalles de edición
+    const btnAgregarEdicion = document.getElementById('agregarEdicion');
+    const edicionesLista = document.getElementById('edicionesLista');
+
+    function agregarFilaEdicion() {
+        const edicionItem = document.createElement('div');
+        edicionItem.className = 'edicion-item';
+        edicionItem.innerHTML = `
+            <div class="form-row">
+                <div class="form-col">
+                    <input type="text" class="form-control" placeholder="Nombre del Archivo Editado">
+                </div>
+                <div class="form-col">
+                    <input type="text" class="form-control" placeholder="Herramienta(s) Utilizada(s)">
+                </div>
+            </div>
+        `;
+        edicionesLista.appendChild(edicionItem);
+    }
+
+    btnAgregarEdicion.addEventListener('click', agregarFilaEdicion);
+
+    // Función para eliminar la última fila de material
+    const btnEliminarMaterial = document.getElementById('eliminarMaterial');
+    btnEliminarMaterial.addEventListener('click', function() {
+        const materiales = materialesLista.querySelectorAll('.material-item');
+        if (materiales.length > 1) {
+            materialesLista.removeChild(materiales[materiales.length - 1]);
+            verificarStock();
+        }
+    });
+
+    // Función para eliminar la última fila de edición
+    const btnEliminarEdicion = document.getElementById('eliminarEdicion');
+    btnEliminarEdicion.addEventListener('click', function() {
+        const ediciones = edicionesLista.querySelectorAll('.edicion-item');
+        if (ediciones.length > 1) {
+            edicionesLista.removeChild(ediciones[ediciones.length - 1]);
+        }
+    });
 }); 

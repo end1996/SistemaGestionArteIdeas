@@ -61,7 +61,7 @@
             <!-- Panel de Control de Producción -->
             <div class="production-dashboard">
                 <div class="dashboard-card production-status">
-                    <div class="card-header">
+                <div class="card-header">
                         <h2>Estado de Producción</h2>
                     </div>
                     <div class="status-grid">
@@ -242,7 +242,7 @@
                                 <div class="form-col">
                                     <input type="number" class="form-control" placeholder="Cantidad" min="1">
                                 </div>
-                                <div class="form-col">
+                                <div class="form-col stock-col">
                                     <span class="stock-info">Stock: <span class="stock-cantidad">0</span></span>
                                 </div>
                             </div>
@@ -251,12 +251,39 @@
                     <button type="button" class="btn btn-secondary btn-sm mt-2" id="agregarMaterial">
                         + Agregar Material
                     </button>
+                     <button type="button" class="btn btn-secondary btn-sm mt-2 ml-2" id="eliminarMaterial">
+                        - Eliminar Material
+                    </button>
                 </div>
 
                 <!-- Sección de alertas de inventario -->
                 <div id="alertasInventario" class="alertas-section">
                     <!-- Las alertas se mostrarán aquí dinámicamente -->
                 </div>
+
+                <!-- Nueva sección: Detalles de Edición -->
+                <div class="form-group">
+                    <h4>Detalles de Edición</h4>
+                    <div id="edicionesLista">
+                        <div class="edicion-item">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <input type="text" class="form-control" placeholder="Nombre del Archivo Editado">
+                                </div>
+                                <div class="form-col">
+                                    <input type="text" class="form-control" placeholder="Herramienta(s) Utilizada(s)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <button type="button" class="btn btn-secondary btn-sm mt-2" id="agregarEdicion">
+                        + Agregar Detalle de Edición
+                    </button>
+                     <button type="button" class="btn btn-secondary btn-sm mt-2 ml-2" id="eliminarEdicion">
+                        - Eliminar Detalle
+                    </button>
+                </div>
+
             </form>
         </div>
         <div class="modal-footer">

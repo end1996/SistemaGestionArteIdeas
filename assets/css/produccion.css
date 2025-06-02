@@ -626,3 +626,112 @@ th.acciones, td.actions {
         font-size: 1rem;
     }
 }
+
+.modal-footer {
+    /* ... estilos del footer del modal ... */
+}
+
+/* Estilo para el botón de cerrar del modal */
+.modal-close {
+    background-color: #345291; /* Azul similar al botón 'Ver' */
+    color: white;
+    border: none;
+    width: 30px; /* Tamaño cuadrado */
+    height: 30px; /* Tamaño cuadrado */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    font-size: 1.2rem; /* Tamaño de la 'x' */
+    display: flex; /* Para centrar la 'x' */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+    background-color: #2a406e; /* Un azul un poco más oscuro al pasar el mouse */
+}
+
+/* Estilo para evitar el scroll en el body cuando el modal está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Responsive adjustments for the modal */
+@media (max-width: 768px) {
+    .modal {
+        width: 95%; /* Ocupa casi todo el ancho en móvil */
+        margin: 20px auto; /* Centrar y dar un pequeño margen */
+        max-height: 90vh; /* Limitar altura y permitir scroll interno */
+        overflow-y: auto; /* Habilitar scroll si el contenido es largo */
+    }
+
+    .modal-body {
+        padding: 15px; /* Reducir padding interno */
+    }
+
+    .modal-header {
+         padding: 15px; /* Ajustar padding del header */
+    }
+
+    .modal-footer {
+        flex-direction: column; /* Apilar botones en el footer */
+        gap: 10px; /* Espacio entre botones apilados */
+        padding: 15px; /* Ajustar padding del footer */
+    }
+
+    .modal-footer button {
+        width: 100%; /* Botones del footer a ancho completo */
+    }
+
+     .form-row {
+        flex-direction: column; /* Asegurar que las columnas se apilen */
+        gap: 0; /* Eliminar gap entre elementos apilados */
+    }
+
+    .form-col {
+        width: 100%; /* Columnas a ancho completo */
+        margin-bottom: 15px; /* Espacio entre elementos apilados */
+    }
+
+     .form-col:last-child {
+        margin-bottom: 0; /* No agregar margen al último elemento de la columna */
+     }
+
+     .stock-col {
+        margin-top: -10px; /* Ajustar margen para la info de stock */
+        margin-bottom: 15px;
+     }
+
+    /* Ajustes para los botones de agregar/eliminar dentro del modal body */
+    .modal-body .btn.mt-2 {
+        width: 100%; /* Botones de agregar/eliminar a ancho completo */
+        margin-left: 0 !important; /* Eliminar margen izquierdo si existe */
+        margin-right: 0 !important; /* Eliminar margen derecho */
+        margin-bottom: 10px; /* Añadir margen inferior para separarlos */
+    }
+
+     .modal-body .btn.mt-2:last-child {
+         margin-bottom: 0; /* No agregar margen inferior al último botón */
+     }
+
+     .form-group h4 {
+         margin-top: 15px; /* Espacio antes de los títulos de sección */
+         margin-bottom: 10px;
+     }
+
+     .material-item,
+     .edicion-item {
+         margin-bottom: 15px; /* Espacio entre cada fila de material/edición */
+         padding: 10px;
+     }
+
+     .material-item:last-child,
+     .edicion-item:last-child {
+         margin-bottom: 0; /* No agregar margen después del último item */
+     }
+
+     .form-group {
+         margin-bottom: 20px; /* Espacio entre grupos de formulario */
+     }
+}

@@ -446,7 +446,8 @@ button, input, select, textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
   display: none;
 }
 
@@ -455,24 +456,29 @@ button, input, select, textarea {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--white);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius);
-  max-width: 500px;
-  width: 100%;
+  background: white;
+  border-radius: 8px;
+  z-index: 1050;
   display: none;
+  max-width: 500px; /* Ajustar el ancho máximo si es necesario */
+  width: 90%; /* Asegurar que sea responsivo */
+  max-height: 90vh; /* Altura máxima del 90% del viewport height */
+  overflow: hidden; /* Ocultar cualquier contenido que se desborde del modal */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .modal-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-md);
+  background: #f8f9fa;
 }
 
-.modal-title {
-  font-size: var(--font-size-medium);
-  font-weight: 600;
+.modal-header .modal-title {
+  margin: 0;
+  font-size: 1.25rem;
 }
 
 .modal-close {
@@ -480,16 +486,26 @@ button, input, select, textarea {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: #6c757d;
+}
+
+.modal-close:hover {
+  color: #343a40;
 }
 
 .modal-body {
-  margin-bottom: var(--spacing-md);
+  padding: 1rem;
+  overflow-y: auto; /* Permitir desplazamiento vertical dentro del cuerpo del modal si el contenido es largo */
+  max-height: calc(90vh - 120px); /* Ajustar la altura máxima del cuerpo restando el header y footer */
 }
 
 .modal-footer {
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-sm);
+  gap: 0.5rem;
+  background: #f8f9fa;
 }
 
 /* Botón de menú móvil */
@@ -1013,4 +1029,12 @@ p {
   .table td {
     font-size: var(--font-size-xs);
   }
+}
+
+/* Responsive para modales */
+@media (max-width: 600px) {
+    .modal {
+        width: 95%;
+        max-width: none; /* Permitir que ocupe casi todo el ancho en pantallas pequeñas */
+    }
 } 
