@@ -15,7 +15,7 @@
             <span class="menu-icon"></span>
         </button>
         <div class="sidebar" id="sidebar">
-            <button class="close-sidebar" id="closeSidebar" style="display:none; background: #3b82f6;">&#10006;</button>
+            <button class="close-sidebar" id="closeSidebar">&#10006;</button>
             <div class="logo">FotoStudio</div>
             <nav class="nav-menu">
                 <ul>
@@ -307,45 +307,53 @@
         const sidebar = document.getElementById('sidebar');
         const closeSidebar = document.getElementById('closeSidebar');
 
-        // Función para verificar el ancho de la pantalla y ajustar la visibilidad del botón del menú
+        function updateMenuButtonVisibility() {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.classList.contains('open')) {
+                    menuToggle.style.display = 'block';
+                } else {
+                    menuToggle.style.display = 'none';
+                }
+            } else {
+                menuToggle.style.display = 'none';
+            }
+        }
+
         function checkScreenSize() {
-          if (window.innerWidth <= 768) {
-            menuToggle.style.display = 'block';
-          } else {
-            menuToggle.style.display = 'none';
-            sidebar.classList.remove('open'); // Asegurarse de que la sidebar esté cerrada en escritorio
-            closeSidebar.style.display = 'none';
-          }
+            updateMenuButtonVisibility();
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                closeSidebar.style.display = 'none';
+            }
         }
 
         function openSidebar() {
-          sidebar.classList.add('open');
-          closeSidebar.style.display = 'block';
-          menuToggle.style.display = 'none';
+            sidebar.classList.add('open');
+            closeSidebar.style.display = 'block';
+            updateMenuButtonVisibility();
         }
 
         function closeSidebarFunc() {
-          sidebar.classList.remove('open');
-          closeSidebar.style.display = 'none';
-          checkScreenSize(); // Llamar a la función para ajustar la visibilidad del botón
+            sidebar.classList.remove('open');
+            closeSidebar.style.display = 'none';
+            updateMenuButtonVisibility();
         }
 
         menuToggle.onclick = openSidebar;
         closeSidebar.onclick = closeSidebarFunc;
 
-        // Ejecutar al cargar la página y al redimensionar la ventana
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
 
         // Resalta automáticamente el enlace del menú según el archivo actual
         document.querySelectorAll('.nav-link').forEach(link => {
-          const href = link.getAttribute('href');
-          const currentPage = window.location.pathname.split('/').pop();
-          if (href === currentPage) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
+            const href = link.getAttribute('href');
+            const currentPage = window.location.pathname.split('/').pop();
+            if (href === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
         });
     </script>
     <script src="../assets/js/produccion.js"></script>
