@@ -100,19 +100,19 @@ body {
   }
 
   .btn {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
   }
   .btn-ver{
-    width: 60px;
+  
     background:  #345291;
     color: white;
   }
   .btn-editar{
-    width: 60px;
+ 
     background:  #913434;
     color: white;
   }
@@ -123,63 +123,120 @@ body {
   }
 
   .btn-sm {
-    padding: 0.25rem 0.5rem;
+    padding: 0.2rem 0.3rem;
     font-size: 0.85rem;
     left: 10px;
+    width: 5px;
+    height: 25px;
   }
 
+  /* Estilos de la tabla */
   .table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     font-size: 0.9rem;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   .table thead {
     background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
   }
 
-  .table th, .table td {
-    padding: 0.8rem;
+  .table th {
+    font-weight: 500;
+    color: #2c3e50;
+    text-transform: none;
+    font-size: 0.95rem;
+    padding: 1rem;
     text-align: left;
+    border-bottom: 2px solid #dee2e6;
     white-space: nowrap;
+    letter-spacing: 0.3px;
   }
 
+  .table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e9ecef;
+    color: #333;
+    vertical-align: middle;
+  }
+
+  .table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  /* Ajustes específicos para columnas */
+  .table td:first-child, /* ID */
+  .table th:first-child {
+    padding-left: 1.5rem;
+  }
+
+  /* Columna de Acciones */
+  .table th:last-child {
+    text-align: center;
+    padding-right: 1.5rem;
+  }
+
+  .table td:last-child {
+    text-align: center;
+    padding-right: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 160px; /* Asegura espacio suficiente para los botones */
+  }
+
+  /* Estilos de los botones de acción */
+  .btn-ver, 
+  .btn-editar {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    min-width: 70px;
+    text-align: center;
+    transition: all 0.2s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-ver {
+    background: #345291;
+    color: white;
+  }
+
+  .btn-editar {
+    background: #913434;
+    color: white;
+  }
+
+  .btn-ver:hover {
+    background: #2a4275;
+    transform: translateY(-1px);
+  }
+
+  .btn-editar:hover {
+    background: #7a2c2c;
+    transform: translateY(-1px);
+  }
+
+  /* Contenedor de la tabla con scroll horizontal */
   .table-container {
     overflow-x: auto;
-  }
-
-  .table th:nth-child(5) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center !important;
-    vertical-align: middle !important;
-    min-width: 120px;
-    max-width: 120px;
-    width: 120px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 !important;
-  }
-
-  .table td:nth-child(5) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 120px;
-    max-width: 120px;
-    width: 120px;
-    height: 40px;
-    padding: 0 !important;
-    gap: 0.4rem;
-  }
-
-  .btn-ver, .btn-editar {
-    margin: 0 2px;
-    min-width: 48px;
-    max-width: 64px;
-    padding: 2px 6px;
-    font-size: 0.90rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
 
   /* Responsive */
@@ -228,4 +285,366 @@ body {
       padding: 1rem;
       width: 100%;
     }
+
+    .table th,
+    .table td {
+      padding: 0.6rem;
+    }
+
+    .table td:last-child {
+      min-width: 140px;
+      gap: 0.5rem;
+    }
+
+    .btn-ver, 
+    .btn-editar {
+      padding: 0.4rem 0.8rem;
+      min-width: 60px;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Estilos específicos para la página de agenda */
+
+  .agenda-page {
+    position: relative;
+  }
+
+  /* Estilos del encabezado */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0.5rem 0;
+  }
+
+  .header-content h1 {
+    margin: 0;
+  }
+
+  .header-content .agenda-btn {
+    margin-left: 1335px;
+    padding: 0.6rem 1.2rem;
+    min-width: 150px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+ 
+
+  /* Aseguramos que el contenedor tenga suficiente espacio */
+  .header {
+    width: 100%;
+    padding-right: 1rem;
+  }
+
+  /* Actualización de estilos del modal */
+  .agenda-modal {
+    display: none; /* El modal inicia oculto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+   
+  }
+
+  .agenda-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .agenda-modal-content {
+    background-color: #fff;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+    margin: auto;
+    border: 1px solid #eaeaea;
+    transform: translateY(0);
+    transition: transform 0.3s ease-out;
+  }
+
+  .agenda-modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #fff;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .agenda-modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+  }
+
+  .agenda-modal-body {
+    padding: 1.5rem;
+    background-color: #fff;
+  }
+
+  .agenda-modal-footer {
+    padding: 1rem;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    background-color: #fff;
+  }
+
+  .agenda-close {
+    font-size: 1.5rem;
+    font-weight: normal;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+  }
+
+  .agenda-close:hover {
+    color: #333;
+  }
+
+  /* Estilos de formulario */
+  .agenda-form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .agenda-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+  }
+
+  .agenda-form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .agenda-form-control:focus {
+    outline: none;
+    border-color: #999;
+  }
+
+  /* Estilos para las tareas */
+  .agenda-tareas-list {
+    margin-bottom: 1rem;
+  }
+
+  .agenda-tarea-item {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Estilos de botones */
+  .agenda-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    width: 100px;
+    height: 40px;
+    
+  }
+
+  .agenda-btn-primary {
+    background-color: #2a406e;
+    color: white;
+  }
+
+  .agenda-btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .agenda-btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .agenda-btn:hover {
+    opacity: 0.9;
+  }
+
+  /* Utilidades */
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  /* Asegurarse que el modal está centrado en la página de agenda */
+  .agenda-page .agenda-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Estilos para Tareas por Proyecto */
+  .project-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-task-group {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+  }
+
+  .project-header {
+    background: #2a406e;
+    color: white;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .project-id {
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  .project-client {
+    font-weight: 500;
+  }
+
+  .project-date {
+    margin-left: auto;
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  .task-items {
+    padding: 0.5rem;
+  }
+
+  .task-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s;
+  }
+
+  .task-item:last-child {
+    border-bottom: none;
+  }
+
+  .task-item:hover {
+    background-color: #fff;
+  }
+
+  .task-checkbox {
+    width: 18px;
+    height: 18px;
+    margin-right: 1rem;
+    cursor: pointer;
+    accent-color: #2a406e;
+  }
+
+  .task-item label {
+    flex: 1;
+    cursor: pointer;
+    color: #333;
+    font-size: 0.95rem;
+  }
+
+  .task-status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .task-status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .task-status.completed {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .task-item input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #6c757d;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .project-header {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-date {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0.3rem;
+    }
+
+    .task-item {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .task-status {
+      width: 100%;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  }
+  .event-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #555;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .task-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .task-list li {
+    padding: 4px 0;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .progress-bar {
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+    width: 100px;
+  }
+  .progress {
+    background-color: #4caf50;
+    height: 100%;
+    transition: width 0.3s;
   }

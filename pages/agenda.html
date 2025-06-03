@@ -4,42 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Agenda Fotográfica</title>
+  <!-- Agregar Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/agenda.css" />
-  <style>
-    .event-label {
-      display: block;
-      font-size: 0.75rem;
-      color: #555;
-      margin-top: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .task-list {
-      list-style: none;
-      padding-left: 0;
-    }
-    .task-list li {
-      padding: 4px 0;
-      border-bottom: 1px solid #eaeaea;
-    }
-    .progress-bar {
-      background-color: #eee;
-      border-radius: 5px;
-      overflow: hidden;
-      height: 10px;
-      width: 100px;
-    }
-    .progress {
-      background-color: #4caf50;
-      height: 100%;
-      transition: width 0.3s;
-    }
-  </style>
+  <script src="../assets/js/agenda.js"></script>
+
 </head>
 <body>
-  <div class="container">
+  <div class="container agenda-page">
     <button class="menu-toggle" id="menuToggle">
       <span class="menu-icon"></span>
     </button>
@@ -62,7 +35,10 @@
 
     <div class="main-content">
       <div class="header">
-        <h1>Agenda Fotográfica</h1>
+        <div class="header-content">
+          <h1>Agenda Fotográfica</h1>
+          <button class="agenda-btn agenda-btn-primary" onclick="openModal()">Añadir Sesión </button>
+        </div>
       </div>
 
       <div class="card">
@@ -95,6 +71,7 @@
                 <th>ID</th>
                 <th>Cliente</th>
                 <th>Fecha</th>
+                <th>Hora de Inicio</th>
                 <th>Estado</th>
                 <th>Avance</th>
                 <th>Acciones</th>
@@ -105,6 +82,7 @@
                 <td>S001</td>
                 <td>Juan Pérez</td>
                 <td>2025-05-01</td>
+                <td>09:00 AM</td>
                 <td>Confirmada</td>
                 <td>
                   <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
@@ -118,6 +96,7 @@
                 <td>S002</td>
                 <td>María López</td>
                 <td>2025-05-02</td>
+                <td>02:30 PM</td>
                 <td>Pendiente</td>
                 <td>
                   <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
@@ -134,88 +113,121 @@
 
       <div class="card">
         <h2>Tareas por Proyecto</h2>
-        <ul class="task-list">
-          <li><strong>S001</strong> - Preparar equipo de luces</li>
-          <li><strong>S002</strong> - Confirmar asistencia del cliente</li>
-          <li><strong>S002</strong> - Imprimir formularios de consentimiento</li>
-        </ul>
+        <div class="project-tasks">
+          <div class="project-task-group">
+            <div class="project-header">
+              <span class="project-id">S001</span>
+              <span class="project-client">Juan Pérez</span>
+              <span class="project-date">2025-05-01</span>
+            </div>
+            <div class="task-items">
+              <div class="task-item">
+                <input type="checkbox" id="task1" class="task-checkbox">
+                <label for="task1">Preparar equipo de luces</label>
+                <span class="task-status pending">Pendiente</span>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="task2" class="task-checkbox" checked>
+                <label for="task2">Revisar baterías de cámaras</label>
+                <span class="task-status completed">Completada</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-task-group">
+            <div class="project-header">
+              <span class="project-id">S002</span>
+              <span class="project-client">María López</span>
+              <span class="project-date">2025-05-02</span>
+            </div>
+            <div class="task-items">
+              <div class="task-item">
+                <input type="checkbox" id="task3" class="task-checkbox">
+                <label for="task3">Confirmar asistencia del cliente</label>
+                <span class="task-status pending">Pendiente</span>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="task4" class="task-checkbox">
+                <label for="task4">Imprimir formularios de consentimiento</label>
+                <span class="task-status pending">Pendiente</span>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="task5" class="task-checkbox" checked>
+                <label for="task5">Preparar locación</label>
+                <span class="task-status completed">Completada</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    const calendarEl = document.getElementById('calendar');
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+  <!-- Modal para añadir sesión -->
+  <div id="sessionModal" class="agenda-modal">
+    <div class="agenda-modal-content">
+      <div class="agenda-modal-header">
+        <h3>Nueva Sesión Fotográfica</h3>
+        <span class="agenda-close" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="agenda-modal-body">
+        <form id="sessionForm">
+          <div class="agenda-form-group">
+            <label for="cliente">Cliente</label>
+            <input type="text" id="cliente" class="agenda-form-control" required>
+          </div>
+          
+          <div class="agenda-form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" class="agenda-form-control" required>
+          </div>
 
-    const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-    dayNames.forEach(day => {
-      const header = document.createElement('div');
-      header.className = 'calendar-header';
-      header.textContent = day;
-      calendarEl.appendChild(header);
-    });
+          <div class="agenda-form-group">
+            <label for="hora">Hora de Inicio</label>
+            <input type="time" id="hora" class="agenda-form-control" required>
+          </div>
+          
+          <div class="agenda-form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" class="agenda-form-control" required>
+              <option value="">Seleccionar estado</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="confirmada">Confirmada</option>
+              <option value="completada">Completada</option>
+              <option value="cancelada">Cancelada</option>
+            </select>
+          </div>
+          
+          <div class="agenda-form-group">
+            <label for="avance">Avance (%)</label>
+            <input type="range" id="avance" class="agenda-form-control" min="0" max="100" value="0">
+            <output for="avance" id="avanceOutput">0%</output>
+          </div>
+          
+          <div class="agenda-form-group">
+            <label for="tareas">Tareas del Proyecto</label>
+            <div id="tareasList" class="agenda-tareas-list">
+              <div class="agenda-tarea-item">
+                <input type="text" class="agenda-form-control" placeholder="Descripción de la tarea">
+                <button type="button" class="agenda-btn agenda-btn-danger" onclick="removeTarea(this)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="agenda-btn agenda-btn-secondary mt-2" onclick="addTarea()">
+              <i class="fas fa-plus"></i> Agregar Tarea
+            </button>
+          </div>
 
-    const sessions = [
-      { day: 1, label: 'Colegio San Juan' },
-      { day: 2, label: 'María López' },
-    ];
+          <div class="agenda-modal-footer">
+            <button type="button" class="agenda-btn agenda-btn-secondary" onclick="closeModal()">Cancelar</button>
+            <button type="submit" class="agenda-btn agenda-btn-primary">Guardar Sesión</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    for (let i = 0; i < firstDay; i++) {
-      const empty = document.createElement('div');
-      empty.className = 'calendar-day empty';
-      calendarEl.appendChild(empty);
-    }
-
-    for (let i = 1; i <= daysInMonth; i++) {
-      const dayEl = document.createElement('div');
-      dayEl.className = 'calendar-day';
-      dayEl.setAttribute('tabindex', '0');
-      const dayNum = document.createElement('span');
-      dayNum.className = 'day-number';
-      dayNum.textContent = i;
-      dayEl.appendChild(dayNum);
-
-      const session = sessions.find(s => s.day === i);
-      if (session) {
-        const label = document.createElement('span');
-        label.className = 'event-label';
-        label.textContent = session.label;
-        dayEl.appendChild(label);
-      }
-
-      dayEl.addEventListener('click', () => {
-        dayEl.classList.toggle('selected');
-      });
-      dayEl.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          dayEl.classList.toggle('selected');
-        }
-      });
-
-      calendarEl.appendChild(dayEl);
-    }
-
-    // Menú móvil
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-      menuToggle.classList.toggle('menu-active');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
-        sidebar.classList.remove('active');
-        menuToggle.classList.remove('menu-active');
-      }
-    });
-  </script>
 </body>
 </html>
 
