@@ -81,6 +81,9 @@ th.acciones, td.actions {
   white-space: nowrap;
 }
 /* --- FIN: Ajustes para tabla y botones --- */
+.menu-toggle {
+  display: none;
+}
 @media (max-width: 768px) {
   .sidebar {
     position: static;
@@ -151,6 +154,9 @@ th.acciones, td.actions {
         justify-content: center;
        
     }
+  .menu-toggle {
+    display: block;
+  }
 }
 @media (max-width: 500px) {
   .header.sticky-header h1 {
