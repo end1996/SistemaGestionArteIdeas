@@ -1,57 +1,200 @@
-const calendarEl = document.getElementById('calendar');
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth();
-const firstDay = new Date(year, month, 1).getDay();
-const daysInMonth = new Date(year, month + 1, 0).getDate();
+// Variables globales
+let currentDate = new Date();
+let selectedDate = null;
 
-const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-dayNames.forEach(day => {
-  const header = document.createElement('div');
-  header.className = 'calendar-header';
-  header.textContent = day;
-  calendarEl.appendChild(header);
-});
-
-const sessions = [
-  { day: 1, label: 'Colegio San Juan' },
-  { day: 2, label: 'María López' },
+// Datos de ejemplo (esto podría venir de una base de datos)
+const events = [
+  {
+    id: 1,
+    title: 'Sesión de Fotos',
+    client: 'Juan Pérez',
+    date: '2024-03-15',
+    time: '09:00',
+    status: 'confirmed'
+  },
+  {
+    id: 2,
+    title: 'Fotografía de Producto',
+    client: 'María López',
+    date: '2024-03-15',
+    time: '14:30',
+    status: 'pending'
+  }
 ];
 
-for (let i = 0; i < firstDay; i++) {
-  const empty = document.createElement('div');
-  empty.className = 'calendar-day empty';
-  calendarEl.appendChild(empty);
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+  // Inicializar calendario
+  updateCalendar();
+  updateMonthYear();
+
+  // Configurar el filtro de fecha
+  const filterDate = document.getElementById('filterDate');
+  filterDate.addEventListener('change', (e) => {
+    const selectedFilterDate = new Date(e.target.value);
+    // Actualizar el mes actual del calendario
+    currentDate = selectedFilterDate;
+    // Actualizar la fecha seleccionada
+    selectedDate = formatDate(selectedFilterDate);
+    // Actualizar el calendario
+    updateCalendar();
+    updateMonthYear();
+    // Actualizar la lista de eventos
+    updateEventsList(selectedDate);
+  });
+
+  // Establecer la fecha actual en el filtro
+  filterDate.value = formatDate(new Date());
+
+  // Inicializar la tabla con todos los eventos
+  updateSessionsTable(events);
+});
+
+// Funciones de navegación
+function previousMonth() {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  updateCalendar();
+  updateMonthYear();
 }
 
-for (let i = 1; i <= daysInMonth; i++) {
-  const dayEl = document.createElement('div');
-  dayEl.className = 'calendar-day';
-  dayEl.setAttribute('tabindex', '0');
-  const dayNum = document.createElement('span');
-  dayNum.className = 'day-number';
-  dayNum.textContent = i;
-  dayEl.appendChild(dayNum);
+function nextMonth() {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  updateCalendar();
+  updateMonthYear();
+}
 
-  const session = sessions.find(s => s.day === i);
-  if (session) {
-    const label = document.createElement('span');
-    label.className = 'event-label';
-    label.textContent = session.label;
-    dayEl.appendChild(label);
+// Actualizar título del mes y año
+function updateMonthYear() {
+  const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const monthYear = document.getElementById('currentMonthYear');
+  monthYear.textContent = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+}
+
+// Actualizar calendario
+function updateCalendar() {
+  const calendarDays = document.getElementById('calendarDays');
+  calendarDays.innerHTML = '';
+
+  const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+  const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+  const startingDay = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+
+  // Días vacíos al inicio
+  for (let i = 0; i < startingDay; i++) {
+    const emptyDay = createDayElement('');
+    emptyDay.classList.add('empty');
+    calendarDays.appendChild(emptyDay);
   }
 
-  dayEl.addEventListener('click', () => {
-    dayEl.classList.toggle('selected');
-  });
-  dayEl.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      dayEl.classList.toggle('selected');
+  // Días del mes
+  for (let day = 1; day <= totalDays; day++) {
+    const dayElement = createDayElement(day);
+    const dateString = formatDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day));
+    
+    // Marcar día actual
+    if (isToday(dateString)) {
+      dayElement.classList.add('today');
     }
-  });
 
-  calendarEl.appendChild(dayEl);
+    // Marcar día seleccionado
+    if (selectedDate === dateString) {
+      dayElement.classList.add('selected');
+      // Hacer scroll al día seleccionado
+      setTimeout(() => {
+        dayElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+
+    // Agregar indicadores de eventos
+    const dayEvents = events.filter(event => event.date === dateString);
+    if (dayEvents.length > 0) {
+      const indicator = document.createElement('div');
+      indicator.className = 'event-indicator';
+      dayEvents.forEach(event => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${event.status}`;
+        indicator.appendChild(dot);
+      });
+      dayElement.appendChild(indicator);
+    }
+
+    dayElement.addEventListener('click', () => {
+      selectDate(dateString, dayElement);
+      // Actualizar el filtro de fecha cuando se selecciona un día
+      const filterDate = document.getElementById('filterDate');
+      filterDate.value = dateString;
+    });
+    calendarDays.appendChild(dayElement);
+  }
+}
+
+// Crear elemento de día
+function createDayElement(day) {
+  const element = document.createElement('div');
+  element.className = 'calendar-day';
+  if (day !== '') {
+    const dayNumber = document.createElement('div');
+    dayNumber.className = 'day-number';
+    dayNumber.textContent = day;
+    element.appendChild(dayNumber);
+  }
+  return element;
+}
+
+// Seleccionar fecha
+function selectDate(date, element) {
+  // Remover selección anterior
+  const previousSelected = document.querySelector('.calendar-day.selected');
+  if (previousSelected) {
+    previousSelected.classList.remove('selected');
+  }
+
+  selectedDate = date;
+  element.classList.add('selected');
+  updateEventsList(date);
+}
+
+// Actualizar lista de eventos
+function updateEventsList(date) {
+  const dayEvents = document.getElementById('dayEvents');
+  dayEvents.innerHTML = '';
+
+  const dateEvents = events.filter(event => event.date === date);
+  
+  if (dateEvents.length === 0) {
+    dayEvents.innerHTML = '<p class="no-events">No hay sesiones programadas para este día</p>';
+    return;
+  }
+
+  dateEvents.sort((a, b) => a.time.localeCompare(b.time));
+  
+  dateEvents.forEach(event => {
+    const eventElement = document.createElement('div');
+    eventElement.className = `event-item ${event.status}`;
+    eventElement.innerHTML = `
+      <div class="event-time">${formatTime(event.time)}</div>
+      <div class="event-title">${event.title}</div>
+      <div class="event-client">${event.client}</div>
+    `;
+    dayEvents.appendChild(eventElement);
+  });
+}
+
+// Funciones auxiliares
+function formatDate(date) {
+  return date.toISOString().split('T')[0];
+}
+
+function formatTime(time) {
+  const [hours, minutes] = time.split(':');
+  return `${hours}:${minutes}`;
+}
+
+function isToday(dateString) {
+  const today = new Date();
+  return formatDate(today) === dateString;
 }
 
 // Menú móvil
@@ -70,20 +213,20 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Funciones para el modal
+// Modal
 function openModal() {
   const modal = document.getElementById('sessionModal');
   modal.classList.add('show');
-  document.body.style.overflow = 'hidden'; // Previene el scroll del body
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   const modal = document.getElementById('sessionModal');
   modal.classList.remove('show');
-  document.body.style.overflow = ''; // Restaura el scroll del body
+  document.body.style.overflow = '';
 }
 
-// Cerrar el modal si se hace clic fuera de él
+// Eventos del modal
 window.addEventListener('click', function(event) {
   const modal = document.getElementById('sessionModal');
   if (event.target === modal) {
@@ -91,7 +234,6 @@ window.addEventListener('click', function(event) {
   }
 });
 
-// Prevenir que los clics dentro del modal lo cierren
 document.querySelector('.agenda-modal-content').addEventListener('click', function(event) {
   event.stopPropagation();
 });
@@ -126,3 +268,85 @@ document.getElementById('sessionForm').addEventListener('submit', function(e) {
   // Aquí iría la lógica para guardar los datos
   closeModal();
 });
+
+// Función para aplicar filtros
+function aplicarFiltros() {
+  const filterDate = document.getElementById('filterDate').value;
+  const filterCliente = document.getElementById('filterCliente').value.toLowerCase();
+
+  // Filtrar eventos
+  const filteredEvents = events.filter(event => {
+    const matchDate = !filterDate || event.date === filterDate;
+    const matchCliente = !filterCliente || event.client.toLowerCase().includes(filterCliente);
+    return matchDate && matchCliente;
+  });
+
+  // Actualizar la tabla de sesiones
+  updateSessionsTable(filteredEvents);
+
+  // Si hay una fecha seleccionada, actualizar el calendario
+  if (filterDate) {
+    const selectedFilterDate = new Date(filterDate);
+    currentDate = selectedFilterDate;
+    selectedDate = filterDate;
+    updateCalendar();
+    updateMonthYear();
+    updateEventsList(filterDate);
+  }
+}
+
+// Función para actualizar la tabla de sesiones
+function updateSessionsTable(sessions) {
+  const tbody = document.getElementById('sessionesTabla');
+  tbody.innerHTML = '';
+
+  if (sessions.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td colspan="7" style="text-align: center;">No se encontraron sesiones</td>
+    `;
+    tbody.appendChild(tr);
+    return;
+  }
+
+  sessions.forEach(session => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${session.id}</td>
+      <td>${session.client}</td>
+      <td>${formatDateDisplay(session.date)}</td>
+      <td>${formatTime(session.time)}</td>
+      <td>${formatStatus(session.status)}</td>
+      <td>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${session.progress || 0}%;"></div>
+        </div>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-ver" onclick="verSesion(${session.id})">Ver</button>
+        <button class="btn btn-sm btn-editar" onclick="editarSesion(${session.id})">Editar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Función para formatear la fecha en formato más legible
+function formatDateDisplay(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+}
+
+// Función para formatear el estado
+function formatStatus(status) {
+  const statusMap = {
+    'pending': 'Pendiente',
+    'confirmed': 'Confirmada',
+    'completed': 'Completada'
+  };
+  return statusMap[status] || status;
+}
