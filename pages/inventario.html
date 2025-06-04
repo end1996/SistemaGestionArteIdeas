@@ -649,6 +649,266 @@
             actualizarMovimientosInventario();
         });
 
+        // Función para actualizar inventario
+        async function actualizarInventario(movimiento) {
+            try {
+                // 1. Verificar stock disponible
+                if (movimiento.tipo === 'salida') {
+                    const stockDisponible = await verificarStockDisponible(movimiento.producto, movimiento.cantidad);
+                    if (!stockDisponible) {
+                        alert('No hay suficiente stock disponible');
+                        return;
+                    }
+                }
+
+                // 2. Registrar movimiento
+                await registrarMovimiento(movimiento);
+                
+                // 3. Actualizar stock
+                await actualizarStock(movimiento);
+                
+                // 4. Verificar alertas
+                await verificarAlertasStock();
+                
+                // 5. Actualizar interfaz
+                actualizarTablaProductos();
+                actualizarResumenStock();
+                
+                alert('Movimiento registrado exitosamente');
+            } catch (error) {
+                console.error('Error al actualizar inventario:', error);
+                alert('Error al actualizar el inventario');
+            }
+        }
+
+        // Función para verificar stock disponible
+        async function verificarStockDisponible(producto, cantidad) {
+            // Simular verificación de stock
+            return true; // En producción real, esto consultaría la base de datos
+        }
+
+        // Función para registrar movimiento
+        async function registrarMovimiento(movimiento) {
+            // Simular registro de movimiento
+            console.log('Registrando movimiento:', movimiento);
+        }
+
+        // Función para actualizar stock
+        async function actualizarStock(movimiento) {
+            // Simular actualización de stock
+            console.log('Actualizando stock:', movimiento);
+        }
+
+        // Función para verificar alertas de stock
+        async function verificarAlertasStock() {
+            try {
+                // 1. Obtener productos con stock bajo
+                const productosStockBajo = await obtenerProductosStockBajo();
+                
+                // 2. Obtener pedidos pendientes
+                const pedidosPendientes = await obtenerPedidosPendientes();
+                
+                // 3. Calcular demanda futura
+                const demandaFutura = calcularDemandaFutura(productosStockBajo, pedidosPendientes);
+                
+                // 4. Generar alertas con sugerencias
+                if (productosStockBajo.length > 0) {
+                    mostrarAlertasStock(productosStockBajo, demandaFutura);
+                }
+                
+                // 5. Actualizar resumen
+                actualizarResumenStock();
+            } catch (error) {
+                console.error('Error al verificar alertas de stock:', error);
+            }
+        }
+
+        // Función mejorada para calcular demanda futura
+        function calcularDemandaFutura(productos, pedidosPendientes) {
+            const demanda = {};
+            
+            productos.forEach(producto => {
+                // 1. Calcular demanda de pedidos pendientes
+                const demandaPedidos = pedidosPendientes.reduce((total, pedido) => {
+                    const cantidad = pedido.materiales.find(m => m.id === producto.id)?.cantidad || 0;
+                    return total + cantidad;
+                }, 0);
+                
+                // 2. Calcular demanda histórica (últimos 3 meses)
+                const demandaHistorica = calcularDemandaHistorica(producto.id);
+                
+                // 3. Calcular tendencia de crecimiento
+                const tendencia = calcularTendenciaCrecimiento(producto.id);
+                
+                // 4. Calcular stock óptimo
+                const stockOptimo = Math.max(
+                    demandaPedidos * 1.2, // 20% más que la demanda actual
+                    demandaHistorica * 1.1, // 10% más que la demanda histórica
+                    producto.stockMinimo * 2 // Doble del stock mínimo
+                );
+                
+                // 5. Ajustar según tendencia
+                const demandaFinal = Math.ceil(stockOptimo * (1 + tendencia));
+                
+                demanda[producto.id] = demandaFinal;
+            });
+            
+            return demanda;
+        }
+
+        // Función para calcular demanda histórica
+        function calcularDemandaHistorica(productoId) {
+            // Simular consulta de demanda histórica
+            const demandaMensual = {
+                'P001': [100, 120, 150], // Últimos 3 meses
+                'P002': [50, 45, 60],
+                'P003': [30, 35, 40]
+            };
+            
+            const demandas = demandaMensual[productoId] || [0, 0, 0];
+            return Math.ceil(demandas.reduce((a, b) => a + b, 0) / demandas.length);
+        }
+
+        // Función para calcular tendencia de crecimiento
+        function calcularTendenciaCrecimiento(productoId) {
+            // Simular cálculo de tendencia
+            const tendencias = {
+                'P001': 0.15, // 15% de crecimiento
+                'P002': 0.05, // 5% de crecimiento
+                'P003': 0.10  // 10% de crecimiento
+            };
+            
+            return tendencias[productoId] || 0;
+        }
+
+        // Función mejorada para mostrar alertas
+        function mostrarAlertasStock(productos, demandaFutura) {
+            const contenedorAlertas = document.getElementById('alertasStock');
+            contenedorAlertas.innerHTML = '';
+            
+            productos.forEach(producto => {
+                const alerta = document.createElement('div');
+                const esCritico = producto.stock <= producto.stockMinimo/2;
+                const cantidadSugerida = demandaFutura[producto.id] || producto.stockMinimo;
+                const tendencia = calcularTendenciaCrecimiento(producto.id);
+                
+                alerta.className = `alert ${esCritico ? 'alert-danger' : 'alert-warning'}`;
+                alerta.innerHTML = `
+                    <i class="fas fa-${esCritico ? 'exclamation-circle' : 'exclamation-triangle'}"></i>
+                    <div class="alert-content">
+                        <strong>Stock ${esCritico ? 'Crítico' : 'Bajo'}</strong>
+                        <p>${producto.nombre} (${producto.stock} unidades restantes)</p>
+                        <p class="sugerencia">Sugerencia de reposición: ${cantidadSugerida} unidades</p>
+                        <p class="tendencia">Tendencia de crecimiento: ${(tendencia * 100).toFixed(1)}%</p>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm btn-primary" onclick="solicitarReposicion('${producto.id}', ${cantidadSugerida})">
+                                Solicitar Reposición
+                            </button>
+                            <button class="btn btn-sm btn-secondary" onclick="verDetallesProducto('${producto.id}')">
+                                Ver Detalles
+                            </button>
+                            <button class="btn btn-sm btn-info" onclick="verHistorialProducto('${producto.id}')">
+                                Ver Historial
+                            </button>
+                        </div>
+                    </div>
+                `;
+                contenedorAlertas.appendChild(alerta);
+            });
+        }
+
+        // Función para ver historial del producto
+        function verHistorialProducto(productoId) {
+            // Implementar lógica para mostrar historial
+            const historial = obtenerHistorialProducto(productoId);
+            mostrarModalHistorial(historial);
+        }
+
+        // Función para obtener historial del producto
+        function obtenerHistorialProducto(productoId) {
+            // Simular datos de historial
+            return {
+                nombre: 'Papel fotográfico 10x15',
+                movimientos: [
+                    { fecha: '2024-03-15', tipo: 'entrada', cantidad: 100, referencia: 'PED-001' },
+                    { fecha: '2024-03-10', tipo: 'salida', cantidad: 50, referencia: 'PROD-002' },
+                    { fecha: '2024-03-05', tipo: 'entrada', cantidad: 200, referencia: 'PED-003' }
+                ],
+                estadisticas: {
+                    demandaPromedio: 150,
+                    tendenciaCrecimiento: '15%',
+                    rotacionStock: '2.5 veces/mes'
+                }
+            };
+        }
+
+        // Función para mostrar modal de historial
+        function mostrarModalHistorial(historial) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-header">
+                    <h3>Historial de ${historial.nombre}</h3>
+                    <button class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="estadisticas">
+                        <h4>Estadísticas</h4>
+                        <p>Demanda Promedio: ${historial.estadisticas.demandaPromedio} unidades/mes</p>
+                        <p>Tendencia de Crecimiento: ${historial.estadisticas.tendenciaCrecimiento}</p>
+                        <p>Rotación de Stock: ${historial.estadisticas.rotacionStock}</p>
+                    </div>
+                    <div class="movimientos">
+                        <h4>Últimos Movimientos</h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Cantidad</th>
+                                    <th>Referencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${historial.movimientos.map(m => `
+                                    <tr>
+                                        <td>${m.fecha}</td>
+                                        <td>${m.tipo}</td>
+                                        <td>${m.cantidad}</td>
+                                        <td>${m.referencia}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Event listeners para los botones de acción
+        document.getElementById('btnMovimiento').addEventListener('click', () => {
+            document.getElementById('movimientoModal').style.display = 'block';
+            document.getElementById('movimientoModalBackdrop').style.display = 'block';
+        });
+
+        document.getElementById('guardarMovimiento').addEventListener('click', () => {
+            const movimiento = {
+                producto: document.getElementById('productoMovimiento').value,
+                tipo: document.getElementById('tipoMovimiento').value,
+                cantidad: document.getElementById('cantidad').value,
+                fecha: document.getElementById('fechaMovimiento').value,
+                referencia: document.getElementById('referencia').value,
+                notas: document.getElementById('notasMovimiento').value
+            };
+            actualizarInventario(movimiento);
+        });
+
+        // Inicializar estado del inventario
+        document.addEventListener('DOMContentLoaded', () => {
+            verificarAlertasStock();
+        });
+
     </script>
 
 </body>
