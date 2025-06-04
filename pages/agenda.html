@@ -54,12 +54,57 @@
           </div>
         </div>
         <div style="text-align: right; margin-top: 1rem;">
-          <button class="btn btn-primary">Aplicar filtros</button>
+          <button class="btn btn-primary" onclick="aplicarFiltros()">Aplicar filtros</button>
         </div>
       </div>
 
-      <div class="calendar-container">
-        <div class="calendar" id="calendar"></div>
+      <div class="card calendar-card">
+        <div class="calendar-container">
+          <div class="calendar-header-controls">
+            <div class="calendar-navigation">
+              <button class="calendar-nav-btn" onclick="previousMonth()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <h2 id="currentMonthYear">Calendario de Sesiones</h2>
+              <button class="calendar-nav-btn" onclick="nextMonth()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar-wrapper">
+            <div class="calendar-grid">
+              <div class="calendar-weekdays">
+                <div>Dom</div>
+                <div>Lun</div>
+                <div>Mar</div>
+                <div>Mié</div>
+                <div>Jue</div>
+                <div>Vie</div>
+                <div>Sáb</div>
+              </div>
+              <div id="calendarDays" class="calendar-days"></div>
+            </div>
+
+            <div class="calendar-events">
+              <div class="calendar-legend">
+                <span class="legend-item">
+                  <span class="legend-dot pending"></span> Pendiente
+                </span>
+                <span class="legend-item">
+                  <span class="legend-dot confirmed"></span> Confirmada
+                </span>
+                <span class="legend-item">
+                  <span class="legend-dot completed"></span> Completada
+                </span>
+              </div>
+              <h3>Sesiones del Día</h3>
+              <div id="dayEvents" class="day-events-list">
+                <!-- Los eventos se cargarán dinámicamente aquí -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="card">
@@ -72,90 +117,141 @@
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Hora de Inicio</th>
+                <th>Dirección</th>
                 <th>Estado</th>
                 <th>Avance</th>
                 <th>Acciones</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>S001</td>
-                <td>Juan Pérez</td>
-                <td>2025-05-01</td>
-                <td>09:00 AM</td>
-                <td>Confirmada</td>
-                <td>
-                  <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-ver">Ver</button>
-                  <button class="btn btn-sm btn-editar">Editar</button>
-                </td>
-              </tr>
-              <tr>
-                <td>S002</td>
-                <td>María López</td>
-                <td>2025-05-02</td>
-                <td>02:30 PM</td>
-                <td>Pendiente</td>
-                <td>
-                  <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-ver">Ver</button>
-                  <button class="btn btn-sm btn-editar">Editar</button>
-                </td>
-              </tr>
+            <tbody id="sessionesTabla">
+              <!-- Las sesiones se cargarán dinámicamente aquí -->
             </tbody>
           </table>
         </div>
       </div>
 
       <div class="card">
-        <h2>Tareas por Proyecto</h2>
-        <div class="project-tasks">
-          <div class="project-task-group">
-            <div class="project-header">
-              <span class="project-id">S001</span>
-              <span class="project-client">Juan Pérez</span>
-              <span class="project-date">2025-05-01</span>
-            </div>
-            <div class="task-items">
-              <div class="task-item">
-                <input type="checkbox" id="task1" class="task-checkbox">
-                <label for="task1">Preparar equipo de luces</label>
-                <span class="task-status pending">Pendiente</span>
+        <div class="tasks-header">
+          <h2>Tareas por Proyecto</h2>
+          <div class="tasks-filters">
+            <select class="form-control" id="filterProyecto">
+              <option value="">Todos los proyectos</option>
+              <option value="pendiente">Pendientes</option>
+              <option value="en-proceso">En Proceso</option>
+              <option value="completado">Completados</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Buscar cliente..." id="searchCliente">
+          </div>
+        </div>
+
+        <div class="tasks-container">
+          <div class="tasks-sidebar">
+            <div class="tasks-projects-list">
+              <div class="project-item active">
+                <div class="project-info">
+                  <span class="project-id">S001</span>
+                  <span class="project-client">Juan Pérez</span>
+                </div>
+                <span class="project-date">2025-05-01</span>
               </div>
-              <div class="task-item">
-                <input type="checkbox" id="task2" class="task-checkbox" checked>
-                <label for="task2">Revisar baterías de cámaras</label>
-                <span class="task-status completed">Completada</span>
+              <div class="project-item">
+                <div class="project-info">
+                  <span class="project-id">S002</span>
+                  <span class="project-client">María López</span>
+                </div>
+                <span class="project-date">2025-05-02</span>
               </div>
+              <!-- Más proyectos se agregarán dinámicamente -->
             </div>
           </div>
 
-          <div class="project-task-group">
-            <div class="project-header">
-              <span class="project-id">S002</span>
-              <span class="project-client">María López</span>
-              <span class="project-date">2025-05-02</span>
+          <div class="tasks-content">
+            <div class="tasks-detail-header">
+              <h3>Sesión Fotográfica - Juan Pérez</h3>
+              <div class="session-info">
+                <span><i class="fas fa-calendar"></i> 2025-05-01</span>
+                <span><i class="fas fa-clock"></i> 10:00 AM</span>
+                <span><i class="fas fa-map-marker-alt"></i> Av. Principal 123</span>
+              </div>
             </div>
-            <div class="task-items">
-              <div class="task-item">
-                <input type="checkbox" id="task3" class="task-checkbox">
-                <label for="task3">Confirmar asistencia del cliente</label>
-                <span class="task-status pending">Pendiente</span>
+
+            <div class="tasks-progress">
+              <div class="progress-header">
+                <span>Progreso General</span>
+                <span>75%</span>
               </div>
-              <div class="task-item">
-                <input type="checkbox" id="task4" class="task-checkbox">
-                <label for="task4">Imprimir formularios de consentimiento</label>
-                <span class="task-status pending">Pendiente</span>
+              <div class="progress-bar">
+                <div class="progress" style="width: 75%"></div>
               </div>
-              <div class="task-item">
-                <input type="checkbox" id="task5" class="task-checkbox" checked>
-                <label for="task5">Preparar locación</label>
-                <span class="task-status completed">Completada</span>
+            </div>
+
+            <div class="tasks-groups">
+              <div class="task-group">
+                <div class="task-group-header">
+                  <h4>Preparación</h4>
+                  <span>2/3</span>
+                </div>
+                <div class="task-list">
+                  <div class="task-item completed">
+                    <input type="checkbox" checked>
+                    <span>Preparar equipo de luces</span>
+                    <div class="task-actions">
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="task-item completed">
+                    <input type="checkbox" checked>
+                    <span>Revisar baterías de cámaras</span>
+                    <div class="task-actions">
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="task-item">
+                    <input type="checkbox">
+                    <span>Confirmar locación</span>
+                    <div class="task-actions">
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <div class="task-group">
+                <div class="task-group-header">
+                  <h4>Durante la Sesión</h4>
+                  <span>1/2</span>
+                </div>
+                <div class="task-list">
+                  <div class="task-item completed">
+                    <input type="checkbox" checked>
+                    <span>Tomar fotos de prueba</span>
+                    <div class="task-actions">
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="task-item">
+                    <input type="checkbox">
+                    <span>Revisar iluminación</span>
+                    <div class="task-actions">
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tasks-actions">
+              <button class="agenda-btn agenda-btn-secondary">
+                 Agregar Grupo
+              </button>
+              <button class="agenda-btn agenda-btn-primary">
+                 Agregar Tarea
+              </button>
             </div>
           </div>
         </div>
@@ -185,6 +281,11 @@
           <div class="agenda-form-group">
             <label for="hora">Hora de Inicio</label>
             <input type="time" id="hora" class="agenda-form-control" required>
+          </div>
+          
+          <div class="agenda-form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" class="agenda-form-control" placeholder="Ingrese la dirección de la sesión" required>
           </div>
           
           <div class="agenda-form-group">
@@ -227,6 +328,218 @@
       </div>
     </div>
   </div>
+
+  <style>
+    .tasks-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .tasks-filters {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .tasks-container {
+      display: flex;
+      gap: 1.5rem;
+      min-height: 500px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .tasks-sidebar {
+      width: 300px;
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .tasks-projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .project-item {
+      padding: 0.75rem;
+      border-radius: 6px;
+      background: #f8f9fa;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .project-item:hover {
+      background: #e9ecef;
+    }
+
+    .project-item.active {
+      background: #e7f1ff;
+      border-left: 3px solid #2a406e;
+    }
+
+    .project-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-id {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2a406e;
+      background: rgba(42, 64, 110, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .project-client {
+      font-weight: 500;
+    }
+
+    .project-date {
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+
+    .tasks-content {
+      flex: 1;
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .tasks-detail-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .session-info {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .session-info span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tasks-progress {
+      margin-bottom: 2rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(to right, #2a406e, #3a5a9e);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .tasks-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .task-group {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .task-group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .task-group-header h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: #2a406e;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      background: white;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .task-item:hover {
+      background: #f8f9fa;
+    }
+
+    .task-item.completed span {
+      text-decoration: line-through;
+      color: #6c757d;
+    }
+
+    .task-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .task-item:hover .task-actions {
+      opacity: 1;
+    }
+
+    .btn-icon {
+      padding: 0.25rem;
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .btn-icon:hover {
+      color: #2a406e;
+    }
+
+    .tasks-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+  </style>
 
 </body>
 </html>
