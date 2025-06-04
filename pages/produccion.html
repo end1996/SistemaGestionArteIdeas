@@ -61,7 +61,7 @@
             <!-- Panel de Control de Producción -->
             <div class="production-dashboard">
                 <div class="dashboard-card production-status">
-                <div class="card-header">
+                    <div class="card-header">
                         <h2>Estado de Producción</h2>
                     </div>
                     <div class="status-grid">
@@ -71,7 +71,10 @@
                             </div>
                             <div class="status-info">
                                 <h3>Pendientes</h3>
-                                <p>3 órdenes</p>
+                                <p id="pedidosPendientes">0 órdenes</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="status-item">
@@ -80,7 +83,10 @@
                             </div>
                             <div class="status-info">
                                 <h3>En Proceso</h3>
-                                <p>2 órdenes</p>
+                                <p id="pedidosEnProceso">0 órdenes</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="status-item">
@@ -89,7 +95,10 @@
                             </div>
                             <div class="status-info">
                                 <h3>Finalizadas</h3>
-                                <p>5 órdenes</p>
+                                <p id="pedidosFinalizados">0 órdenes</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +113,9 @@
                             <div class="timeline-marker"></div>
                             <div class="timeline-content">
                                 <h4>P001 - Impresión Minilab</h4>
+                                <p>Cliente: Juan Pérez</p>
                                 <p>Inicio: 15/04/2023</p>
+                                <p>Materiales: Papel 10x15 (10 unidades), Químico Revelador (1L)</p>
                                 <span class="status-badge pendiente">Pendiente</span>
                             </div>
                         </div>
@@ -112,7 +123,9 @@
                             <div class="timeline-marker"></div>
                             <div class="timeline-content">
                                 <h4>P002 - Enmarcado</h4>
+                                <p>Cliente: María López</p>
                                 <p>Inicio: 12/04/2023</p>
+                                <p>Materiales: Marco 20x30, Vidrio, Cartulina</p>
                                 <span class="status-badge proceso">En Proceso</span>
                             </div>
                         </div>
@@ -145,9 +158,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Pedido</th>
+                                <th>Tipo de Servicio</th>
                                 <th>Estado</th>
                                 <th>Fecha Inicio</th>
                                 <th>Responsable</th>
+                                <th>Materiales</th>
                                 <th>Progreso</th>
                                 <th>Acciones</th>
                             </tr>
@@ -156,9 +171,15 @@
                             <tr>
                                 <td>PR001</td>
                                 <td>P001</td>
+                                <td>Impresión Minilab</td>
                                 <td><span class="status-badge pendiente">Pendiente</span></td>
                                 <td>15/04/2023</td>
                                 <td>Juan Pérez</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Ver materiales">
+                                        <i class="fas fa-box"></i> Ver
+                                    </button>
+                                </td>
                                 <td>
                                     <div class="progress">
                                         <div class="progress-bar" style="width: 0%"></div>
@@ -167,14 +188,21 @@
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-iniciar">Iniciar</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>PR002</td>
                                 <td>P002</td>
+                                <td>Enmarcado</td>
                                 <td><span class="status-badge proceso">En Proceso</span></td>
                                 <td>12/04/2023</td>
                                 <td>María López</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Ver materiales">
+                                        <i class="fas fa-box"></i> Ver
+                                    </button>
+                                </td>
                                 <td>
                                     <div class="progress">
                                         <div class="progress-bar" style="width: 60%"></div>
@@ -183,6 +211,7 @@
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-finalizar">Finalizar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -191,40 +220,56 @@
             </div>
         </div>
     </div>
-    <!-- Modal de nueva orden (estructura básica, funcionalidad JS a implementar) -->
-    <div class="modal" id="ordenModal" style="display:none;">
+    <!-- Modal de nueva orden -->
+    <div class="modal" id="ordenModal">
         <div class="modal-header">
-            <h3 class="modal-title">Nueva Orden de Producción</h3>
-            <button class="modal-close" onclick="cerrarModal()">&times;</button>
+            <h3>Nueva Orden de Producción</h3>
+            <button class="modal-close">&times;</button>
         </div>
         <div class="modal-body">
             <form id="formOrden">
                 <div class="form-group">
-                    <label for="pedidoAsociado" class="form-label">Pedido Asociado</label>
-                    <input type="text" id="pedidoAsociado" class="form-control" required>
+                    <label for="pedidoAsociado">Pedido Asociado</label>
+                    <select id="pedidoAsociado" class="form-control" required>
+                        <option value="">Seleccione pedido</option>
+                        <option value="P001">P001 - Impresión Minilab</option>
+                        <option value="P002">P002 - Enmarcado</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="estadoOrden" class="form-label">Estado</label>
-                    <select id="estadoOrden" class="form-control">
+                    <label for="tipoServicio">Tipo de Servicio</label>
+                    <select id="tipoServicio" class="form-control" required>
+                        <option value="impresion">Impresión Minilab</option>
+                        <option value="enmarcado">Enmarcado</option>
+                        <option value="recordatorio">Recordatorio Escolar</option>
+                        <option value="retoque">Retoque Fotográfico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="estadoOrden">Estado</label>
+                    <select id="estadoOrden" class="form-control" required>
                         <option value="pendiente">Pendiente</option>
                         <option value="en_proceso">En Proceso</option>
                         <option value="finalizado">Finalizado</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="fechaInicio" class="form-label">Fecha Inicio</label>
+                    <label for="fechaInicio">Fecha Inicio</label>
                     <input type="date" id="fechaInicio" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="fechaFin" class="form-label">Fecha Fin</label>
+                    <label for="fechaFin">Fecha Fin Estimada</label>
                     <input type="date" id="fechaFin" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="responsable" class="form-label">Responsable</label>
-                    <input type="text" id="responsable" class="form-control" required>
+                    <label for="responsable">Responsable</label>
+                    <select id="responsable" class="form-control" required>
+                        <option value="">Seleccione responsable</option>
+                        <option value="1">Juan Pérez</option>
+                        <option value="2">María López</option>
+                    </select>
                 </div>
                 
-                <!-- Nueva sección de materiales -->
                 <div class="form-group">
                     <h4>Materiales Necesarios</h4>
                     <div id="materialesLista">
@@ -248,47 +293,20 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2" id="agregarMaterial">
-                        + Agregar Material
-                    </button>
-                     <button type="button" class="btn btn-secondary btn-sm mt-2 ml-2" id="eliminarMaterial">
-                        - Eliminar Material
+                    <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="agregarMaterial()">
+                        <i class="fas fa-plus"></i> Agregar Material
                     </button>
                 </div>
 
-                <!-- Sección de alertas de inventario -->
-                <div id="alertasInventario" class="alertas-section">
-                    <!-- Las alertas se mostrarán aquí dinámicamente -->
-                </div>
-
-                <!-- Nueva sección: Detalles de Edición -->
                 <div class="form-group">
-                    <h4>Detalles de Edición</h4>
-                    <div id="edicionesLista">
-                        <div class="edicion-item">
-                            <div class="form-row">
-                                <div class="form-col">
-                                    <input type="text" class="form-control" placeholder="Nombre del Archivo Editado">
-                                </div>
-                                <div class="form-col">
-                                    <input type="text" class="form-control" placeholder="Herramienta(s) Utilizada(s)">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     <button type="button" class="btn btn-secondary btn-sm mt-2" id="agregarEdicion">
-                        + Agregar Detalle de Edición
-                    </button>
-                     <button type="button" class="btn btn-secondary btn-sm mt-2 ml-2" id="eliminarEdicion">
-                        - Eliminar Detalle
-                    </button>
+                    <label for="observaciones">Observaciones</label>
+                    <textarea id="observaciones" class="form-control" rows="3"></textarea>
                 </div>
-
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
-            <button class="btn btn-primary">Guardar Orden</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Guardar Orden</button>
         </div>
     </div>
     <script>
@@ -354,6 +372,122 @@
             } else {
                 link.classList.remove('active');
             }
+        });
+
+        // Funciones para gestionar la producción
+        function actualizarEstadoProduccion() {
+            // Obtener pedidos por estado
+            const pedidos = obtenerPedidosPorEstado();
+            
+            // Actualizar contadores
+            document.getElementById('pedidosPendientes').textContent = `${pedidos.pendientes} órdenes`;
+            document.getElementById('pedidosEnProceso').textContent = `${pedidos.enProceso} órdenes`;
+            document.getElementById('pedidosFinalizados').textContent = `${pedidos.finalizados} órdenes`;
+            
+            // Actualizar barras de progreso
+            actualizarBarrasProgreso(pedidos);
+        }
+
+        function iniciarProduccion(ordenId) {
+            // Verificar disponibilidad de materiales
+            const materiales = obtenerMaterialesOrden(ordenId);
+            if (!verificarDisponibilidadMateriales(materiales)) {
+                alert('No hay suficiente stock para iniciar la producción');
+                return;
+            }
+            
+            // Reservar materiales
+            reservarMateriales(materiales);
+            
+            // Actualizar estado de la orden
+            actualizarEstadoOrden(ordenId, 'en_proceso');
+            
+            // Actualizar contadores
+            actualizarEstadoProduccion();
+        }
+
+        function finalizarProduccion(ordenId) {
+            // Calcular desperdicios
+            const desperdicios = calcularDesperdicios(ordenId);
+            
+            // Actualizar inventario
+            actualizarInventario(desperdicios, 'salida');
+            
+            // Actualizar estado de la orden
+            actualizarEstadoOrden(ordenId, 'finalizado');
+            
+            // Actualizar pedido asociado
+            actualizarPedidoAsociado(ordenId);
+            
+            // Actualizar contadores
+            actualizarEstadoProduccion();
+        }
+
+        function verificarDisponibilidadMateriales(materiales) {
+            // Simular verificación de stock
+            return materiales.every(material => material.stock >= material.cantidad);
+        }
+
+        function reservarMateriales(materiales) {
+            // Simular reserva de materiales
+            materiales.forEach(material => {
+                actualizarStock(material.id, material.cantidad, 'reservado');
+            });
+        }
+
+        function calcularDesperdicios(ordenId) {
+            // Simular cálculo de desperdicios
+            const desperdicios = [];
+            const materiales = obtenerMaterialesOrden(ordenId);
+            
+            materiales.forEach(material => {
+                desperdicios.push({
+                    id: material.id,
+                    cantidad: Math.ceil(material.cantidad * 0.1) // 10% de desperdicio
+                });
+            });
+            
+            return desperdicios;
+        }
+
+        function actualizarPedidoAsociado(ordenId) {
+            // Simular actualización de pedido
+            const pedidoId = obtenerPedidoAsociado(ordenId);
+            actualizarEstadoPedido(pedidoId, 'completado');
+        }
+
+        // Funciones simuladas para obtener datos
+        function obtenerPedidosPorEstado() {
+            // Simular consulta a base de datos
+            return {
+                pendientes: Math.floor(Math.random() * 5),
+                enProceso: Math.floor(Math.random() * 3),
+                finalizados: Math.floor(Math.random() * 10)
+            };
+        }
+
+        function obtenerMaterialesOrden(ordenId) {
+            // Simular consulta a base de datos
+            return [
+                { id: 1, nombre: 'Papel 10x15', cantidad: 50, stock: 100 },
+                { id: 2, nombre: 'Químico Revelador', cantidad: 1, stock: 5 }
+            ];
+        }
+
+        function actualizarBarrasProgreso(pedidos) {
+            const total = pedidos.pendientes + pedidos.enProceso + pedidos.finalizados;
+            
+            document.querySelector('.status-item:nth-child(1) .progress-bar').style.width = 
+                `${(pedidos.pendientes / total) * 100}%`;
+            document.querySelector('.status-item:nth-child(2) .progress-bar').style.width = 
+                `${(pedidos.enProceso / total) * 100}%`;
+            document.querySelector('.status-item:nth-child(3) .progress-bar').style.width = 
+                `${(pedidos.finalizados / total) * 100}%`;
+        }
+
+        // Inicializar estado de producción
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarEstadoProduccion();
         });
     </script>
     <script src="../assets/js/produccion.js"></script>

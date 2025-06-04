@@ -77,24 +77,11 @@
             <!-- Panel de Control de Inventario -->
             <div class="inventory-dashboard">
                 <div class="dashboard-card stock-alerts">
-                <div class="card-header">
+                    <div class="card-header">
                         <h2>Alertas de Stock</h2>
-                </div>
-                    <div class="alert-list">
-                <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <div class="alert-content">
-                                <strong>Stock Crítico</strong>
-                                <p>Papel fotográfico 10x15 (5 unidades restantes)</p>
-                            </div>
-                </div>
-                <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <div class="alert-content">
-                                <strong>Stock Bajo</strong>
-                                <p>Químico Revelador (2 litros restantes)</p>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="alert-list" id="alertasStock">
+                        <!-- Las alertas se generarán dinámicamente -->
                     </div>
                 </div>
 
@@ -108,6 +95,9 @@
                             <div class="summary-info">
                                 <h3>Papel Fotográfico</h3>
                                 <p>30 unidades total</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 60%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="summary-item">
@@ -115,6 +105,9 @@
                             <div class="summary-info">
                                 <h3>Químicos</h3>
                                 <p>14 litros total</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="summary-item">
@@ -122,6 +115,9 @@
                             <div class="summary-info">
                                 <h3>Marcos</h3>
                                 <p>18 unidades total</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 80%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -145,6 +141,7 @@
                             <h4>Entrada de Material</h4>
                             <p>Papel fotográfico 10x15 - 50 unidades</p>
                             <span class="timeline-date">15/04/2023</span>
+                            <span class="timeline-reference">Ref: PED-001</span>
                         </div>
                     </div>
                     <div class="timeline-item salida">
@@ -155,6 +152,7 @@
                             <h4>Salida de Material</h4>
                             <p>Químico Revelador - 2 litros</p>
                             <span class="timeline-date">14/04/2023</span>
+                            <span class="timeline-reference">Ref: PROD-002</span>
                         </div>
                     </div>
                 </div>
@@ -175,6 +173,7 @@
                                 <option value="papel">Papel Fotográfico</option>
                                 <option value="quimico">Químicos</option>
                                 <option value="marco">Marcos</option>
+                                <option value="otros">Otros Materiales</option>
                             </select>
                         </div>
                     </div>
@@ -185,10 +184,12 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th> Estado del producto</th>
+                                <th>Categoría</th>
                                 <th>Unidad</th>
                                 <th>Stock Actual</th>
                                 <th>Stock Mínimo</th>
+                                <th>Última Actualización</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -196,61 +197,76 @@
                             <tr>
                                 <td>P001</td>
                                 <td>Papel fotográfico 10x15</td>
-                                <td>Produccion</td>
+                                <td>Papel</td>
                                 <td>Unidad</td>
                                 <td><span class="badge badge-danger">5</span></td>
                                 <td>10</td>
+                                <td>15/04/2023</td>
+                                <td><span class="badge badge-warning">Stock Bajo</span></td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>P002</td>
                                 <td>Químico Revelador</td>
-                                <td> Finalizado</td>
+                                <td>Químico</td>
                                 <td>Litro</td>
                                 <td><span class="badge badge-warning">2</span></td>
                                 <td>5</td>
+                                <td>14/04/2023</td>
+                                <td><span class="badge badge-warning">Stock Bajo</span></td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>P003</td>
                                 <td>Varillas de Marco Tipo A</td>
-                                <td>Produccion</td>
+                                <td>Marco</td>
                                 <td>Unidad</td>
                                 <td><span class="badge badge-danger">3</span></td>
                                 <td>15</td>
+                                <td>15/04/2023</td>
+                                <td><span class="badge badge-warning">Stock Bajo</span></td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>P004</td>
                                 <td>Papel fotográfico 13x18</td>
-                                <td>Finalizado</td>
+                                <td>Papel</td>
                                 <td>Unidad</td>
                                 <td><span class="badge badge-success">25</span></td>
                                 <td>10</td>
+                                <td>15/04/2023</td>
+                                <td><span class="badge badge-success">Stock Suficiente</span></td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>P005</td>
                                 <td>Químico Fijador</td>
-                                <td>Finalizado</td>
+                                <td>Químico</td>
                                 <td>Litro</td>
                                 <td><span class="badge badge-success">12</span></td>
                                 <td>5</td>
+                                <td>15/04/2023</td>
+                                <td><span class="badge badge-success">Stock Suficiente</span></td>
                                 <td class="actions">
                                     <button class="btn btn-sm btn-ver">Ver</button>
                                     <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -328,61 +344,49 @@
         <div class="modal-body">
             <form id="formNuevoProducto">
                 <div class="form-group">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" id="nombre" class="form-control" placeholder="Nombre del producto">
+                    <label for="nombreProducto">Nombre del Producto</label>
+                    <input type="text" id="nombreProducto" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="tipo" class="form-label">Tipo de Producto</label>
-                    <select id="tipo" class="form-control">
+                    <label for="categoriaProducto">Categoría</label>
+                    <select id="categoriaProducto" class="form-control" required>
+                        <option value="">Seleccione categoría</option>
                         <option value="papel">Papel Fotográfico</option>
                         <option value="quimico">Químicos</option>
-                        <option value="marco">Marcos y Varillas</option>
-                        <option value="otro">Otros</option>
+                        <option value="marco">Marcos</option>
+                        <option value="otros">Otros Materiales</option>
                     </select>
                 </div>
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="unidad" class="form-label">Unidad de Medida</label>
-                            <select id="unidad" class="form-control">
-                                <option value="unidad">Unidad</option>
-                                <option value="litro">Litro</option>
-                                <option value="rollo">Rollo</option>
-                                <option value="metro">Metro</option>
-                                <option value="kg">Kilogramo</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="stockInicial" class="form-label">Stock Inicial</label>
-                            <input type="number" id="stockInicial" class="form-control" min="0">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="stockMinimo" class="form-label">Stock Mínimo</label>
-                            <input type="number" id="stockMinimo" class="form-control" min="0">
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="precio" class="form-label">Precio Unitario (S/)</label>
-                            <input type="number" id="precio" class="form-control" min="0" step="0.01">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="unidadProducto">Unidad de Medida</label>
+                    <select id="unidadProducto" class="form-control" required>
+                        <option value="unidad">Unidad</option>
+                        <option value="litro">Litro</option>
+                        <option value="metro">Metro</option>
+                        <option value="kg">Kilogramo</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea id="descripcion" class="form-control" rows="2" placeholder="Descripción del producto"></textarea>
+                    <label for="stockMinimo">Stock Mínimo</label>
+                    <input type="number" id="stockMinimo" class="form-control" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="stockInicial">Stock Inicial</label>
+                    <input type="number" id="stockInicial" class="form-control" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="proveedor">Proveedor Principal</label>
+                    <input type="text" id="proveedor" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="observaciones">Observaciones</label>
+                    <textarea id="observaciones" class="form-control" rows="3"></textarea>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-secondary" id="cancelarProducto">Cancelar</button>
-            <button class="btn btn-primary" id="guardarProducto">Guardar Producto</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Guardar</button>
         </div>
     </div>
 
@@ -491,6 +495,159 @@
 
         // Cerrar modal de nuevo producto haciendo clic fuera de él (en el backdrop)
         nuevoProductoModalBackdrop.addEventListener('click', cerrarNuevoProductoModal);
+
+        // Funciones para gestionar el inventario
+        function actualizarAlertasStock() {
+            const alertas = obtenerAlertasStock();
+            const contenedorAlertas = document.getElementById('alertasStock');
+            contenedorAlertas.innerHTML = '';
+            
+            alertas.forEach(alerta => {
+                const alertaElement = crearElementoAlerta(alerta);
+                contenedorAlertas.appendChild(alertaElement);
+            });
+        }
+
+        function crearElementoAlerta(alerta) {
+            const div = document.createElement('div');
+            div.className = `alert alert-${alerta.tipo}`;
+            
+            div.innerHTML = `
+                <i class="fas fa-${alerta.tipo === 'danger' ? 'exclamation-circle' : 'exclamation-triangle'}"></i>
+                <div class="alert-content">
+                    <strong>${alerta.titulo}</strong>
+                    <p>${alerta.mensaje}</p>
+                    <button class="btn btn-sm btn-primary" onclick="solicitarReposicion('${alerta.productoId}')">
+                        Solicitar Reposición
+                    </button>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        function solicitarReposicion(productoId) {
+            // Obtener información del producto
+            const producto = obtenerProducto(productoId);
+            
+            // Calcular cantidad necesaria
+            const cantidadNecesaria = calcularCantidadReposicion(producto);
+            
+            // Crear solicitud de reposición
+            crearSolicitudReposicion(producto, cantidadNecesaria);
+            
+            // Actualizar alertas
+            actualizarAlertasStock();
+        }
+
+        function calcularCantidadReposicion(producto) {
+            // Obtener pedidos pendientes que usan este producto
+            const pedidosPendientes = obtenerPedidosPendientesPorProducto(producto.id);
+            
+            // Calcular demanda futura
+            const demandaFutura = pedidosPendientes.reduce((total, pedido) => {
+                return total + pedido.cantidad;
+            }, 0);
+            
+            // Calcular stock óptimo (demanda futura + stock mínimo)
+            return demandaFutura + producto.stockMinimo;
+        }
+
+        function actualizarMovimientosInventario() {
+            const movimientos = obtenerMovimientosInventario();
+            const contenedorMovimientos = document.querySelector('.movements-timeline');
+            contenedorMovimientos.innerHTML = '';
+            
+            movimientos.forEach(movimiento => {
+                const movimientoElement = crearElementoMovimiento(movimiento);
+                contenedorMovimientos.appendChild(movimientoElement);
+            });
+        }
+
+        function crearElementoMovimiento(movimiento) {
+            const div = document.createElement('div');
+            div.className = `timeline-item ${movimiento.tipo}`;
+            
+            div.innerHTML = `
+                <div class="timeline-icon">
+                    <i class="fas fa-${movimiento.tipo === 'entrada' ? 'arrow-down' : 'arrow-up'}"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>${movimiento.tipo === 'entrada' ? 'Entrada' : 'Salida'} de Material</h4>
+                    <p>${movimiento.producto} - ${movimiento.cantidad} ${movimiento.unidad}</p>
+                    <span class="timeline-date">${movimiento.fecha}</span>
+                    <span class="timeline-reference">Ref: ${movimiento.referencia}</span>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Funciones simuladas para obtener datos
+        function obtenerAlertasStock() {
+            // Simular consulta a base de datos
+            return [
+                {
+                    tipo: 'danger',
+                    titulo: 'Stock Crítico',
+                    mensaje: 'Papel fotográfico 10x15 (5 unidades restantes)',
+                    productoId: 'P001'
+                },
+                {
+                    tipo: 'warning',
+                    titulo: 'Stock Bajo',
+                    mensaje: 'Químico Revelador (2 litros restantes)',
+                    productoId: 'P002'
+                }
+            ];
+        }
+
+        function obtenerProducto(productoId) {
+            // Simular consulta a base de datos
+            return {
+                id: productoId,
+                nombre: 'Papel fotográfico 10x15',
+                stockActual: 5,
+                stockMinimo: 10,
+                unidad: 'unidad'
+            };
+        }
+
+        function obtenerPedidosPendientesPorProducto(productoId) {
+            // Simular consulta a base de datos
+            return [
+                { id: 'P001', cantidad: 50 },
+                { id: 'P002', cantidad: 30 }
+            ];
+        }
+
+        function obtenerMovimientosInventario() {
+            // Simular consulta a base de datos
+            return [
+                {
+                    tipo: 'entrada',
+                    producto: 'Papel fotográfico 10x15',
+                    cantidad: 50,
+                    unidad: 'unidades',
+                    fecha: '15/04/2023',
+                    referencia: 'PED-001'
+                },
+                {
+                    tipo: 'salida',
+                    producto: 'Químico Revelador',
+                    cantidad: 2,
+                    unidad: 'litros',
+                    fecha: '14/04/2023',
+                    referencia: 'PROD-002'
+                }
+            ];
+        }
+
+        // Inicializar estado del inventario
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarAlertasStock();
+            actualizarMovimientosInventario();
+        });
 
     </script>
 

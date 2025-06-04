@@ -237,7 +237,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
-                    <select id="tipoServicio" class="form-control">
+                    <select id="tipoServicio" class="form-control" onchange="actualizarCamposServicio()">
                         <option value="">Seleccione servicio</option>
                         <option value="impresion">Impresión Minilab</option>
                         <option value="enmarcado">Enmarcado</option>
@@ -245,35 +245,121 @@
                         <option value="retoque">Retoque Fotográfico</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles del pedido"></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-col">
+                <!-- Campos dinámicos según tipo de servicio -->
+                <div id="camposServicio">
+                    <!-- Campos para Impresión Minilab -->
+                    <div class="campos-impresion" style="display:none;">
                         <div class="form-group">
-                            <label for="fecha" class="form-label">Fecha</label>
-                            <input type="date" id="fecha" class="form-control">
+                            <label for="tipoPapel" class="form-label">Tipo de Papel</label>
+                            <select id="tipoPapel" class="form-control" onchange="verificarStockPapel()">
+                                <option value="10x15">10x15 cm</option>
+                                <option value="13x18">13x18 cm</option>
+                                <option value="15x21">15x21 cm</option>
+                            </select>
+                            <small class="stock-info" id="stockPapel"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidadFotos" class="form-label">Cantidad de Fotos</label>
+                            <input type="number" id="cantidadFotos" class="form-control" min="1" onchange="calcularTiempoEstimado()">
+                        </div>
+                        <div class="form-group">
+                            <label for="tiempoEstimado" class="form-label">Tiempo Estimado</label>
+                            <input type="text" id="tiempoEstimado" class="form-control" readonly>
                         </div>
                     </div>
-                    <div class="form-col">
+
+                    <!-- Campos para Enmarcado -->
+                    <div class="campos-enmarcado" style="display:none;">
                         <div class="form-group">
-                            <label for="estado" class="form-label">Estado</label>
-                            <select id="estado" class="form-control">
-                                <option value="nuevo">Nuevo</option>
-                                <option value="produccion">En Producción</option>
-                                <option value="entregado">Entregado</option>
+                            <label for="tipoMarco" class="form-label">Tipo de Marco</label>
+                            <select id="tipoMarco" class="form-control" onchange="verificarStockMarco()">
+                                <option value="artesanal">Artesanal (a medida)</option>
+                                <option value="estandar">Estándar (preensamblado)</option>
+                            </select>
+                            <small class="stock-info" id="stockMarco"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="medidasMarco" class="form-label">Medidas del Marco</label>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <input type="number" id="anchoMarco" class="form-control" placeholder="Ancho (cm)" onchange="calcularTiempoEstimado()">
+                                </div>
+                                <div class="form-col">
+                                    <input type="number" id="altoMarco" class="form-control" placeholder="Alto (cm)" onchange="calcularTiempoEstimado()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tiempoEstimado" class="form-label">Tiempo Estimado</label>
+                            <input type="text" id="tiempoEstimado" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Campos para Recordatorio Escolar -->
+                    <div class="campos-recordatorio" style="display:none;">
+                        <div class="form-group">
+                            <label for="plantillaRecordatorio" class="form-label">Plantilla</label>
+                            <select id="plantillaRecordatorio" class="form-control" onchange="verificarStockRecordatorio()">
+                                <option value="">Seleccione plantilla</option>
+                                <option value="1">Plantilla Clásica</option>
+                                <option value="2">Plantilla Moderna</option>
+                                <option value="3">Plantilla Infantil</option>
+                            </select>
+                            <small class="stock-info" id="stockRecordatorio"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidadRecordatorios" class="form-label">Cantidad de Recordatorios</label>
+                            <input type="number" id="cantidadRecordatorios" class="form-control" min="1" onchange="calcularTiempoEstimado()">
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+                            <input type="date" id="fechaEntrega" class="form-control" onchange="verificarCapacidadProduccion()">
+                        </div>
+                        <div class="form-group">
+                            <label for="tiempoEstimado" class="form-label">Tiempo Estimado</label>
+                            <input type="text" id="tiempoEstimado" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Campos para Retoque Fotográfico -->
+                    <div class="campos-retoque" style="display:none;">
+                        <div class="form-group">
+                            <label for="tipoRetoque" class="form-label">Tipo de Retoque</label>
+                            <select id="tipoRetoque" class="form-control" onchange="calcularTiempoEstimado()">
+                                <option value="restauracion">Restauración</option>
+                                <option value="retoque">Retoque Digital</option>
+                                <option value="colorizacion">Colorización</option>
                             </select>
                         </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-col">
                         <div class="form-group">
-                            <label for="total" class="form-label">Total (S/)</label>
-                            <input type="number" id="total" class="form-control" min="0" step="0.01">
+                            <label for="descripcionRetoque" class="form-label">Descripción del Retoque</label>
+                            <textarea id="descripcionRetoque" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tiempoEstimado" class="form-label">Tiempo Estimado</label>
+                            <input type="text" id="tiempoEstimado" class="form-control" readonly>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="archivos" class="form-label">Archivos</label>
+                    <input type="file" id="archivos" class="form-control" multiple accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="observaciones" class="form-label">Observaciones</label>
+                    <textarea id="observaciones" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="fechaEntrega" class="form-label">Fecha de Entrega Estimada</label>
+                    <input type="date" id="fechaEntrega" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="prioridad" class="form-label">Prioridad</label>
+                    <select id="prioridad" class="form-control">
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
                 </div>
             </form>
         </div>
@@ -337,6 +423,108 @@
                 menuToggle.classList.remove('menu-active');
             }
         });
+    </script>
+
+    <script>
+    // Funciones para verificar stock y calcular tiempos
+    function verificarStockPapel() {
+        const tipoPapel = document.getElementById('tipoPapel').value;
+        const stockInfo = document.getElementById('stockPapel');
+        
+        // Simular verificación de stock
+        const stock = obtenerStockPapel(tipoPapel);
+        if (stock < 10) {
+            stockInfo.innerHTML = `<span class="text-danger">Stock bajo: ${stock} unidades</span>`;
+        } else {
+            stockInfo.innerHTML = `<span class="text-success">Stock disponible: ${stock} unidades</span>`;
+        }
+    }
+
+    function verificarStockMarco() {
+        const tipoMarco = document.getElementById('tipoMarco').value;
+        const stockInfo = document.getElementById('stockMarco');
+        
+        // Simular verificación de stock
+        const stock = obtenerStockMarco(tipoMarco);
+        if (stock < 5) {
+            stockInfo.innerHTML = `<span class="text-danger">Stock bajo: ${stock} unidades</span>`;
+        } else {
+            stockInfo.innerHTML = `<span class="text-success">Stock disponible: ${stock} unidades</span>`;
+        }
+    }
+
+    function verificarStockRecordatorio() {
+        const plantilla = document.getElementById('plantillaRecordatorio').value;
+        const stockInfo = document.getElementById('stockRecordatorio');
+        
+        // Simular verificación de stock
+        const stock = obtenerStockRecordatorio(plantilla);
+        if (stock < 20) {
+            stockInfo.innerHTML = `<span class="text-danger">Stock bajo: ${stock} unidades</span>`;
+        } else {
+            stockInfo.innerHTML = `<span class="text-success">Stock disponible: ${stock} unidades</span>`;
+        }
+    }
+
+    function calcularTiempoEstimado() {
+        const tipoServicio = document.getElementById('tipoServicio').value;
+        let tiempoEstimado = '';
+        
+        switch(tipoServicio) {
+            case 'impresion':
+                const cantidadFotos = document.getElementById('cantidadFotos').value;
+                tiempoEstimado = `${Math.ceil(cantidadFotos / 50)} horas`;
+                break;
+            case 'enmarcado':
+                const ancho = document.getElementById('anchoMarco').value;
+                const alto = document.getElementById('altoMarco').value;
+                tiempoEstimado = `${Math.ceil((ancho * alto) / 100)} horas`;
+                break;
+            case 'recordatorio':
+                const cantidad = document.getElementById('cantidadRecordatorios').value;
+                tiempoEstimado = `${Math.ceil(cantidad / 100)} días`;
+                break;
+            case 'retoque':
+                const tipoRetoque = document.getElementById('tipoRetoque').value;
+                tiempoEstimado = tipoRetoque === 'restauracion' ? '2-3 días' : '1 día';
+                break;
+        }
+        
+        document.getElementById('tiempoEstimado').value = tiempoEstimado;
+    }
+
+    function verificarCapacidadProduccion() {
+        const fechaEntrega = document.getElementById('fechaEntrega').value;
+        const tipoServicio = document.getElementById('tipoServicio').value;
+        
+        // Simular verificación de capacidad
+        const capacidad = obtenerCapacidadProduccion(fechaEntrega, tipoServicio);
+        if (!capacidad) {
+            alert('No hay capacidad de producción disponible para la fecha seleccionada');
+            document.getElementById('fechaEntrega').value = '';
+        }
+    }
+
+    // Funciones simuladas para obtener datos
+    function obtenerStockPapel(tipo) {
+        // Simular consulta a base de datos
+        return Math.floor(Math.random() * 50);
+    }
+
+    function obtenerStockMarco(tipo) {
+        // Simular consulta a base de datos
+        return Math.floor(Math.random() * 20);
+    }
+
+    function obtenerStockRecordatorio(plantilla) {
+        // Simular consulta a base de datos
+        return Math.floor(Math.random() * 100);
+    }
+
+    function obtenerCapacidadProduccion(fecha, tipo) {
+        // Simular consulta a base de datos
+        return Math.random() > 0.3; // 70% de probabilidad de tener capacidad
+    }
     </script>
 </body>
 </html> 
