@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de contratos - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/contratos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+        
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contratos.html" class="nav-link active">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="contratos-header">
+                <h1>Gestión de contratos</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="abrirModalNuevoContrato()">
+                        <i class="fas fa-plus"></i> Nuevo Contrato
+                    </button>
+                    <button class="btn btn-outline" onclick="exportarResumen()">
+                        <i class="fas fa-download"></i> Exportar Resumen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panel de Resumen -->
+            <div class="resumen-grid">
+                <div class="resumen-card contratos-activos">
+                    <div class="resumen-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="resumen-content">
+                        <div class="resumen-value">24</div>
+                        <div class="resumen-label">Contratos Activos</div>
+                        <div class="resumen-trend positive">
+                            <i class="fas fa-arrow-up"></i> +3 este mes
+                        </div>
+                    </div>
+                </div>
+                <div class="resumen-card contratos-pendientes">
+                    <div class="resumen-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="resumen-content">
+                        <div class="resumen-value">8</div>
+                        <div class="resumen-label">Contratos Pendientes</div>
+                        <div class="resumen-meta">Requieren atención</div>
+                    </div>
+                </div>
+                <div class="resumen-card proximos-vencer">
+                    <div class="resumen-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="resumen-content">
+                        <div class="resumen-value">5</div>
+                        <div class="resumen-label">Por Vencer (7 días)</div>
+                        <div class="resumen-meta">Próximos a vencer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestañas de Navegación -->
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="contratos-generales">Contratos Generales</div>
+                <div class="nav-tab" data-tab="por-servicio">Por Servicio</div>
+                <div class="nav-tab" data-tab="por-cliente">Por Cliente</div>
+            </div>
+
+            <!-- Contenido de Pestañas -->
+            <div class="tab-content active" id="contratos-generales">
+                <!-- Filtros Generales -->
+                <div class="filtros-section">
+                    <div class="filtros-grupo">
+                        <div class="filtro-item">
+                            <div class="input-group">
+                                <span class="input-icon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Buscar contrato o cliente...">
+                            </div>
+                        </div>
+                        <div class="filtro-item">
+                            <div class="select-group">
+                                <span class="select-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </span>
+                                <select class="form-control">
+                                    <option value="">Todos los servicios</option>
+                                    <optgroup label="Servicios Principales">
+                                        <option value="impresion">Impresión Minilab</option>
+                                        <option value="enmarcado">Enmarcado Artesanal</option>
+                                        <option value="recordatorios">Recordatorios Escolares</option>
+                                    </optgroup>
+                                    <optgroup label="Servicios Artísticos">
+                                        <option value="restauracion">Restauración y Retoque</option>
+                                        <option value="pintura">Pintura al Óleo</option>
+                                        <option value="edicion">Edición y Montaje</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filtro-item">
+                            <div class="select-group">
+                                <span class="select-icon">
+                                    <i class="fas fa-filter"></i>
+                                </span>
+                                <select class="form-control">
+                                    <option value="">Todos los estados</option>
+                                    <option value="activo">Activo</option>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="vencido">Vencido</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filtro-item">
+                            <div class="date-group">
+                                <span class="date-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <input type="date" class="form-control" placeholder="Fecha desde">
+                            </div>
+                        </div>
+                        <div class="filtro-actions">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-filter"></i> Aplicar
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-sync"></i> Limpiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Clientes Frecuentes -->
+                <div class="contratos-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i>
+                            <h3>Clientes Frecuentes</h3>
+                            <span class="badge badge-primary">15 clientes</span>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Contratos -->
+                    <div class="tabla-responsive">
+                        <table class="tabla-contratos">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="th-content">
+                                            Cliente
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Servicio
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Fecha Inicio
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Fecha Fin
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Valor
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Estado
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="cliente-info">
+                                            <span class="cliente-nombre">Colegio San José</span>
+                                            <span class="badge badge-primary">Frecuente</span>
+                                        </div>
+                                    </td>
+                                    <td>Promoción Escolar 2024</td>
+                                    <td>01/03/2024</td>
+                                    <td>31/12/2024</td>
+                                    <td>
+                                        <div class="valor-info">
+                                            <span class="valor-total">S/. 15,000</span>
+                                            <span class="valor-estado pagado">80% pagado</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="estado-badge activo">Activo</span>
+                                    </td>
+                                    <td>
+                                        <div class="acciones-grupo">
+                                            <button class="btn btn-icon" title="Ver Detalles">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-icon" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-icon" title="Descargar">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Más filas de contratos... -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Paginación y Controles -->
+                    <div class="controles-tabla">
+                        <div class="items-por-pagina">
+                            <span>Mostrar:</span>
+                            <select class="form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span>por página</span>
+                        </div>
+                        <div class="paginacion">
+                            <button class="btn btn-icon" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="pagina-info">Página 1 de 5</span>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Clientes Nuevos -->
+                <div class="contratos-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-user-plus"></i>
+                            <h3>Clientes Nuevos</h3>
+                            <span class="badge badge-info">8 clientes</span>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Contratos -->
+                    <div class="tabla-responsive">
+                        <table class="tabla-contratos">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="th-content">
+                                            Cliente
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Servicio
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Fecha Inicio
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Fecha Fin
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Valor
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-content">
+                                            Estado
+                                            <i class="fas fa-sort"></i>
+                                        </div>
+                                    </th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="cliente-info">
+                                            <span class="cliente-nombre">Galería ModernArte</span>
+                                            <span class="badge badge-info">Nuevo</span>
+                                        </div>
+                                    </td>
+                                    <td>Enmarcado Artesanal</td>
+                                    <td>15/03/2024</td>
+                                    <td>22/03/2024</td>
+                                    <td>
+                                        <div class="valor-info">
+                                            <span class="valor-total">S/. 500</span>
+                                            <span class="valor-estado pendiente">Pendiente de pago</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="estado-badge pendiente">En Proceso</span>
+                                    </td>
+                                    <td>
+                                        <div class="acciones-grupo">
+                                            <button class="btn btn-icon" title="Ver Detalles">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-icon" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-icon" title="Descargar">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Más filas de contratos... -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Paginación y Controles -->
+                    <div class="controles-tabla">
+                        <div class="items-por-pagina">
+                            <span>Mostrar:</span>
+                            <select class="form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span>por página</span>
+                        </div>
+                        <div class="paginacion">
+                            <button class="btn btn-icon" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="pagina-info">Página 1 de 3</span>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="por-servicio">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Distribución por Servicio</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="servicios-grid">
+                            <!-- Servicios Principales -->
+                            <div class="servicio-categoria">
+                                <h4 class="categoria-titulo">
+                                    <i class="fas fa-camera"></i>
+                                    Servicios Principales
+                                </h4>
+                                <div class="servicios-wrapper">
+                                    <!-- Impresión Minilab -->
+                                    <div class="servicio-resumen">
+                                        <div class="servicio-header">
+                                            <i class="fas fa-print"></i>
+                                            <h4>Impresión Minilab</h4>
+                                            <p class="servicio-desc">Revelado químico tradicional de alta calidad</p>
+                                        </div>
+                                        <div class="servicio-stats">
+                                            <div class="stat">
+                                                <span class="stat-value">15</span>
+                                                <span class="stat-label">Contratos Activos</span>
+                                            </div>
+                                            <div class="stat">
+                                                <span class="stat-value">S/. 12,000</span>
+                                                <span class="stat-label">Valor Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Enmarcado Artesanal -->
+                                    <div class="servicio-resumen">
+                                        <div class="servicio-header">
+                                            <i class="fas fa-image"></i>
+                                            <h4>Enmarcado Artesanal</h4>
+                                            <p class="servicio-desc">Marcos a medida con varillas de madera</p>
+                                        </div>
+                                        <div class="servicio-stats">
+                                            <div class="stat">
+                                                <span class="stat-value">8</span>
+                                                <span class="stat-label">Contratos Activos</span>
+                                            </div>
+                                            <div class="stat">
+                                                <span class="stat-value">S/. 6,000</span>
+                                                <span class="stat-label">Valor Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Recordatorios Escolares -->
+                                    <div class="servicio-resumen">
+                                        <div class="servicio-header">
+                                            <i class="fas fa-graduation-cap"></i>
+                                            <h4>Recordatorios Escolares</h4>
+                                            <p class="servicio-desc">Producción personalizada para campaña escolar</p>
+                                        </div>
+                                        <div class="servicio-stats">
+                                            <div class="stat">
+                                                <span class="stat-value">12</span>
+                                                <span class="stat-label">Contratos Activos</span>
+                                            </div>
+                                            <div class="stat">
+                                                <span class="stat-value">S/. 24,000</span>
+                                                <span class="stat-label">Valor Total</span>
+                                            </div>
+                                        </div>
+                                        <div class="servicio-meta">
+                                            <span class="temporada-badge">
+                                                <i class="fas fa-calendar"></i> Jul - Dic
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Servicios Artísticos -->
+                            <div class="servicio-categoria">
+                                <h4 class="categoria-titulo">
+                                    <i class="fas fa-palette"></i>
+                                    Servicios Artísticos
+                                </h4>
+                                <div class="servicios-wrapper">
+                                    <!-- Restauración y Retoque -->
+                                    <div class="servicio-resumen">
+                                        <div class="servicio-header">
+                                            <i class="fas fa-magic"></i>
+                                            <h4>Restauración y Retoque</h4>
+                                            <p class="servicio-desc">Restauración digital con Photoshop e IA</p>
+                                        </div>
+                                        <div class="servicio-stats">
+                                            <div class="stat">
+                                                <span class="stat-value">5</span>
+                                                <span class="stat-label">Contratos Activos</span>
+                                            </div>
+                                            <div class="stat">
+                                                <span class="stat-value">S/. 2,500</span>
+                                                <span class="stat-label">Valor Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pintura al Óleo -->
+                                    <div class="servicio-resumen">
+                                        <div class="servicio-header">
+                                            <i class="fas fa-paint-brush"></i>
+                                            <h4>Pintura al Óleo</h4>
+                                            <p class="servicio-desc">Retratos y cuadros personalizados</p>
+                                        </div>
+                                        <div class="servicio-stats">
+                                            <div class="stat">
+                                                <span class="stat-value">3</span>
+                                                <span class="stat-label">Contratos Activos</span>
+                                            </div>
+                                            <div class="stat">
+                                                <span class="stat-value">S/. 4,500</span>
+                                                <span class="stat-label">Valor Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Edición y Montaje -->
+                                    <div class="servicio-resumen">
+                                        <div class="servicio-header">
+                                            <i class="fas fa-crop"></i>
+                                            <h4>Edición y Montaje</h4>
+                                            <p class="servicio-desc">Edición profesional para impresión</p>
+                                        </div>
+                                        <div class="servicio-stats">
+                                            <div class="stat">
+                                                <span class="stat-value">6</span>
+                                                <span class="stat-label">Contratos Activos</span>
+                                            </div>
+                                            <div class="stat">
+                                                <span class="stat-value">S/. 3,000</span>
+                                                <span class="stat-label">Valor Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="por-cliente">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Historial de Contratos</h3>
+                        <div class="filtros-contratos">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="buscarCliente" placeholder="Buscar por cliente...">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" id="filtroAnio">
+                                    <option value="">Todos los años</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" id="filtroServicio">
+                                    <option value="">Todos los servicios</option>
+                                    <option value="promocion">Promoción Escolar</option>
+                                    <option value="enmarcado">Enmarcado</option>
+                                    <option value="impresion">Impresión</option>
+                                    <option value="artistico">Servicios Artísticos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Vista de Historial por Cliente -->
+                        <div class="historial-cliente-container">
+                            <!-- Cliente Individual -->
+                            <div class="cliente-historial">
+                                <div class="cliente-header" onclick="toggleHistorial('cliente1')">
+                                    <div class="cliente-info">
+                                        <h3>Colegio San José</h3>
+                                        <span class="cliente-badge cliente-frecuente">12 contratos totales</span>
+                                    </div>
+                                    <div class="cliente-stats">
+                                        <span>Último contrato: 01/07/2024</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="cliente-contratos" id="cliente1">
+                                    <div class="timeline">
+                                        <div class="timeline-item">
+                                            <div class="timeline-date">
+                                                <span class="fecha">01/07/2024</span>
+                                                <span class="estado-badge activo">Activo</span>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h4>Promoción Escolar 2024</h4>
+                                                <div class="contrato-detalles">
+                                                    <p><strong>Valor:</strong> S/. 2,000.00</p>
+                                                    <p><strong>Duración:</strong> 6 meses</p>
+                                                    <p><strong>Estado de pago:</strong> Al día</p>
+                                                </div>
+                                                <div class="contrato-acciones">
+                                                    <button class="btn btn-sm btn-outline" onclick="verDetallesContrato('C2024-001')">
+                                                        <i class="fas fa-eye"></i> Ver Detalles
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline" onclick="descargarContrato('C2024-001')">
+                                                        <i class="fas fa-download"></i> Descargar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-date">
+                                                <span class="fecha">01/07/2023</span>
+                                                <span class="estado-badge completado">Completado</span>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h4>Promoción Escolar 2023</h4>
+                                                <div class="contrato-detalles">
+                                                    <p><strong>Valor:</strong> S/. 1,800.00</p>
+                                                    <p><strong>Duración:</strong> 6 meses</p>
+                                                    <p><strong>Estado de pago:</strong> Completado</p>
+                                                </div>
+                                                <div class="contrato-acciones">
+                                                    <button class="btn btn-sm btn-outline">
+                                                        <i class="fas fa-eye"></i> Ver Detalles
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline">
+                                                        <i class="fas fa-download"></i> Descargar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Otro Cliente -->
+                            <div class="cliente-historial">
+                                <div class="cliente-header" onclick="toggleHistorial('cliente2')">
+                                    <div class="cliente-info">
+                                        <h3>Galería ModernArte</h3>
+                                        <span class="cliente-badge cliente-nuevo">Primer contrato</span>
+                                    </div>
+                                    <div class="cliente-stats">
+                                        <span>Último contrato: 15/03/2024</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="cliente-contratos" id="cliente2">
+                                    <div class="timeline">
+                                        <div class="timeline-item">
+                                            <div class="timeline-date">
+                                                <span class="fecha">15/03/2024</span>
+                                                <span class="estado-badge pendiente">En Proceso</span>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h4>Enmarcado Artesanal</h4>
+                                                <div class="contrato-detalles">
+                                                    <p><strong>Valor:</strong> S/. 500.00</p>
+                                                    <p><strong>Duración:</strong> 7 días</p>
+                                                    <p><strong>Estado de pago:</strong> Pendiente</p>
+                                                </div>
+                                                <div class="contrato-acciones">
+                                                    <button class="btn btn-sm btn-outline">
+                                                        <i class="fas fa-eye"></i> Ver Detalles
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline">
+                                                        <i class="fas fa-download"></i> Descargar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalles de Contrato -->
+    <div class="modal" id="modalDetallesContrato">
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h3>Detalles del Contrato #C2024-001</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="nav-tabs">
+                    <div class="nav-tab active" data-tab="info-general">Información General</div>
+                    <div class="nav-tab" data-tab="seguimiento">Seguimiento</div>
+                    <div class="nav-tab" data-tab="documentos">Documentos</div>
+                </div>
+                
+                <!-- Información General -->
+                <div class="tab-content active" id="info-general">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <p>Colegio San José</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Servicio</label>
+                            <p>Promoción Escolar 2024</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de Inicio</label>
+                            <p>01/07/2024</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de Fin</label>
+                            <p>25/12/2024</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor del Contrato</label>
+                            <p>S/. 2,000.00</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <p><span class="estado-badge activo">Activo</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seguimiento -->
+                <div class="tab-content" id="seguimiento">
+                    <div class="timeline">
+                        <!-- Items de seguimiento... -->
+                    </div>
+                </div>
+
+                <!-- Documentos -->
+                <div class="tab-content" id="documentos">
+                    <div class="documentos-grid">
+                        <!-- Lista de documentos... -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Nuevo Contrato -->
+    <div class="modal-overlay" id="modalNuevoContrato">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-contract"></i> Nuevo Contrato</h3>
+                <button class="modal-close" onclick="cerrarModalNuevoContrato()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formNuevoContrato" onsubmit="guardarNuevoContrato(event)">
+                    <!-- Información del Cliente -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Información del Cliente</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombreCliente">Nombre del Cliente *</label>
+                                <input type="text" id="nombreCliente" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipoCliente">Tipo de Cliente *</label>
+                                <select id="tipoCliente" class="form-control" required>
+                                    <option value="">Seleccione tipo...</option>
+                                    <option value="particular">Particular</option>
+                                    <option value="colegio">Colegio</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="emailCliente">Email *</label>
+                                <input type="email" id="emailCliente" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoCliente">Teléfono *</label>
+                                <input type="tel" id="telefonoCliente" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tipoClienteFrec">Tipo de Frecuencia *</label>
+                                <select id="tipoClienteFrec" class="form-control" required>
+                                    <option value="">Seleccione frecuencia...</option>
+                                    <option value="nuevo">Cliente Nuevo</option>
+                                    <option value="frecuente">Cliente Frecuente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalles del Servicio -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-camera"></i> Detalles del Servicio</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tipoServicio">Tipo de Servicio *</label>
+                                <select id="tipoServicio" class="form-control" required onchange="actualizarPrecioBase()">
+                                    <option value="">Seleccione servicio...</option>
+                                    <option value="promocion">Promoción Escolar</option>
+                                    <option value="enmarcado">Enmarcado Artesanal</option>
+                                    <option value="impresion">Impresión Minilab</option>
+                                    <option value="restauracion">Restauración y Retoque</option>
+                                    <option value="pintura">Pintura al Óleo</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="modalidadServicio">Modalidad de Servicio *</label>
+                                <select id="modalidadServicio" class="form-control" required>
+                                    <option value="">Seleccione modalidad...</option>
+                                    <option value="presencial">Presencial</option>
+                                    <option value="domicilio">A Domicilio</option>
+                                    <option value="mixto">Mixto</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fechaInicio">Fecha de Inicio *</label>
+                                <input type="date" id="fechaInicio" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaFin">Fecha de Fin *</label>
+                                <input type="date" id="fechaFin" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="estadoContrato">Estado del Contrato *</label>
+                                <select id="estadoContrato" class="form-control" required>
+                                    <option value="">Seleccione estado...</option>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="en_proceso">En Proceso</option>
+                                    <option value="completado">Completado</option>
+                                    <option value="cancelado">Cancelado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="precioBase">Precio Base (S/.) *</label>
+                                <input type="number" id="precioBase" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción del Servicio</label>
+                            <textarea id="descripcion" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Detalles de Pago -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-money-bill-wave"></i> Detalles de Pago</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="metodoPago">Método de Pago *</label>
+                                <select id="metodoPago" class="form-control" required onchange="mostrarDetallesPago()">
+                                    <option value="">Seleccione método...</option>
+                                    <option value="dos_partes">Pago en dos partes (50% - 50%)</option>
+                                    <option value="tres_partes">Pago en tres partes (20% - 40% - 40%)</option>
+                                    <option value="contra_entrega">Pago contra entrega (100%)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="detallesPago" class="payment-details"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="cerrarModalNuevoContrato()">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Contrato
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/contratos.js"></script>
+</body>
+</html> 

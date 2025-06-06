@@ -8,17 +8,21 @@ const events = [
     id: 1,
     title: 'Sesión de Fotos',
     client: 'Juan Pérez',
-    date: '2024-03-15',
+    date: '2024-03-14',
     time: '09:00',
-    status: 'confirmed'
+    status: 'proceso',
+    lugar: 'A.v arequipa',
+    progress: 75
   },
   {
     id: 2,
     title: 'Fotografía de Producto',
     client: 'María López',
-    date: '2024-03-15',
-    time: '14:30',
-    status: 'pending'
+    date: '2024-03-14',
+    time: '09:00',
+    status: 'pendiente',
+    lugar: 'A.v arequipa',
+    progress: 30
   }
 ];
 
@@ -188,8 +192,7 @@ function formatDate(date) {
 }
 
 function formatTime(time) {
-  const [hours, minutes] = time.split(':');
-  return `${hours}:${minutes}`;
+  return time + ' hrs';
 }
 
 function isToday(dateString) {
@@ -303,7 +306,7 @@ function updateSessionsTable(sessions) {
   if (sessions.length === 0) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td colspan="7" style="text-align: center;">No se encontraron sesiones</td>
+      <td colspan="8" style="text-align: center;">No se encontraron sesiones</td>
     `;
     tbody.appendChild(tr);
     return;
@@ -314,12 +317,13 @@ function updateSessionsTable(sessions) {
     tr.innerHTML = `
       <td>${session.id}</td>
       <td>${session.client}</td>
-      <td>${formatDateDisplay(session.date)}</td>
-      <td>${formatTime(session.time)}</td>
+      <td>${session.lugar}</td>
+      <td>14/03/2024</td>
+      <td>09:00 hrs</td>
       <td>${formatStatus(session.status)}</td>
       <td>
         <div class="progress-bar">
-          <div class="progress" style="width: ${session.progress || 0}%;"></div>
+          <div class="progress" style="width: ${session.progress || 0}%"></div>
         </div>
       </td>
       <td>
@@ -328,16 +332,6 @@ function updateSessionsTable(sessions) {
       </td>
     `;
     tbody.appendChild(tr);
-  });
-}
-
-// Función para formatear la fecha en formato más legible
-function formatDateDisplay(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
   });
 }
 
