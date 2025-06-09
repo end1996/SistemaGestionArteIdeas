@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inventario de Molduras</title>
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  
+  <!-- Estilos principales del sistema -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/agenda.css" />
+  <style>
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    form input, form button {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .table-wrapper {
+      flex: 1 1 45%;
+    }
+
+    @media (max-width: 800px) {
+      .flex-container {
+        flex-direction: column;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+  <script src="../assets/js/agenda.js"></script>
+</head>
+<body>
+  <div class="container agenda-page">
+    <!-- Botón de menú para móvil -->
+    <button class="menu-toggle" id="menuToggle">
+      <span class="menu-icon"></span>
+    </button>
+
+    <!-- Menú lateral -->
+    <div class="sidebar" id="sidebar">
+      <div class="logo">FotoStudio</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="pedidos.html" class="nav-link">Pedidos</a></li>
+          <li class="nav-item"><a href="clientes.html" class="nav-link">Clientes</a></li>
+          <li class="nav-item"><a href="contratos.html" class="nav-link">Contratos</a></li>
+          <li class="nav-item"><a href="inventario.html" class="nav-link active">Inventario</a></li>
+          <li class="nav-item"><a href="produccion.html" class="nav-link">Producción</a></li>
+          <li class="nav-item"><a href="agenda.html" class="nav-link">Agenda</a></li>
+          <li class="nav-item"><a href="reportes.html" class="nav-link">Reportes</a></li>
+          <li class="nav-item"><a href="configuracion.html" class="nav-link">Configuración</a></li>
+          <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <h2>Formulario de Moldura</h2>
+
+      <form>
+        <input type="text" placeholder="Nombre de Moldura" required>
+        <input type="text" placeholder="Color" required>
+        <input type="text" placeholder="Material" required>
+        <input type="number" step="0.1" placeholder="Ancho (cm)" required>
+        <input type="text" placeholder="Estilo" required>
+        <input type="number" placeholder="Cantidad" required>
+        <button type="submit">Agregar</button>
+      </form>
+
+      <div class="flex-container">
+        <!-- Tabla: Inventario -->
+        <div class="table-wrapper">
+          <h3>Inventario de Molduras</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Color</th>
+                <th>Material</th>
+                <th>Ancho (cm)</th>
+                <th>Estilo</th>
+                <th>Cantidad Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Molde Clásico 12A</td>
+                <td>Nogal Oscuro</td>
+                <td>Madera</td>
+                <td>3.5</td>
+                <td>Clásico</td>
+                <td>785</td>
+              </tr>
+              <!-- Agrega más si deseas -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabla: Stock actual -->
+        <div class="table-wrapper">
+          <h3>Stock Actual en Almacén</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Molde Clásico 12A</td>
+                <td>93</td>
+              </tr>
+              <!-- Agrega más si deseas -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

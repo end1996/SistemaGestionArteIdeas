@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Producción - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/produccion.css">
+     
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+        <div class="sidebar" id="sidebar">
+            <button class="close-sidebar" id="closeSidebar">&#10006;</button>
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contratos.html" class="nav-link">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link active">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="modal-backdrop" id="modalBackdrop" style="display:none;"></div>
+        <div class="main-content">
+            <div class="header sticky-header">
+                <h1>Gestión de Producción</h1>
+                <button class="btn btn-primary" id="btnNuevaOrden">
+                    <i class="fas fa-plus"></i> Nueva Orden
+                </button>
+            </div>
+
+            <!-- Panel de Control de Producción -->
+            <div class="production-dashboard">
+                <div class="dashboard-card production-status">
+                    <div class="card-header">
+                        <h2>Estado de Producción</h2>
+                    </div>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-icon pendiente">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Pendientes</h3>
+                                <p id="pedidosPendientes">0 órdenes</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon proceso">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>En Proceso</h3>
+                                <p id="pedidosEnProceso">0 órdenes</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon finalizado">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Finalizadas</h3>
+                                <p id="pedidosFinalizados">0 órdenes</p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card production-timeline">
+                    <div class="card-header">
+                        <h2>Línea de Tiempo</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>P001 - Impresión Minilab</h4>
+                                <p>Cliente: Juan Pérez</p>
+                                <p>Inicio: 15/04/2023</p>
+                                <p>Materiales: Papel 10x15 (10 unidades), Químico Revelador (1L)</p>
+                                <span class="status-badge pendiente">Pendiente</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>P002 - Enmarcado</h4>
+                                <p>Cliente: María López</p>
+                                <p>Inicio: 12/04/2023</p>
+                                <p>Materiales: Marco 20x30, Vidrio, Cartulina</p>
+                                <span class="status-badge proceso">En Proceso</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Órdenes Activas -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2>Órdenes Activas</h2>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar orden..." class="form-control">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-group">
+                            <select class="form-control">
+                                <option value="">Estado</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="proceso">En Proceso</option>
+                                <option value="finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Pedido</th>
+                                <th>Tipo de Servicio</th>
+                                <th>Estado</th>
+                                <th>Fecha Inicio</th>
+                                <th>Responsable</th>
+                                <th>Materiales</th>
+                                <th>Progreso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PR001</td>
+                                <td>P001</td>
+                                <td>Impresión Minilab</td>
+                                <td><span class="status-badge pendiente">Pendiente</span></td>
+                                <td>15/04/2023</td>
+                                <td>Juan Pérez</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Ver materiales">
+                                        <i class="fas fa-box"></i> Ver
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-iniciar">Iniciar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PR002</td>
+                                <td>P002</td>
+                                <td>Enmarcado</td>
+                                <td><span class="status-badge proceso">En Proceso</span></td>
+                                <td>12/04/2023</td>
+                                <td>María López</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Ver materiales">
+                                        <i class="fas fa-box"></i> Ver
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 60%"></div>
+                                    </div>
+                                </td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                    <button class="btn btn-sm btn-finalizar">Finalizar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de nueva orden -->
+    <div class="modal" id="ordenModal">
+        <div class="modal-header">
+            <h3>Nueva Orden de Producción</h3>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formOrden">
+                <div class="form-group">
+                    <label for="pedidoAsociado">Pedido Asociado</label>
+                    <select id="pedidoAsociado" class="form-control" required>
+                        <option value="">Seleccione pedido</option>
+                        <option value="P001">P001 - Impresión Minilab</option>
+                        <option value="P002">P002 - Enmarcado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tipoServicio">Tipo de Servicio</label>
+                    <select id="tipoServicio" class="form-control" required>
+                        <option value="impresion">Impresión Minilab</option>
+                        <option value="enmarcado">Enmarcado</option>
+                        <option value="recordatorio">Recordatorio Escolar</option>
+                        <option value="retoque">Retoque Fotográfico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="estadoOrden">Estado</label>
+                    <select id="estadoOrden" class="form-control" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en_proceso">En Proceso</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInicio">Fecha Inicio</label>
+                    <input type="date" id="fechaInicio" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="fechaFin">Fecha Fin Estimada</label>
+                    <input type="date" id="fechaFin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="responsable">Responsable</label>
+                    <select id="responsable" class="form-control" required>
+                        <option value="">Seleccione responsable</option>
+                        <option value="1">Juan Pérez</option>
+                        <option value="2">María López</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Materiales Necesarios</h4>
+                    <div id="materialesLista">
+                        <div class="material-item">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <select class="form-control material-select">
+                                        <option value="">Seleccionar Material</option>
+                                        <option value="papel_10x15">Papel 10x15</option>
+                                        <option value="papel_13x18">Papel 13x18</option>
+                                        <option value="quimico_revelador">Químico Revelador</option>
+                                        <option value="marco_20x30">Marco 20x30</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <input type="number" class="form-control" placeholder="Cantidad" min="1">
+                                </div>
+                                <div class="form-col stock-col">
+                                    <span class="stock-info">Stock: <span class="stock-cantidad">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="agregarMaterial()">
+                        <i class="fas fa-plus"></i> Agregar Material
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="observaciones">Observaciones</label>
+                    <textarea id="observaciones" class="form-control" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Guardar Orden</button>
+        </div>
+    </div>
+    <script>
+        // Aquí puedes agregar la lógica JS para abrir/cerrar el modal y manejar el formulario
+        function cerrarModal() {
+            document.getElementById('ordenModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        }
+        document.getElementById('btnNuevaOrden').onclick = function() {
+            document.getElementById('ordenModal').style.display = 'block';
+            document.getElementById('modalBackdrop').style.display = 'block';
+        };
+
+        // Lógica para abrir/cerrar la sidebar en móvil sin superponer el contenido
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function updateMenuButtonVisibility() {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.classList.contains('open')) {
+                    menuToggle.style.display = 'block';
+                } else {
+                    menuToggle.style.display = 'none';
+                }
+            } else {
+                menuToggle.style.display = 'none';
+            }
+        }
+
+        function checkScreenSize() {
+            updateMenuButtonVisibility();
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                closeSidebar.style.display = 'none';
+            }
+        }
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            closeSidebar.style.display = 'block';
+            updateMenuButtonVisibility();
+        }
+
+        function closeSidebarFunc() {
+            sidebar.classList.remove('open');
+            closeSidebar.style.display = 'none';
+            updateMenuButtonVisibility();
+        }
+
+        menuToggle.onclick = openSidebar;
+        closeSidebar.onclick = closeSidebarFunc;
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        // Resalta automáticamente el enlace del menú según el archivo actual
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            const currentPage = window.location.pathname.split('/').pop();
+            if (href === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Funciones para gestionar la producción
+        function actualizarEstadoProduccion() {
+            // Obtener pedidos por estado
+            const pedidos = obtenerPedidosPorEstado();
+            
+            // Actualizar contadores
+            document.getElementById('pedidosPendientes').textContent = `${pedidos.pendientes} órdenes`;
+            document.getElementById('pedidosEnProceso').textContent = `${pedidos.enProceso} órdenes`;
+            document.getElementById('pedidosFinalizados').textContent = `${pedidos.finalizados} órdenes`;
+            
+            // Actualizar barras de progreso
+            actualizarBarrasProgreso(pedidos);
+        }
+
+        // Simular inventario disponible para producción
+        let inventarioSimuladoProduccion = {
+            'papel_10x15': 200, // Ejemplo: 200 unidades
+            'papel_13x18': 100,
+            'quimico_revelador': 5, // Ejemplo: 5 litros
+            'marco_20x30': 15
+            // Añade otros materiales aquí
+        };
+
+        // Función para obtener los materiales necesarios para una orden
+        async function obtenerMaterialesOrden(ordenId) {
+            // Aquí deberías consultar una base de datos para obtener los materiales reales
+            // Para la simulación, devolveremos materiales para las órdenes de ejemplo
+            const materialesEjemplo = {
+                'PR001': [
+                    { id: 'papel_10x15', cantidad: 50, unidad: 'unidades' },
+                    { id: 'quimico_revelador', cantidad: 1, unidad: 'litros' }
+                ],
+                'PR002': [
+                    { id: 'marco_20x30', cantidad: 1, unidad: 'unidades' },
+                    { id: 'papel_13x18', cantidad: 5, unidad: 'unidades' }
+                    // Asume que un enmarcado usa papel y un marco
+                ]
+            };
+            
+            return materialesEjemplo[ordenId] || [];
+        }
+
+        function actualizarEstadoProduccion() {
+            // Obtener pedidos por estado (esta función no está definida, asumo que es simulada o necesita implementación)
+            // Para esta mejora, nos enfocaremos en la lógica de materiales, no en los contadores generales.
+            // const pedidos = obtenerPedidosPorEstado();
+            
+            // Actualizar contadores (simulados)
+            // document.getElementById('pedidosPendientes').textContent = `${pedidos.pendientes} órdenes`;
+            // document.getElementById('pedidosEnProceso').textContent = `${pedidos.enProceso} órdenes`;
+            // document.getElementById('pedidosFinalizados').textContent = `${pedidos.finalizados} órdenes`;
+            
+            console.log('Inventario simulado actual:', inventarioSimuladoProduccion); // Mostrar inventario actual en consola
+        }
+
+        // Función para iniciar producción
+        async function iniciarProduccion(ordenId) {
+            try {
+                console.log(`Intentando iniciar orden: ${ordenId}`);
+                // 1. Obtener materiales necesarios para la orden
+                const materialesNecesarios = await obtenerMaterialesOrden(ordenId);
+                
+                // 2. Verificar disponibilidad de materiales en el inventario simulado
+                const disponibilidad = await verificarDisponibilidadMateriales(materialesNecesarios);
+                
+                if (!disponibilidad.suficiente) {
+                    alert(`No hay suficiente stock para iniciar la producción de la orden ${ordenId}. Falta: ${disponibilidad.faltante.map(item => `${item.cantidad} de ${item.id}`).join(', ')}`);
+                    return;
+                }
+
+                // 3. Descontar materiales del inventario simulado
+                descontarMateriales(materialesNecesarios);
+                
+                // 4. Actualizar estado de la orden (simulado)
+                // En un sistema real, aquí actualizarías el estado en la base de datos
+                console.log(`Estado de la orden ${ordenId} actualizado a 'en_proceso' (simulado)`);
+                await actualizarEstadoOrden(ordenId, 'en_proceso'); // Asumiendo que esta función existe y actualiza la UI o datos simulados
+                
+                // 5. Actualizar interfaz (simulado)
+                actualizarEstadoProduccion(); // Esto ahora solo imprime el inventario simulado y podrías añadir más actualizaciones de UI
+                actualizarTablaOrdenes(); // Asumiendo que esta función actualiza la tabla visual
+                
+                alert(`Producción iniciada exitosamente para la orden ${ordenId}`);
+            } catch (error) {
+                console.error('Error al iniciar producción:', error);
+                alert('Error al iniciar la producción');
+            }
+        }
+
+        // Función para finalizar producción
+        async function finalizarProduccion(ordenId) {
+            try {
+                console.log(`Intentando finalizar orden: ${ordenId}`);
+                // 1. Calcular desperdicios (simulado)
+                const desperdicios = await calcularDesperdicios(ordenId);
+                
+                // 2. Actualizar inventario (descontar desperdicios, simulado)
+                // await actualizarInventario(desperdicios, 'salida'); // Esta función parece no estar definida o es para inventario general
+                 descontarMateriales(desperdicios, true); // Usar la misma lógica de descuento, marcando como desperdicio si aplica
+                 console.log('Desperdicios descontados (simulado):', desperdicios);
+                
+                // 3. Actualizar estado de la orden (simulado)
+                await actualizarEstadoOrden(ordenId, 'finalizado');
+                
+                // 4. Actualizar pedido asociado (simulado)
+                await actualizarPedidoAsociado(ordenId);
+                
+                // 5. Actualizar interfaz
+                actualizarEstadoProduccion();
+                actualizarTablaOrdenes();
+                
+                alert(`Producción finalizada exitosamente para la orden ${ordenId}`);
+            } catch (error) {
+                console.error('Error al finalizar producción:', error);
+                alert('Error al finalizar la producción');
+            }
+        }
+
+        // Función para verificar disponibilidad de materiales (modificada)
+        async function verificarDisponibilidadMateriales(materiales) {
+            const faltante = [];
+            let suficiente = true;
+
+            for (const material of materiales) {
+                const idMaterial = material.id; // Usamos 'id' para buscar en el inventario simulado
+                const cantidadRequerida = parseInt(material.cantidad, 10);
+
+                if (!inventarioSimuladoProduccion.hasOwnProperty(idMaterial)) {
+                    console.warn(`Material desconocido en inventario simulado: ${idMaterial}`);
+                    // Si un material no está en el inventario simulado, consideramos que no hay stock
+                    suficiente = false;
+                    faltante.push({ id: idMaterial, cantidad: cantidadRequerida, motivo: 'Desconocido' });
+                } else {
+                    const stockActual = inventarioSimuladoProduccion[idMaterial];
+                    if (stockActual < cantidadRequerida) {
+                        suficiente = false;
+                        const cantidadFaltante = cantidadRequerida - stockActual;
+                        faltante.push({ id: idMaterial, cantidad: cantidadFaltante, motivo: 'Stock Insuficiente' });
+                    }
+                }
+            }
+
+            return { suficiente, faltante };
+        }
+
+        // Función para descontar materiales del inventario (anteriormente reservarMateriales)
+        function descontarMateriales(materiales, esDesperdicio = false) {
+            console.log(`Descontando materiales (${esDesperdicio ? 'desperdicio' : 'uso'}):`, materiales);
+            for (const material of materiales) {
+                const idMaterial = material.id;
+                const cantidadADescontar = parseInt(material.cantidad, 10);
+                
+                if (inventarioSimuladoProduccion.hasOwnProperty(idMaterial)) {
+                    inventarioSimuladoProduccion[idMaterial] -= cantidadADescontar;
+                    // Asegurarse de que el stock no sea negativo (aunque la verificación previa debería evitar esto)
+                    if (inventarioSimuladoProduccion[idMaterial] < 0) {
+                        inventarioSimuladoProduccion[idMaterial] = 0;
+                    }
+                } else {
+                     console.warn(`Intentando descontar material desconocido: ${idMaterial}`);
+                }
+            }
+             console.log('Inventario simulado DESPUÉS del descuento:', inventarioSimuladoProduccion);
+        }
+
+        // Función para calcular desperdicios (simulada, usa obtenerMaterialesOrden)
+        async function calcularDesperdicios(ordenId) {
+             // Simular cálculo de desperdicios basado en los materiales originales de la orden
+             const materialesUsados = await obtenerMaterialesOrden(ordenId);
+             // Suponemos un 5% de desperdicio para cada material usado
+             return materialesUsados.map(material => ({
+                 id: material.id,
+                 cantidad: Math.ceil(parseInt(material.cantidad, 10) * 0.05) // 5% de desperdicio
+             }));
+        }
+
+        // Función para actualizar pedido asociado (simulada)
+        async function actualizarPedidoAsociado(ordenId) {
+            // Simular actualización de pedido, por ejemplo, cambiar su estado a 'en produccion' o 'finalizado'
+            console.log(`Actualizando pedido asociado a orden (${ordenId}) a estado finalizado/completado (simulado)`);
+             // En un sistema real, encontrarías el pedido asociado a esta orden y actualizarías su estado.
+        }
+
+        // Función simulada para actualizar el estado de la orden en la tabla/UI
+        async function actualizarEstadoOrden(ordenId, nuevoEstado) {
+             console.log(`Actualizando estado de orden ${ordenId} a ${nuevoEstado} en la tabla (simulado)`);
+             // Aquí iría la lógica para encontrar la fila de la tabla correspondiente a ordenId
+             // y actualizar su columna de estado y barra de progreso.
+             
+             // Ejemplo muy básico (necesitarías una forma de mapear ordenId a la fila de la tabla):
+             // const filaOrden = document.querySelector(`tr td:first-child:contains('${ordenId}')`).closest('tr');
+             // if (filaOrden) {
+             //    const estadoSpan = filaOrden.querySelector('.status-badge');
+             //    estadoSpan.textContent = nuevoEstado.charAt(0).toUpperCase() + nuevoEstado.slice(1).replace('_', ' ');
+             //    estadoSpan.className = `status-badge ${nuevoEstado.replace('_', ' ')}`; // Actualizar clase CSS
+             //    // Actualizar barra de progreso si es 'en_proceso' o 'finalizado'
+             //    const progressBar = filaOrden.querySelector('.progress-bar');
+             //    if (nuevoEstado === 'en_proceso') progressBar.style.width = '30%'; // Ejemplo de progreso inicial
+             //    if (nuevoEstado === 'finalizado') progressBar.style.width = '100%';
+             // }
+        }
+
+        // Función simulada para actualizar la tabla visual de órdenes
+        function actualizarTablaOrdenes() {
+             console.log('Actualizando la tabla visual de órdenes (simulado).');
+             // Aquí iría la lógica para recargar o actualizar las filas de la tabla con los datos más recientes
+             // de las órdenes, incluyendo sus estados y progreso actualizados.
+             // Como el estado y progreso se actualizan en actualizarEstadoOrden, esta función
+             // podría simplemente ser una forma de refrescar la vista general si fuera necesario.
+        }
+
+        // Event listeners para los botones de acción (mantienen la lógica de llamar a iniciarProduccion/finalizarProduccion)
+        document.querySelectorAll('.btn-iniciar').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const ordenId = e.target.closest('tr').querySelector('td:first-child').textContent;
+                iniciarProduccion(ordenId);
+            });
+        });
+
+        document.querySelectorAll('.btn-finalizar').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const ordenId = e.target.closest('tr').querySelector('td:first-child').textContent;
+                finalizarProduccion(ordenId);
+            });
+        });
+
+        // Inicializar estado de producción al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarEstadoProduccion(); // Esto ahora solo imprimirá el inventario inicial en consola
+        });
+
+        // Agregar al inicio del script para escuchar nuevas órdenes desde pedidos.html
+        document.addEventListener('DOMContentLoaded', () => {
+            // Escuchar nuevas órdenes de producción (si vienen de pedidos.html)
+            window.addEventListener('nuevaOrdenProduccion', (event) => {
+                const nuevaOrden = event.detail;
+                agregarOrdenATabla(nuevaOrden); // Asegúrate de que esta función exista y funcione
+                actualizarEstadoProduccion(); // Esto actualizará los contadores visuales si implementas esa parte
+            });
+        });
+
+        // Nota: Las funciones agregarOrdenATabla, actualizarEstadoOrden, actualizarTablaOrdenes, obtenerPedidosPorEstado
+        // y actualizarBarrasProgreso son simuladas o placeholders en el código proporcionado.
+        // Deberías implementarlas completamente para tener una UI dinámica.
+    </script>
+    <script src="../assets/js/produccion.js"></script>
+</body>
+</html> 

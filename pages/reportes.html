@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/reportes.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+        
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contratos.html" class="nav-link">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link active">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Reportes y Análisis</h1>
+                <div class="user-info">
+                    <span>Bienvenido, Administrador</span>
+                </div>
+            </div>
+
+            <!-- Filtros de reportes -->
+            <div class="card filter-card">
+                <div class="card-header">
+                    <h2 class="card-title">Filtros</h2>
+                </div>
+                <div class="filter-controls">
+                    <div class="form-group">
+                        <label for="report-type">Tipo de Reporte</label>
+                        <select id="report-type" class="form-control">
+                            <option value="financial">Financiero</option>
+                            <option value="products">Productos</option>
+                            <option value="inventory">Inventario</option>
+                            <option value="profitability">Rentabilidad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-range">Rango de Fechas</label>
+                        <select id="date-range" class="form-control">
+                            <option value="current-day">Día Actual</option>
+                            <option value="current-week">Semana Actual</option>
+                            <option value="current-month">Mes Actual</option>
+                            <option value="current-year">Año Actual</option>
+                            <option value="custom">Personalizado</option>
+                        </select>
+                    </div>
+                    <div class="form-group date-inputs" id="custom-date-container" style="display: none;">
+                        <div class="date-field">
+                            <label for="start-date">Fecha Inicial</label>
+                            <input type="date" id="start-date" class="form-control">
+                        </div>
+                        <div class="date-field">
+                            <label for="end-date">Fecha Final</label>
+                            <input type="date" id="end-date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="generate-report" class="btn btn-primary">Generar Reporte</button>
+                        <button id="export-report" class="btn btn-secondary">Exportar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Reportes -->
+            <div class="reports-container">
+                <!-- Reporte Financiero -->
+                <div class="report-section" id="financial-report">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Ingresos por Servicio</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="services-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Ingresos por Cliente</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="clients-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Resumen Financiero</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Servicio</th>
+                                        <th>Cantidad</th>
+                                        <th>Ingresos</th>
+                                        <th>% del Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Impresión Minilab</td>
+                                        <td>45</td>
+                                        <td>$2,250.00</td>
+                                        <td>15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recordatorios Escolares</td>
+                                        <td>120</td>
+                                        <td>$7,200.00</td>
+                                        <td>48%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enmarcado</td>
+                                        <td>30</td>
+                                        <td>$4,500.00</td>
+                                        <td>30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Retoque Fotográfico</td>
+                                        <td>15</td>
+                                        <td>$1,050.00</td>
+                                        <td>7%</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>210</th>
+                                        <th>$15,000.00</th>
+                                        <th>100%</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reporte de Productos -->
+                <div class="report-section" id="products-report" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Productos Más Vendidos</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="top-products-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Detalles de Productos</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad Vendida</th>
+                                        <th>Ingresos</th>
+                                        <th>Tendencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Recordatorio Diseño A</td>
+                                        <td>85</td>
+                                        <td>$4,250.00</td>
+                                        <td><span class="badge badge-success">↑ 12%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Marco 20x30</td>
+                                        <td>22</td>
+                                        <td>$3,300.00</td>
+                                        <td><span class="badge badge-success">↑ 8%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Impresión 10x15</td>
+                                        <td>250</td>
+                                        <td>$1,875.00</td>
+                                        <td><span class="badge badge-danger">↓ 5%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Álbum Fotográfico</td>
+                                        <td>15</td>
+                                        <td>$1,500.00</td>
+                                        <td><span class="badge badge-success">↑ 20%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reporte de Inventario -->
+                <div class="report-section" id="inventory-report" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Estado del Inventario</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="inventory-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Productos con Stock Bajo</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Stock Actual</th>
+                                        <th>Stock Mínimo</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Papel Fotográfico 10x15</td>
+                                        <td>5</td>
+                                        <td>20</td>
+                                        <td><span class="badge badge-danger">Crítico</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Químico Revelador</td>
+                                        <td>2</td>
+                                        <td>5</td>
+                                        <td><span class="badge badge-danger">Crítico</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Varillas Marco Tipo A</td>
+                                        <td>8</td>
+                                        <td>10</td>
+                                        <td><span class="badge badge-warning">Bajo</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Historial de Movimientos</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Producto</th>
+                                        <th>Tipo</th>
+                                        <th>Cantidad</th>
+                                        <th>Referencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15/05/2023</td>
+                                        <td>Papel Fotográfico 10x15</td>
+                                        <td>Salida</td>
+                                        <td>15</td>
+                                        <td>Pedido #1245</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14/05/2023</td>
+                                        <td>Químico Revelador</td>
+                                        <td>Salida</td>
+                                        <td>1</td>
+                                        <td>Producción #78</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10/05/2023</td>
+                                        <td>Marcos 20x30</td>
+                                        <td>Entrada</td>
+                                        <td>25</td>
+                                        <td>Compra #223</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reporte de Rentabilidad -->
+                <div class="report-section" id="profitability-report" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Análisis de Rentabilidad por Servicio</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="profitability-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Comparativa Costos vs Ingresos</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="costs-vs-income-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Detalles de Rentabilidad</h2>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Servicio</th>
+                                        <th>Ingresos</th>
+                                        <th>Costos</th>
+                                        <th>Margen</th>
+                                        <th>Rentabilidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Impresión Minilab</td>
+                                        <td>$2,250.00</td>
+                                        <td>$787.50</td>
+                                        <td>$1,462.50</td>
+                                        <td>65%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recordatorios Escolares</td>
+                                        <td>$7,200.00</td>
+                                        <td>$2,160.00</td>
+                                        <td>$5,040.00</td>
+                                        <td>70%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enmarcado</td>
+                                        <td>$4,500.00</td>
+                                        <td>$1,800.00</td>
+                                        <td>$2,700.00</td>
+                                        <td>60%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Retoque Fotográfico</td>
+                                        <td>$1,050.00</td>
+                                        <td>$262.50</td>
+                                        <td>$787.50</td>
+                                        <td>75%</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>$15,000.00</th>
+                                        <th>$5,010.00</th>
+                                        <th>$9,990.00</th>
+                                        <th>66.6%</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/reportes.js"></script>
+    <script>
+        // Menú móvil toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            this.classList.toggle('menu-active');
+        });
+        
+        // Mostrar/ocultar selector de fechas personalizado
+        document.getElementById('date-range').addEventListener('change', function() {
+            const customDateContainer = document.getElementById('custom-date-container');
+            if (this.value === 'custom') {
+                customDateContainer.style.display = 'flex';
+            } else {
+                customDateContainer.style.display = 'none';
+            }
+        });
+        
+        // Cambiar entre tipos de reportes
+        document.getElementById('report-type').addEventListener('change', function() {
+            // Ocultar todos los reportes
+            document.querySelectorAll('.report-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Mostrar el reporte seleccionado
+            const selectedReport = this.value + '-report';
+            document.getElementById(selectedReport).style.display = 'block';
+        });
+    </script>
+</body>
+</html> 

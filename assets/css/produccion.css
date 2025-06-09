@@ -1,0 +1,743 @@
+html, body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+.main-content {
+  width: 100%;
+  overflow-x: hidden;
+}
+th.acciones, td.actions {
+  min-width: 120px;
+  width: 120px;
+  max-width: 140px;
+  box-sizing: border-box;
+}
+.close-sidebar {
+  display: none !important;
+}
+/* --- INICIO: Ajustes para tabla y botones --- */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+.table .actions .btn {
+  min-width: 48px;
+  max-width: 64px;
+  padding: 2px 6px;
+  font-size: 0.90rem;
+  margin-bottom: 4px;
+  margin-right: 2px;
+}
+.container, .main-content {
+  width: 100%;
+  box-sizing: border-box;
+}
+.btn-ver {
+  background: #345291;
+  color: white;
+  border: none;
+  width: 38px;
+  height: 28px;
+  font-size: 14px;
+}
+
+.btn-editar {
+  background: #a74a4a;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 28px;
+  font-size: 14px;
+}
+.btn-ver:hover {
+  background-color: #2a406e;
+}
+
+.btn-editar:hover {
+  background-color: #913434 ;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  align-items: center;
+  gap: 8px;
+}
+.btn-siguiente,
+.btn-anterior{
+    font-size: 13px;
+    width: 86px ;
+    height: 25px ;
+} 
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  background: white;
+  font-size: 15px;
+  white-space: nowrap;
+}
+/* --- FIN: Ajustes para tabla y botones --- */
+.menu-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100vw;
+    min-height: 180px;
+    background: #2d2d2d;
+    border-radius: 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    display: none;
+    flex-direction: column;
+    padding-bottom: 24px;
+    margin-bottom: 16px;
+    z-index: 1;
+    transition: none;
+    transform: none;
+  }
+  .sidebar.open {
+    display: flex;
+  }
+  .close-sidebar {
+    display: block !important;
+    background: #345291; /* Color de fondo solicitado */
+    color: #fff;
+    border: none;
+    font-size: 1.6rem;
+    width: 38px;
+    height: 38px;
+    margin: 16px 0 0 16px; /* Ajustado para que se parezca al botón de menú */
+    border-radius: 0;
+    cursor: pointer;
+    align-self: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    transition: background 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .close-sidebar:hover {
+    background: #2a406e; /* Color de hover ajustado */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .logo {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #fff;
+    margin: -36px auto 20px auto;
+    padding-top: 8px;
+  }
+  .nav-menu {
+    margin-top: 12px;
+    padding-left: 24px;
+  }
+  .modal-backdrop {
+    display: none !important;
+  }
+  .btn-anterior{
+    width: 90px;
+    margin-right: 25px;
+    }
+    .btn-siguiente{
+        width: 90px;
+        margin-left:25px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+       
+    }
+  .menu-toggle {
+    display: block;
+  }
+}
+@media (max-width: 500px) {
+  .header.sticky-header h1 {
+    text-align: center;
+    font-size: 1.3rem;
+    width: 100%;
+    margin: 0 auto 12px auto;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .form-col {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .form-group input,
+  .form-group select {
+    width: 87%;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    padding: 7px 8px;
+  }
+  .form-group.text-right {
+    text-align: center !important;
+  }
+  .btn.btn-primary {
+    min-width: 120px;
+    width: 70%;
+    max-width: 220px;
+    font-size: 1rem;
+    margin: 0 auto;
+    display: block;
+  }
+  .card {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .card .form-row, .card .form-group {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .table-container {
+    overflow-x: auto;
+  }
+  .table {
+    font-size: 0.92rem;
+  }
+}
+@media (max-width: 600px) {
+  th.acciones, td.actions {
+    min-width: 100px;
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    text-align: center;
+  }
+  .actions {
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 8px;
+    padding-left: 0;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .actions .btn {
+    min-width: 70px;
+    width: 80px;
+    margin-bottom: 4px;
+  }
+  
+}
+@media screen and (max-width: 316px) {
+  .btn-anterior{
+      width: 90px;
+      margin-right: 10px;
+      }
+      .btn-siguiente{
+          width: 80px;
+          margin-left:5px;
+      }
+      .pagination {
+        margin-top: 10px;
+          display: flex;
+          margin-right:15px; 
+      }
+      .pagination span {
+          font-size: 13px;
+          letter-spacing: 1px;
+         
+      }
+}
+
+.material-item {
+    background: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.material-item .form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.material-item .form-col {
+    flex: 1;
+}
+
+.stock-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.stock-info.bajo {
+    color: #dc3545;
+}
+
+.stock-info.normal {
+    color: #28a745;
+}
+
+.alertas-section {
+    margin-top: 15px;
+}
+
+.alertas-section .alert {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+/* Estilos para el resumen de inventario */
+.inventario-resumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.inventario-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.inventario-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.material-icon {
+    font-size: 2rem;
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info {
+    flex: 1;
+}
+
+.info h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.stock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stock-bajo {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.stock-normal {
+    color: #28a745;
+}
+
+.btn-link {
+    color: #345291;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .inventario-resumen {
+        grid-template-columns: 1fr;
+    }
+    
+    .inventario-item {
+        padding: 0.75rem;
+    }
+    
+    .material-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Estilos para el dashboard de producción */
+.production-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.dashboard-card .card-header {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dashboard-card .card-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Estilos para el estado de producción */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
+
+.status-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.status-icon {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.status-icon.pendiente {
+    color: #ffc107;
+}
+
+.status-icon.proceso {
+    color: #17a2b8;
+}
+
+.status-icon.finalizado {
+    color: #28a745;
+}
+
+.status-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.status-info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Estilos para la línea de tiempo */
+.timeline {
+    padding: 1rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 2.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-marker {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Estilos para las badges de estado */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.proceso {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status-badge.finalizado {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* Estilos para la barra de progreso */
+.progress {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #17a2b8;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Estilos para el catálogo de órdenes */
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-box input {
+    padding-right: 2.5rem;
+}
+
+.search-box i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.filter-group {
+    min-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .production-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        flex-direction: column;
+    }
+
+    .search-box,
+    .filter-group {
+        width: 100%;
+    }
+
+    .timeline-item::before {
+        left: 2rem;
+    }
+
+    .timeline-marker {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+.modal-footer {
+    /* ... estilos del footer del modal ... */
+}
+
+/* Estilo para el botón de cerrar del modal */
+.modal-close {
+    background-color: #345291; /* Azul similar al botón 'Ver' */
+    color: white;
+    border: none;
+    width: 30px; /* Tamaño cuadrado */
+    height: 30px; /* Tamaño cuadrado */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    font-size: 1.2rem; /* Tamaño de la 'x' */
+    display: flex; /* Para centrar la 'x' */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+    background-color: #2a406e; /* Un azul un poco más oscuro al pasar el mouse */
+}
+
+/* Estilo para evitar el scroll en el body cuando el modal está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Responsive adjustments for the modal */
+@media (max-width: 768px) {
+    .modal {
+        width: 95%; /* Ocupa casi todo el ancho en móvil */
+        margin: 20px auto; /* Centrar y dar un pequeño margen */
+        max-height: 90vh; /* Limitar altura y permitir scroll interno */
+        overflow-y: auto; /* Habilitar scroll si el contenido es largo */
+    }
+
+    .modal-body {
+        padding: 15px; /* Reducir padding interno */
+    }
+
+    .modal-header {
+         padding: 15px; /* Ajustar padding del header */
+    }
+
+    .modal-footer {
+        flex-direction: column; /* Apilar botones en el footer */
+        gap: 10px; /* Espacio entre botones apilados */
+        padding: 15px; /* Ajustar padding del footer */
+    }
+
+    .modal-footer button {
+        width: 100%; /* Botones del footer a ancho completo */
+    }
+
+     .form-row {
+        flex-direction: column; /* Asegurar que las columnas se apilen */
+        gap: 0; /* Eliminar gap entre elementos apilados */
+    }
+
+    .form-col {
+        width: 100%; /* Columnas a ancho completo */
+        margin-bottom: 15px; /* Espacio entre elementos apilados */
+    }
+
+     .form-col:last-child {
+        margin-bottom: 0; /* No agregar margen al último elemento de la columna */
+     }
+
+     .stock-col {
+        margin-top: -10px; /* Ajustar margen para la info de stock */
+        margin-bottom: 15px;
+     }
+
+    /* Ajustes para los botones de agregar/eliminar dentro del modal body */
+    .modal-body .btn.mt-2 {
+        width: 100%; /* Botones de agregar/eliminar a ancho completo */
+        margin-left: 0 !important; /* Eliminar margen izquierdo si existe */
+        margin-right: 0 !important; /* Eliminar margen derecho */
+        margin-bottom: 10px; /* Añadir margen inferior para separarlos */
+    }
+
+     .modal-body .btn.mt-2:last-child {
+         margin-bottom: 0; /* No agregar margen inferior al último botón */
+     }
+
+     .form-group h4 {
+         margin-top: 15px; /* Espacio antes de los títulos de sección */
+         margin-bottom: 10px;
+     }
+
+     .material-item,
+     .edicion-item {
+         margin-bottom: 15px; /* Espacio entre cada fila de material/edición */
+         padding: 10px;
+     }
+
+     .material-item:last-child,
+     .edicion-item:last-child {
+         margin-bottom: 0; /* No agregar margen después del último item */
+     }
+
+     .form-group {
+         margin-bottom: 20px; /* Espacio entre grupos de formulario */
+     }
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/configuracion.css">
+    <script src="../assets/js/configuracion.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+        </button>
+
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <button class="close-menu" id="closeMenu" style="display:none; padding:0;">
+                <svg width="32" height="32" viewBox="0 0 32 32">
+                    <line x1="8" y1="8" x2="24" y2="24" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="24" y1="8" x2="8" y2="24" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contratos.html" class="nav-link">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link active">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Configuración del Sistema</h1>
+                <div class="user-info">
+                    <span>Bienvenido, Administrador</span>
+                </div>
+            </div>
+
+            <!-- Secciones de configuración -->
+            <div class="config-sections">
+                <!-- Configuración General -->
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <h2 class="card-title">Configuración General</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="generalConfig">
+                            <div class="form-group">
+                                <label for="nombreEmpresa" class="form-label">Nombre de la Empresa</label>
+                                <input type="text" id="nombreEmpresa" class="form-control" value="FotoStudio">
+                            </div>
+                            <div class="form-group">
+                                <label for="direccionEmpresa" class="form-label">Dirección</label>
+                                <input type="text" id="direccionEmpresa" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoEmpresa" class="form-label">Teléfono</label>
+                                <input type="tel" id="telefonoEmpresa" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailEmpresa" class="form-label">Correo Electrónico</label>
+                                <input type="email" id="emailEmpresa" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Configuración de Usuarios -->
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h2 class="card-title">Gestión de Usuarios</h2>
+                        <button class="btn btn-primary" id="btnNuevoUsuario">Nuevo Usuario</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                        <th>Último Acceso</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>admin</td>
+                                        <td>Administrador</td>
+                                        <td><span class="badge badge-success">Activo</span></td>
+                                        <td>2024-03-20 15:30</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning">Editar</button>
+                                            <button class="btn btn-sm btn-danger">Desactivar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configuración de Servicios -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h2 class="card-title">Servicios y Precios</h2>
+                        <button class="btn btn-primary" id="btnNuevoServicio">Nuevo Servicio</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Servicio</th>
+                                        <th>Precio Base</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Impresión Minilab</td>
+                                        <td>$50.00</td>
+                                        <td><span class="badge badge-success">Activo</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning">Editar</button>
+                                            <button class="btn btn-sm btn-danger">Desactivar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configuración de Notificaciones -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2 class="card-title">Configuración de Notificaciones</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="notificacionesConfig">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" checked> Alertas de Stock Bajo
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" checked> Notificaciones de Pedidos Nuevos
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" checked> Recordatorios de Entrega
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailNotificaciones" class="form-label">Correo para Notificaciones</label>
+                                <input type="email" id="emailNotificaciones" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</body>
+</html> 

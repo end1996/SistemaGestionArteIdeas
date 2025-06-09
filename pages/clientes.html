@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/clientes.css">
+    
+</head>
+<body>
+        <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link active">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contratos.html" class="nav-link">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Clientes</h1>
+                <button class="btn btn-primary" id="btnNuevoCliente">Nuevo Cliente</button>
+            </div>
+
+            <!-- Filtros de clientes -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2 class="card-title">Filtros</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroNombre" class="form-label">Nombre</label>
+                            <input type="text" id="filtroNombre" class="form-control" placeholder="Buscar por nombre">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="filtroTipo" class="form-label">Tipo de Cliente</label>
+                            <select id="filtroTipo" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="particular">Particular</option>
+                                <option value="colegio">Colegio</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Aplicar Filtros</button>
+                </div>
+            </div>
+
+            <!-- Tabla de clientes -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Listado de Clientes</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Contacto</th>
+                                <th>Nombre I.E</th>
+                                <th>Dirección</th>
+                                <th>Detalles Adicionales</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="ID">C001</td>
+                                <td data-label="Nombre">Valentina Olivos</td>
+                                <td data-label="Tipo">Colegio</td>
+                                <td data-label="Contacto">987654321</td>
+                                <td data-label="Nombre I.E"> I.E Gotitas</td>
+                                <td data-label="Dirección">Av. Lima 123</td>
+                                <td data-label="Detalles Adicionales">Aula patitos</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="ID">C002</td>
+                                <td data-label="Nombre">María López</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654322</td>
+                                <td data-label="Nombre I.E">-</td>
+                                <td data-label="Dirección">Jr. Cusco 456</td>
+                                <td data-label="Detalles Adicionales"> Cliente frecuente</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="ID">C003</td>
+                                <td data-label="Nombre">Arlond Villareal</td>
+                                <td data-label="Tipo">Colegio</td>
+                                <td data-label="Contacto">01-4562890</td>
+                                <td data-label="Nombre I.E">I.E San José</td>
+                                <td data-label="Dirección">Av. Arequipa 789</td>
+                                <td data-label="Detalles Adicionales">Grado 6-B</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="ID">C004</td>
+                                <td data-label="Nombre">Carlos Sánchez</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654324</td>
+                                <td data-label="Nombre I.E">-</td>
+                                <td data-label="Dirección">Calle Los Pinos 234</td>
+                                <td data-label="Detalles Adicionales">-</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="ID">C005</td>
+                                <td data-label="Nombre">Ana Gómez</td>
+                                <td data-label="Tipo">Particular</td>
+                                <td data-label="Contacto">987654325</td>
+                                <td data-label="Nombre I.E">-</td>
+                                <td data-label="Dirección">Jr. Las Flores 567</td>
+                                <td data-label="Detalles Adicionales">Cliente nuevo</td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-ver">Ver</button>
+                                    <button class="btn btn-sm btn-editar">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <div class="pagination" >
+                        <button class="btn btn-anterior">Anterior</button>
+                        <span>Página 1 de 2</span>
+                        <button class="btn btn-siguiente">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de nuevo cliente -->
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal" id="nuevoClienteModal">
+        <div class="modal-header">
+            <h3 class="modal-title">Nuevo Cliente</h3>
+            <button class="modal-close" id="cerrarModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="formNuevoCliente">
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" placeholder="Nombre completo">
+                </div>
+                <div class="form-group">
+                    <label for="tipoCliente" class="form-label">Tipo de Cliente</label>
+                    <select id="tipoCliente" class="form-control">
+                        <option value="particular">Particular</option>
+                        <option value="institucion">Institución Educativa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contacto" class="form-label">Contacto</label>
+                    <input type="text" id="contacto" class="form-control" placeholder="Teléfono o correo">
+                </div>
+                <div class="form-group" id="nombreIEGroup">
+                    <label for="nombreIE" class="form-label">Nombre de la I.E</label>
+                    <input type="text" id="nombreIE" class="form-control" placeholder="Nombre de la Institución Educativa">
+                </div>
+                <div class="form-group">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" id="direccion" class="form-control" placeholder="Dirección completa">
+                </div>
+                <div class="form-group">
+                    <label for="detallesAdicionales" class="form-label">Detalles Adicionales</label>
+                    <textarea id="detallesAdicionales" class="form-control" rows="2" placeholder="Detalles adicionales del cliente"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelarCliente">Cancelar</button>
+            <button class="btn btn-primary" id="guardarCliente">Guardar Cliente</button>
+        </div>
+    </div>
+
+    
+
+    <script>
+        // Control del menú móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('menu-active');
+        });
+
+        // Cerrar menú al hacer clic fuera (solo móvil)
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('menu-active');
+            }
+        });
+    </script>
+</body>
+</html> 
