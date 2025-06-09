@@ -249,6 +249,21 @@
                 menuToggle.classList.remove('menu-active');
             }
         });
+
+        document.getElementById('btnNuevoCliente').addEventListener('click', function() {
+            document.getElementById('nuevoClienteModal').style.display = 'block';
+            document.getElementById('modalBackdrop').style.display = 'block';
+        });
+
+        document.getElementById('cerrarModal').addEventListener('click', function() {
+            document.getElementById('nuevoClienteModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        });
+
+        document.getElementById('cancelarCliente').addEventListener('click', function() {
+            document.getElementById('nuevoClienteModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        });
     </script>
 </body>
 </html> 

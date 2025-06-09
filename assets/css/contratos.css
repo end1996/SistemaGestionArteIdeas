@@ -664,26 +664,25 @@ select.form-control {
     cursor: pointer;
 }
 
-.btn-primary {
-    background: #3b82f6;
-    color: white;
-    border: none;
+.btn-primary, .btn.btn-primary, .header-actions .btn.btn-primary, .form-actions .btn.btn-primary {
+    background: #345291 !important;
+    color: white !important;
+    border: none !important;
 }
 
-.btn-primary:hover {
-    background: #2563eb;
+.btn-primary:hover, .btn.btn-primary:hover, .header-actions .btn.btn-primary:hover, .form-actions .btn.btn-primary:hover {
+    background: #2a406e !important;
 }
 
-.btn-outline {
-    background: transparent;
-    border: 1px solid #e5e7eb;
-    color: #6b7280;
+.btn-outline, .btn.btn-outline, .form-actions .btn.btn-outline {
+    background: #a74a4a !important;
+    color: white !important;
+    border: none !important;
 }
 
-.btn-outline:hover {
-    border-color: #3b82f6;
-    color: #3b82f6;
-    background: rgba(59, 130, 246, 0.05);
+.btn-outline:hover, .btn.btn-outline:hover, .form-actions .btn.btn-outline:hover {
+    background: #913434 !important;
+    color: white !important;
 }
 
 @media (max-width: 768px) {
@@ -1110,20 +1109,23 @@ select.form-control {
 }
 
 .modal-close {
-    background: none;
+    background-color: #345291;
+    color: white;
     border: none;
-    color: #64748b;
-    cursor: pointer;
-    padding: 0.5rem;
-    font-size: 1.25rem;
-    transition: color 0.2s;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s;
 }
 
 .modal-close:hover {
-    color: #ef4444;
+    background-color: #2a406e;
 }
 
 .modal-body {

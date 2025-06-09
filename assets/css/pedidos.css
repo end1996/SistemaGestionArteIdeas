@@ -399,3 +399,23 @@
             }
     }
     
+.modal-close {
+    background-color: #345291;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s;
+}
+
+.modal-close:hover {
+    background-color: #2a406e;
+}
+    

@@ -227,7 +227,30 @@ th.acciones, td.actions {
     width: 80px;
     margin-bottom: 4px;
   }
-  
+  .modal {
+    width: 95% !important;
+    max-width: none !important;
+    margin: 20px auto !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    padding: 0 !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  .modal-header, .modal-footer {
+    padding: 12px !important;
+    border-radius: 10px 10px 0 0 !important;
+  }
+  .modal-body {
+    padding: 10px !important;
+  }
+  .modal-footer {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .modal-footer button {
+    width: 100% !important;
+  }
 }
 @media screen and (max-width: 316px) {
   .btn-anterior{
@@ -660,7 +683,9 @@ th.acciones, td.actions {
 
 /* Estilo para evitar el scroll en el body cuando el modal está abierto */
 body.no-scroll {
-    overflow: hidden;
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100vw;
 }
 
 /* Responsive adjustments for the modal */
@@ -670,6 +695,7 @@ body.no-scroll {
         margin: 20px auto; /* Centrar y dar un pequeño margen */
         max-height: 90vh; /* Limitar altura y permitir scroll interno */
         overflow-y: auto; /* Habilitar scroll si el contenido es largo */
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25) !important;
     }
 
     .modal-body {
@@ -740,4 +766,9 @@ body.no-scroll {
      .form-group {
          margin-bottom: 20px; /* Espacio entre grupos de formulario */
      }
+}
+
+.modal {
+    max-height: 90vh;
+    overflow-y: auto;
 }

@@ -702,5 +702,18 @@
             return materiales;
         }
     </script>
+
+    <script>
+        // ... existing code ...
+        document.getElementById('cerrarModal').addEventListener('click', () => {
+            document.getElementById('nuevoPedidoModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        });
+        document.getElementById('cancelarPedido').addEventListener('click', () => {
+            document.getElementById('nuevoPedidoModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        });
+        // ... existing code ...
+    </script>
 </body>
 </html> 

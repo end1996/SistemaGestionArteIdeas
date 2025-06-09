@@ -314,14 +314,19 @@
     </div>
     <script>
         // Aquí puedes agregar la lógica JS para abrir/cerrar el modal y manejar el formulario
-        function cerrarModal() {
-            document.getElementById('ordenModal').style.display = 'none';
-            document.getElementById('modalBackdrop').style.display = 'none';
-        }
-        document.getElementById('btnNuevaOrden').onclick = function() {
+        const abrirModalProduccion = function() {
             document.getElementById('ordenModal').style.display = 'block';
             document.getElementById('modalBackdrop').style.display = 'block';
+            document.body.classList.add('no-scroll');
         };
+        const cerrarModalProduccion = function() {
+            document.getElementById('ordenModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        };
+        document.getElementById('btnNuevaOrden').onclick = abrirModalProduccion;
+        document.querySelector('.modal-close').addEventListener('click', cerrarModalProduccion);
+        document.querySelector('.modal-footer .btn.btn-secondary').addEventListener('click', cerrarModalProduccion);
 
         // Lógica para abrir/cerrar la sidebar en móvil sin superponer el contenido
         const menuToggle = document.getElementById('menuToggle');
