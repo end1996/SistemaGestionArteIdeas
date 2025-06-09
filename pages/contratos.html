@@ -897,5 +897,67 @@
     </div>
 
     <script src="../assets/js/contratos.js"></script>
+    <script>
+    // Lógica de filtrado de contratos (en la pestaña Contratos Generales)
+    function aplicarFiltrosContratos() {
+        // Obtener valores de los filtros
+        const filtroTexto = document.querySelector('.filtros-section input[type="text"]').value.toLowerCase();
+        const filtroServicio = document.querySelector('.filtros-section select').value;
+        const filtroEstado = document.querySelectorAll('.filtros-section select')[1].value;
+        // Filas de ambas tablas (Clientes Frecuentes y Clientes Nuevos)
+        const tablas = document.querySelectorAll('.tabla-contratos tbody');
+        tablas.forEach(tbody => {
+            const filas = tbody.querySelectorAll('tr');
+            filas.forEach(fila => {
+                // Cliente
+                const cliente = fila.querySelector('.cliente-nombre')?.textContent.toLowerCase() || '';
+                // Servicio
+                const servicio = fila.children[1]?.textContent.toLowerCase() || '';
+                // Estado (badge)
+                const estadoBadge = fila.querySelector('.estado-badge');
+                const estado = estadoBadge ? estadoBadge.textContent.toLowerCase() : '';
+                let mostrar = true;
+                if (filtroTexto && !cliente.includes(filtroTexto) && !servicio.includes(filtroTexto)) {
+                    mostrar = false;
+                }
+                if (filtroServicio && !servicio.includes(filtroServicio)) {
+                    mostrar = false;
+                }
+                if (filtroEstado && !estado.includes(filtroEstado)) {
+                    mostrar = false;
+                }
+                fila.style.display = mostrar ? '' : 'none';
+            });
+        });
+    }
+    // Asignar evento al botón de aplicar filtros
+    const btnAplicarFiltros = document.querySelector('.filtro-actions .btn.btn-primary');
+    if (btnAplicarFiltros) {
+        btnAplicarFiltros.addEventListener('click', aplicarFiltrosContratos);
+    }
+    // Lógica para limpiar filtros y mostrar todos los contratos
+    function limpiarFiltrosContratos() {
+        // Limpiar campos de filtro
+        document.querySelector('.filtros-section input[type="text"]').value = '';
+        document.querySelector('.filtros-section select').selectedIndex = 0;
+        document.querySelectorAll('.filtros-section select')[1].selectedIndex = 0;
+        if(document.querySelector('.filtros-section input[type="date"]')){
+            document.querySelector('.filtros-section input[type="date"]').value = '';
+        }
+        // Mostrar todas las filas de ambas tablas
+        const tablas = document.querySelectorAll('.tabla-contratos tbody');
+        tablas.forEach(tbody => {
+            const filas = tbody.querySelectorAll('tr');
+            filas.forEach(fila => {
+                fila.style.display = '';
+            });
+        });
+    }
+    // Asignar evento al botón de limpiar filtros
+    const btnLimpiarFiltros = document.querySelector('.filtro-actions .btn.btn-outline');
+    if (btnLimpiarFiltros) {
+        btnLimpiarFiltros.addEventListener('click', limpiarFiltrosContratos);
+    }
+    </script>
 </body>
 </html> 

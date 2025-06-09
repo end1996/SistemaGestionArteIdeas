@@ -264,6 +264,32 @@
             document.getElementById('nuevoClienteModal').style.display = 'none';
             document.getElementById('modalBackdrop').style.display = 'none';
         });
+
+        // Lógica de filtrado de clientes
+        function aplicarFiltrosClientes() {
+            const filtroNombre = document.getElementById('filtroNombre').value.toLowerCase();
+            const filtroTipo = document.getElementById('filtroTipo').value;
+            const filas = document.querySelectorAll('.table tbody tr');
+
+            filas.forEach(fila => {
+                const nombre = fila.children[1].textContent.toLowerCase();
+                const tipo = fila.children[2].textContent.toLowerCase();
+                let mostrar = true;
+
+                if (filtroNombre && !nombre.includes(filtroNombre)) {
+                    mostrar = false;
+                }
+                if (filtroTipo && tipo !== filtroTipo) {
+                    mostrar = false;
+                }
+                fila.style.display = mostrar ? '' : 'none';
+            });
+        }
+        // Asignar evento al botón de aplicar filtros
+        const btnAplicarFiltros = document.querySelector('.card.mb-3 .btn.btn-primary');
+        if (btnAplicarFiltros) {
+            btnAplicarFiltros.addEventListener('click', aplicarFiltrosClientes);
+        }
     </script>
 </body>
 </html> 

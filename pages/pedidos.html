@@ -715,5 +715,42 @@
         });
         // ... existing code ...
     </script>
+
+    <script>
+    // Lógica de filtrado de pedidos
+    function aplicarFiltrosPedidos() {
+        const filtroCliente = document.getElementById('filtroCliente').value.toLowerCase();
+        const filtroServicio = document.getElementById('filtroServicio').value;
+        const filtroEstado = document.getElementById('filtroEstado').value;
+        const filas = document.querySelectorAll('.table tbody tr');
+
+        filas.forEach(fila => {
+            const cliente = fila.children[1].textContent.toLowerCase();
+            const servicio = fila.children[2].textContent;
+            const estado = fila.children[3].textContent.toLowerCase();
+            let mostrar = true;
+
+            if (filtroCliente && !cliente.includes(filtroCliente)) {
+                mostrar = false;
+            }
+            if (filtroServicio && !servicio.toLowerCase().includes(filtroServicio)) {
+                mostrar = false;
+            }
+            if (filtroEstado) {
+                // Buscar el texto del estado dentro del span
+                const estadoSpan = fila.children[3].querySelector('span');
+                if (!estadoSpan || !estadoSpan.textContent.toLowerCase().includes(filtroEstado)) {
+                    mostrar = false;
+                }
+            }
+            fila.style.display = mostrar ? '' : 'none';
+        });
+    }
+    // Asignar evento al botón de aplicar filtros
+    const btnAplicarFiltros = document.querySelector('.form-group.text-right .btn.btn-primary');
+    if (btnAplicarFiltros) {
+        btnAplicarFiltros.addEventListener('click', aplicarFiltrosPedidos);
+    }
+    </script>
 </body>
 </html> 

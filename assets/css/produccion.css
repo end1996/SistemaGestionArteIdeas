@@ -59,10 +59,11 @@ th.acciones, td.actions {
 }
 .actions {
   display: flex;
-  justify-content: flex-end;
-  text-align: right;
+  justify-content: flex-start;
+  text-align: left;
   align-items: center;
   gap: 8px;
+  padding-left: 8px;
 }
 .btn-siguiente,
 .btn-anterior{
@@ -215,11 +216,9 @@ th.acciones, td.actions {
     text-align: center;
   }
   .actions {
-    justify-content: center !important;
-    text-align: center !important;
-    gap: 8px;
-    padding-left: 0;
-    flex-wrap: wrap;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding-left: 8px !important;
     width: 100%;
   }
   .actions .btn {
