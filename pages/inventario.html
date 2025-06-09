@@ -1,918 +1,172 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gestión de Inventario - Sistema de Gestión Fotográfica</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/inventario.css">
-   
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inventario de Molduras</title>
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  
+  <!-- Estilos principales del sistema -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/agenda.css" />
+  <style>
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    form input, form button {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .table-wrapper {
+      flex: 1 1 45%;
+    }
+
+    @media (max-width: 800px) {
+      .flex-container {
+        flex-direction: column;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+  <script src="../assets/js/agenda.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Botón de menú hamburguesa para móvil -->
-        <button class="menu-toggle" id="menuToggle" style="display:none;">
-            <span class="menu-icon"></span>
-        </button>
-        <script>
-        // Mostrar el botón solo en móvil
-        if (window.innerWidth <= 768) {
-            document.getElementById('menuToggle').style.display = 'block';
-        }
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 768) {
-                document.getElementById('menuToggle').style.display = 'block';
-            } else {
-                document.getElementById('menuToggle').style.display = 'none';
-            }
-        });
-        </script>
-        <!-- Menú lateral -->
-        <div class="sidebar">
-            <div class="logo">FotoStudio</div>
-            <button class="close-menu" id="closeMenu" style="display:none;">&times;</button>
-            <nav class="nav-menu">
-                <ul>
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pedidos.html" class="nav-link">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="clientes.html" class="nav-link">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contratos.html" class="nav-link">Contratos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="inventario.html" class="nav-link active">Inventario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="produccion.html" class="nav-link">Producción</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="agenda.html" class="nav-link">Agenda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="reportes.html" class="nav-link">Reportes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="configuracion.html" class="nav-link">Configuración</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+  <div class="container agenda-page">
+    <!-- Botón de menú para móvil -->
+    <button class="menu-toggle" id="menuToggle">
+      <span class="menu-icon"></span>
+    </button>
 
-        <div class="main-content">
-            <div class="header">
-                <h1>Gestión de Inventario</h1>
-                <div class="header-buttons">
-                    <button class="btn btn-nuevo" id="btnNuevoProducto">
-                        <i class="fas fa-plus"></i> Nuevo Producto
-                    </button>
-                </div>
-            </div>
-
-            <!-- Panel de Control de Inventario -->
-            <div class="inventory-dashboard">
-                <div class="dashboard-card stock-alerts">
-                    <div class="card-header">
-                        <h2>Alertas de Stock</h2>
-                    </div>
-                    <div class="alert-list" id="alertasStock">
-                        <!-- Las alertas se generarán dinámicamente -->
-                    </div>
-                </div>
-
-                <div class="dashboard-card stock-summary">
-                    <div class="card-header">
-                        <h2>Resumen de Stock</h2>
-                    </div>
-                    <div class="summary-grid">
-                        <div class="summary-item">
-                            <span class="summary-icon">📄</span>
-                            <div class="summary-info">
-                                <h3>Papel Fotográfico</h3>
-                                <p>30 unidades total</p>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 60%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-icon">🧪</span>
-                            <div class="summary-info">
-                                <h3>Químicos</h3>
-                                <p>14 litros total</p>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 40%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-icon">🖼️</span>
-                            <div class="summary-info">
-                                <h3>Marcos</h3>
-                                <p>18 unidades total</p>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección de Movimientos de Inventario -->
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h2>Movimientos de Inventario</h2>
-                    <button class="btn btn-movimiento" id="btnMovimiento">
-                        <i class="fas fa-exchange-alt"></i> Registrar Movimiento
-                    </button>
-                </div>
-                <div class="movements-timeline">
-                    <div class="timeline-item entrada">
-                        <div class="timeline-icon">
-                            <i class="fas fa-arrow-down"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h4>Entrada de Material</h4>
-                            <p>Papel fotográfico 10x15 - 50 unidades</p>
-                            <span class="timeline-date">15/04/2023</span>
-                            <span class="timeline-reference">Ref: PED-001</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item salida">
-                        <div class="timeline-icon">
-                            <i class="fas fa-arrow-up"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h4>Salida de Material</h4>
-                            <p>Químico Revelador - 2 litros</p>
-                            <span class="timeline-date">14/04/2023</span>
-                            <span class="timeline-reference">Ref: PROD-002</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tabla de productos -->
-            <div class="card">
-                <div class="card-header">
-                    <h2>Catálogo de Productos</h2>
-                    <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Buscar producto..." class="form-control">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="filter-group">
-                            <select class="form-control">
-                                <option value="">Tipo de Producto</option>
-                                <option value="papel">Papel Fotográfico</option>
-                                <option value="quimico">Químicos</option>
-                                <option value="marco">Marcos</option>
-                                <option value="otros">Otros Materiales</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Categoría</th>
-                                <th>Unidad</th>
-                                <th>Stock Actual</th>
-                                <th>Stock Mínimo</th>
-                                <th>Última Actualización</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>P001</td>
-                                <td>Papel fotográfico 10x15</td>
-                                <td>Papel</td>
-                                <td>Unidad</td>
-                                <td><span class="badge badge-danger">5</span></td>
-                                <td>10</td>
-                                <td>15/04/2023</td>
-                                <td><span class="badge badge-warning">Stock Bajo</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-ver">Ver</button>
-                                    <button class="btn btn-sm btn-editar">Editar</button>
-                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>P002</td>
-                                <td>Químico Revelador</td>
-                                <td>Químico</td>
-                                <td>Litro</td>
-                                <td><span class="badge badge-warning">2</span></td>
-                                <td>5</td>
-                                <td>14/04/2023</td>
-                                <td><span class="badge badge-warning">Stock Bajo</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-ver">Ver</button>
-                                    <button class="btn btn-sm btn-editar">Editar</button>
-                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>P003</td>
-                                <td>Varillas de Marco Tipo A</td>
-                                <td>Marco</td>
-                                <td>Unidad</td>
-                                <td><span class="badge badge-danger">3</span></td>
-                                <td>15</td>
-                                <td>15/04/2023</td>
-                                <td><span class="badge badge-warning">Stock Bajo</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-ver">Ver</button>
-                                    <button class="btn btn-sm btn-editar">Editar</button>
-                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>P004</td>
-                                <td>Papel fotográfico 13x18</td>
-                                <td>Papel</td>
-                                <td>Unidad</td>
-                                <td><span class="badge badge-success">25</span></td>
-                                <td>10</td>
-                                <td>15/04/2023</td>
-                                <td><span class="badge badge-success">Stock Suficiente</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-ver">Ver</button>
-                                    <button class="btn btn-sm btn-editar">Editar</button>
-                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>P005</td>
-                                <td>Químico Fijador</td>
-                                <td>Químico</td>
-                                <td>Litro</td>
-                                <td><span class="badge badge-success">12</span></td>
-                                <td>5</td>
-                                <td>15/04/2023</td>
-                                <td><span class="badge badge-success">Stock Suficiente</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-sm btn-ver">Ver</button>
-                                    <button class="btn btn-sm btn-editar">Editar</button>
-                                    <button class="btn btn-sm btn-reposicion">Reposición</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer text-right">
-                    <div class="pagination">
-                        <button class="btn btn-anterior">Anterior</button>
-                        <span>Página 1 de 2</span>
-                        <button class="btn  btn-siguiente">Siguiente</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Menú lateral -->
+    <div class="sidebar" id="sidebar">
+      <div class="logo">FotoStudio</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="pedidos.html" class="nav-link">Pedidos</a></li>
+          <li class="nav-item"><a href="clientes.html" class="nav-link">Clientes</a></li>
+          <li class="nav-item"><a href="contratos.html" class="nav-link">Contratos</a></li>
+          <li class="nav-item"><a href="inventario.html" class="nav-link active">Inventario</a></li>
+          <li class="nav-item"><a href="produccion.html" class="nav-link">Producción</a></li>
+          <li class="nav-item"><a href="agenda.html" class="nav-link">Agenda</a></li>
+          <li class="nav-item"><a href="reportes.html" class="nav-link">Reportes</a></li>
+          <li class="nav-item"><a href="configuracion.html" class="nav-link">Configuración</a></li>
+          <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesión</a></li>
+        </ul>
+      </nav>
     </div>
 
-    <!-- Modal de registro de movimiento -->
-    <div class="modal-backdrop" id="movimientoModalBackdrop" style="display:none;"></div>
-    <div class="modal" id="movimientoModal" style="display:none;">
-        <div class="modal-header">
-            <h3 class="modal-title">Registrar Movimiento de Inventario</h3>
-            <button class="modal-close" id="cerrarModalMovimiento">&times;</button>
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <h2>Formulario de Moldura</h2>
+
+      <form>
+        <input type="text" placeholder="Nombre de Moldura" required>
+        <input type="text" placeholder="Color" required>
+        <input type="text" placeholder="Material" required>
+        <input type="number" step="0.1" placeholder="Ancho (cm)" required>
+        <input type="text" placeholder="Estilo" required>
+        <input type="number" placeholder="Cantidad" required>
+        <button type="submit">Agregar</button>
+      </form>
+
+      <div class="flex-container">
+        <!-- Tabla: Inventario -->
+        <div class="table-wrapper">
+          <h3>Inventario de Molduras</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Color</th>
+                <th>Material</th>
+                <th>Ancho (cm)</th>
+                <th>Estilo</th>
+                <th>Cantidad Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Molde Clásico 12A</td>
+                <td>Nogal Oscuro</td>
+                <td>Madera</td>
+                <td>3.5</td>
+                <td>Clásico</td>
+                <td>785</td>
+              </tr>
+              <!-- Agrega más si deseas -->
+            </tbody>
+          </table>
         </div>
-        <div class="modal-body">
-            <form id="formMovimiento">
-                <div class="form-group">
-                    <label for="productoMovimiento" class="form-label">Producto</label>
-                    <select id="productoMovimiento" class="form-control">
-                        <option value="">Seleccione producto</option>
-                        <option value="1">Papel fotográfico 10x15</option>
-                        <option value="2">Químico Revelador</option>
-                        <option value="3">Varillas de Marco Tipo A</option>
-                        <option value="4">Papel fotográfico 13x18</option>
-                        <option value="5">Químico Fijador</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tipoMovimiento" class="form-label">Tipo de Movimiento</label>
-                    <select id="tipoMovimiento" class="form-control">
-                        <option value="entrada">Entrada</option>
-                        <option value="salida">Salida</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="cantidad" class="form-label">Cantidad</label>
-                    <input type="number" id="cantidad" class="form-control" min="1">
-                </div>
-                <div class="form-group">
-                    <label for="fechaMovimiento" class="form-label">Fecha</label>
-                    <input type="date" id="fechaMovimiento" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="referencia" class="form-label">Referencia</label>
-                    <input type="text" id="referencia" class="form-control" placeholder="Pedido, Factura, etc.">
-                </div>
-                <div class="form-group">
-                    <label for="notasMovimiento" class="form-label">Notas</label>
-                    <textarea id="notasMovimiento" class="form-control" rows="2" placeholder="Notas adicionales"></textarea>
-                </div>
-            </form>
+
+        <!-- Tabla: Stock actual -->
+        <div class="table-wrapper">
+          <h3>Stock Actual en Almacén</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Molde Clásico 12A</td>
+                <td>93</td>
+              </tr>
+              <!-- Agrega más si deseas -->
+            </tbody>
+          </table>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" id="cancelarMovimiento">Cancelar</button>
-            <button class="btn btn-primary" id="guardarMovimiento">Registrar Movimiento</button>
-        </div>
+      </div>
     </div>
-
-    <!-- Modal de nuevo producto -->
-    <div class="modal-backdrop" id="nuevoProductoModalBackdrop" style="display:none;"></div>
-    <div class="modal" id="nuevoProductoModal" style="display:none;">
-        <div class="modal-header">
-            <h3 class="modal-title">Nuevo Producto</h3>
-            <button class="modal-close" id="cerrarModalNuevoProducto">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="formNuevoProducto">
-                <div class="form-group">
-                    <label for="nombreProducto">Nombre del Producto</label>
-                    <input type="text" id="nombreProducto" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="categoriaProducto">Categoría</label>
-                    <select id="categoriaProducto" class="form-control" required>
-                        <option value="">Seleccione categoría</option>
-                        <option value="papel">Papel Fotográfico</option>
-                        <option value="quimico">Químicos</option>
-                        <option value="marco">Marcos</option>
-                        <option value="otros">Otros Materiales</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="unidadProducto">Unidad de Medida</label>
-                    <select id="unidadProducto" class="form-control" required>
-                        <option value="unidad">Unidad</option>
-                        <option value="litro">Litro</option>
-                        <option value="metro">Metro</option>
-                        <option value="kg">Kilogramo</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="stockMinimo">Stock Mínimo</label>
-                    <input type="number" id="stockMinimo" class="form-control" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="stockInicial">Stock Inicial</label>
-                    <input type="number" id="stockInicial" class="form-control" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="proveedor">Proveedor Principal</label>
-                    <input type="text" id="proveedor" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="observaciones">Observaciones</label>
-                    <textarea id="observaciones" class="form-control" rows="3"></textarea>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Guardar</button>
-        </div>
-    </div>
-
-    <script>
-        // Variables para el control del scroll
-        let lastScrollTop = 0;
-        const menuHeader = document.querySelector('.menu-header');
-
-        // Función para manejar el scroll
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop) {
-                // Scroll hacia abajo
-                menuHeader.classList.add('hide');
-            } else {
-                // Scroll hacia arriba
-                menuHeader.classList.remove('hide');
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-
-        // Control del menú móvil
-        const menuToggle = document.getElementById('menuToggle');
-        const closeMenu = document.getElementById('closeMenu');
-        const sidebar = document.querySelector('.sidebar');
-
-        // Lógica para mostrar/ocultar el botón del menú móvil según el ancho de la ventana
-        function checkMobileView() {
-            if (window.innerWidth <= 768) {
-                menuToggle.style.display = 'block';
-            } else {
-                menuToggle.style.display = 'none';
-            }
-        }
-
-        // Ejecutar al cargar y al redimensionar
-        checkMobileView();
-        window.addEventListener('resize', checkMobileView);
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            menuToggle.classList.toggle('menu-active');
-            if (sidebar.classList.contains('active')) {
-                closeMenu.style.display = 'block';
-                menuToggle.style.display = 'none';
-            } else {
-                closeMenu.style.display = 'none';
-                menuToggle.style.display = 'block';
-            }
-        });
-
-        closeMenu.addEventListener('click', function() {
-            sidebar.classList.remove('active');
-            menuToggle.classList.remove('menu-active');
-            closeMenu.style.display = 'none';
-            menuToggle.style.display = 'block';
-        });
-
-        // Lógica para abrir/cerrar el modal de movimiento de inventario
-        const btnMovimiento = document.getElementById('btnMovimiento');
-        const movimientoModal = document.getElementById('movimientoModal');
-        const movimientoModalBackdrop = document.getElementById('movimientoModalBackdrop');
-        const cerrarModalMovimiento = document.getElementById('cerrarModalMovimiento');
-        const cancelarMovimiento = document.getElementById('cancelarMovimiento');
-
-        function abrirMovimientoModal() {
-            movimientoModal.style.display = 'block';
-            movimientoModalBackdrop.style.display = 'block';
-        }
-
-        function cerrarMovimientoModal() {
-            movimientoModal.style.display = 'none';
-            movimientoModalBackdrop.style.display = 'none';
-        }
-
-        btnMovimiento.addEventListener('click', abrirMovimientoModal);
-        cerrarModalMovimiento.addEventListener('click', cerrarMovimientoModal);
-        cancelarMovimiento.addEventListener('click', cerrarMovimientoModal);
-
-        // Cerrar modal de movimiento haciendo clic fuera de él (en el backdrop)
-        movimientoModalBackdrop.addEventListener('click', cerrarMovimientoModal);
-
-        // Lógica para abrir/cerrar el modal de nuevo producto
-        const btnNuevoProducto = document.getElementById('btnNuevoProducto');
-        const nuevoProductoModal = document.getElementById('nuevoProductoModal');
-        const nuevoProductoModalBackdrop = document.getElementById('nuevoProductoModalBackdrop'); // Usar el backdrop específico para este modal
-        const cerrarModalNuevoProducto = document.getElementById('cerrarModalNuevoProducto');
-        const cancelarProducto = document.getElementById('cancelarProducto');
-        const guardarProducto = document.getElementById('guardarProducto');
-
-        function abrirNuevoProductoModal() {
-            nuevoProductoModal.style.display = 'block';
-            nuevoProductoModalBackdrop.style.display = 'block';
-        }
-
-        function cerrarNuevoProductoModal() {
-            nuevoProductoModal.style.display = 'none';
-            nuevoProductoModalBackdrop.style.display = 'none';
-        }
-
-        btnNuevoProducto.addEventListener('click', abrirNuevoProductoModal);
-        cerrarModalNuevoProducto.addEventListener('click', cerrarNuevoProductoModal);
-        cancelarProducto.addEventListener('click', cerrarNuevoProductoModal);
-
-        // Cerrar modal de nuevo producto haciendo clic fuera de él (en el backdrop)
-        nuevoProductoModalBackdrop.addEventListener('click', cerrarNuevoProductoModal);
-
-        // Funciones para gestionar el inventario
-        function actualizarAlertasStock() {
-            const alertas = obtenerAlertasStock();
-            const contenedorAlertas = document.getElementById('alertasStock');
-            contenedorAlertas.innerHTML = '';
-            
-            alertas.forEach(alerta => {
-                const alertaElement = crearElementoAlerta(alerta);
-                contenedorAlertas.appendChild(alertaElement);
-            });
-        }
-
-        function crearElementoAlerta(alerta) {
-            const div = document.createElement('div');
-            div.className = `alert alert-${alerta.tipo}`;
-            
-            div.innerHTML = `
-                <i class="fas fa-${alerta.tipo === 'danger' ? 'exclamation-circle' : 'exclamation-triangle'}"></i>
-                <div class="alert-content">
-                    <strong>${alerta.titulo}</strong>
-                    <p>${alerta.mensaje}</p>
-                    <button class="btn btn-sm btn-primary" onclick="solicitarReposicion('${alerta.productoId}')">
-                        Solicitar Reposición
-                    </button>
-                </div>
-            `;
-            
-            return div;
-        }
-
-        function solicitarReposicion(productoId) {
-            // Obtener información del producto
-            const producto = obtenerProducto(productoId);
-            
-            // Calcular cantidad necesaria
-            const cantidadNecesaria = calcularCantidadReposicion(producto);
-            
-            // Crear solicitud de reposición
-            crearSolicitudReposicion(producto, cantidadNecesaria);
-            
-            // Actualizar alertas
-            actualizarAlertasStock();
-        }
-
-        function calcularCantidadReposicion(producto) {
-            // Obtener pedidos pendientes que usan este producto
-            const pedidosPendientes = obtenerPedidosPendientesPorProducto(producto.id);
-            
-            // Calcular demanda futura
-            const demandaFutura = pedidosPendientes.reduce((total, pedido) => {
-                return total + pedido.cantidad;
-            }, 0);
-            
-            // Calcular stock óptimo (demanda futura + stock mínimo)
-            return demandaFutura + producto.stockMinimo;
-        }
-
-        function actualizarMovimientosInventario() {
-            const movimientos = obtenerMovimientosInventario();
-            const contenedorMovimientos = document.querySelector('.movements-timeline');
-            contenedorMovimientos.innerHTML = '';
-            
-            movimientos.forEach(movimiento => {
-                const movimientoElement = crearElementoMovimiento(movimiento);
-                contenedorMovimientos.appendChild(movimientoElement);
-            });
-        }
-
-        function crearElementoMovimiento(movimiento) {
-            const div = document.createElement('div');
-            div.className = `timeline-item ${movimiento.tipo}`;
-            
-            div.innerHTML = `
-                <div class="timeline-icon">
-                    <i class="fas fa-${movimiento.tipo === 'entrada' ? 'arrow-down' : 'arrow-up'}"></i>
-                </div>
-                <div class="timeline-content">
-                    <h4>${movimiento.tipo === 'entrada' ? 'Entrada' : 'Salida'} de Material</h4>
-                    <p>${movimiento.producto} - ${movimiento.cantidad} ${movimiento.unidad}</p>
-                    <span class="timeline-date">${movimiento.fecha}</span>
-                    <span class="timeline-reference">Ref: ${movimiento.referencia}</span>
-                </div>
-            `;
-            
-            return div;
-        }
-
-        // Funciones simuladas para obtener datos
-        function obtenerAlertasStock() {
-            // Simular consulta a base de datos
-            return [
-                {
-                    tipo: 'danger',
-                    titulo: 'Stock Crítico',
-                    mensaje: 'Papel fotográfico 10x15 (5 unidades restantes)',
-                    productoId: 'P001'
-                },
-                {
-                    tipo: 'warning',
-                    titulo: 'Stock Bajo',
-                    mensaje: 'Químico Revelador (2 litros restantes)',
-                    productoId: 'P002'
-                }
-            ];
-        }
-
-        function obtenerProducto(productoId) {
-            // Simular consulta a base de datos
-            return {
-                id: productoId,
-                nombre: 'Papel fotográfico 10x15',
-                stockActual: 5,
-                stockMinimo: 10,
-                unidad: 'unidad'
-            };
-        }
-
-        function obtenerPedidosPendientesPorProducto(productoId) {
-            // Simular consulta a base de datos
-            return [
-                { id: 'P001', cantidad: 50 },
-                { id: 'P002', cantidad: 30 }
-            ];
-        }
-
-        function obtenerMovimientosInventario() {
-            // Simular consulta a base de datos
-            return [
-                {
-                    tipo: 'entrada',
-                    producto: 'Papel fotográfico 10x15',
-                    cantidad: 50,
-                    unidad: 'unidades',
-                    fecha: '15/04/2023',
-                    referencia: 'PED-001'
-                },
-                {
-                    tipo: 'salida',
-                    producto: 'Químico Revelador',
-                    cantidad: 2,
-                    unidad: 'litros',
-                    fecha: '14/04/2023',
-                    referencia: 'PROD-002'
-                }
-            ];
-        }
-
-        // Inicializar estado del inventario
-        document.addEventListener('DOMContentLoaded', () => {
-            actualizarAlertasStock();
-            actualizarMovimientosInventario();
-        });
-
-        // Función para actualizar inventario
-        async function actualizarInventario(movimiento) {
-            try {
-                // 1. Verificar stock disponible
-                if (movimiento.tipo === 'salida') {
-                    const stockDisponible = await verificarStockDisponible(movimiento.producto, movimiento.cantidad);
-                    if (!stockDisponible) {
-                        alert('No hay suficiente stock disponible');
-                        return;
-                    }
-                }
-
-                // 2. Registrar movimiento
-                await registrarMovimiento(movimiento);
-                
-                // 3. Actualizar stock
-                await actualizarStock(movimiento);
-                
-                // 4. Verificar alertas
-                await verificarAlertasStock();
-                
-                // 5. Actualizar interfaz
-                actualizarTablaProductos();
-                actualizarResumenStock();
-                
-                alert('Movimiento registrado exitosamente');
-            } catch (error) {
-                console.error('Error al actualizar inventario:', error);
-                alert('Error al actualizar el inventario');
-            }
-        }
-
-        // Función para verificar stock disponible
-        async function verificarStockDisponible(producto, cantidad) {
-            // Simular verificación de stock
-            return true; // En producción real, esto consultaría la base de datos
-        }
-
-        // Función para registrar movimiento
-        async function registrarMovimiento(movimiento) {
-            // Simular registro de movimiento
-            console.log('Registrando movimiento:', movimiento);
-        }
-
-        // Función para actualizar stock
-        async function actualizarStock(movimiento) {
-            // Simular actualización de stock
-            console.log('Actualizando stock:', movimiento);
-        }
-
-        // Función para verificar alertas de stock
-        async function verificarAlertasStock() {
-            try {
-                // 1. Obtener productos con stock bajo
-                const productosStockBajo = await obtenerProductosStockBajo();
-                
-                // 2. Obtener pedidos pendientes
-                const pedidosPendientes = await obtenerPedidosPendientes();
-                
-                // 3. Calcular demanda futura
-                const demandaFutura = calcularDemandaFutura(productosStockBajo, pedidosPendientes);
-                
-                // 4. Generar alertas con sugerencias
-                if (productosStockBajo.length > 0) {
-                    mostrarAlertasStock(productosStockBajo, demandaFutura);
-                }
-                
-                // 5. Actualizar resumen
-                actualizarResumenStock();
-            } catch (error) {
-                console.error('Error al verificar alertas de stock:', error);
-            }
-        }
-
-        // Función mejorada para calcular demanda futura
-        function calcularDemandaFutura(productos, pedidosPendientes) {
-            const demanda = {};
-            
-            productos.forEach(producto => {
-                // 1. Calcular demanda de pedidos pendientes
-                const demandaPedidos = pedidosPendientes.reduce((total, pedido) => {
-                    const cantidad = pedido.materiales.find(m => m.id === producto.id)?.cantidad || 0;
-                    return total + cantidad;
-                }, 0);
-                
-                // 2. Calcular demanda histórica (últimos 3 meses)
-                const demandaHistorica = calcularDemandaHistorica(producto.id);
-                
-                // 3. Calcular tendencia de crecimiento
-                const tendencia = calcularTendenciaCrecimiento(producto.id);
-                
-                // 4. Calcular stock óptimo
-                const stockOptimo = Math.max(
-                    demandaPedidos * 1.2, // 20% más que la demanda actual
-                    demandaHistorica * 1.1, // 10% más que la demanda histórica
-                    producto.stockMinimo * 2 // Doble del stock mínimo
-                );
-                
-                // 5. Ajustar según tendencia
-                const demandaFinal = Math.ceil(stockOptimo * (1 + tendencia));
-                
-                demanda[producto.id] = demandaFinal;
-            });
-            
-            return demanda;
-        }
-
-        // Función para calcular demanda histórica
-        function calcularDemandaHistorica(productoId) {
-            // Simular consulta de demanda histórica
-            const demandaMensual = {
-                'P001': [100, 120, 150], // Últimos 3 meses
-                'P002': [50, 45, 60],
-                'P003': [30, 35, 40]
-            };
-            
-            const demandas = demandaMensual[productoId] || [0, 0, 0];
-            return Math.ceil(demandas.reduce((a, b) => a + b, 0) / demandas.length);
-        }
-
-        // Función para calcular tendencia de crecimiento
-        function calcularTendenciaCrecimiento(productoId) {
-            // Simular cálculo de tendencia
-            const tendencias = {
-                'P001': 0.15, // 15% de crecimiento
-                'P002': 0.05, // 5% de crecimiento
-                'P003': 0.10  // 10% de crecimiento
-            };
-            
-            return tendencias[productoId] || 0;
-        }
-
-        // Función mejorada para mostrar alertas
-        function mostrarAlertasStock(productos, demandaFutura) {
-            const contenedorAlertas = document.getElementById('alertasStock');
-            contenedorAlertas.innerHTML = '';
-            
-            productos.forEach(producto => {
-                const alerta = document.createElement('div');
-                const esCritico = producto.stock <= producto.stockMinimo/2;
-                const cantidadSugerida = demandaFutura[producto.id] || producto.stockMinimo;
-                const tendencia = calcularTendenciaCrecimiento(producto.id);
-                
-                alerta.className = `alert ${esCritico ? 'alert-danger' : 'alert-warning'}`;
-                alerta.innerHTML = `
-                    <i class="fas fa-${esCritico ? 'exclamation-circle' : 'exclamation-triangle'}"></i>
-                    <div class="alert-content">
-                        <strong>Stock ${esCritico ? 'Crítico' : 'Bajo'}</strong>
-                        <p>${producto.nombre} (${producto.stock} unidades restantes)</p>
-                        <p class="sugerencia">Sugerencia de reposición: ${cantidadSugerida} unidades</p>
-                        <p class="tendencia">Tendencia de crecimiento: ${(tendencia * 100).toFixed(1)}%</p>
-                        <div class="alert-actions">
-                            <button class="btn btn-sm btn-primary" onclick="solicitarReposicion('${producto.id}', ${cantidadSugerida})">
-                                Solicitar Reposición
-                            </button>
-                            <button class="btn btn-sm btn-secondary" onclick="verDetallesProducto('${producto.id}')">
-                                Ver Detalles
-                            </button>
-                            <button class="btn btn-sm btn-info" onclick="verHistorialProducto('${producto.id}')">
-                                Ver Historial
-                            </button>
-                        </div>
-                    </div>
-                `;
-                contenedorAlertas.appendChild(alerta);
-            });
-        }
-
-        // Función para ver historial del producto
-        function verHistorialProducto(productoId) {
-            // Implementar lógica para mostrar historial
-            const historial = obtenerHistorialProducto(productoId);
-            mostrarModalHistorial(historial);
-        }
-
-        // Función para obtener historial del producto
-        function obtenerHistorialProducto(productoId) {
-            // Simular datos de historial
-            return {
-                nombre: 'Papel fotográfico 10x15',
-                movimientos: [
-                    { fecha: '2024-03-15', tipo: 'entrada', cantidad: 100, referencia: 'PED-001' },
-                    { fecha: '2024-03-10', tipo: 'salida', cantidad: 50, referencia: 'PROD-002' },
-                    { fecha: '2024-03-05', tipo: 'entrada', cantidad: 200, referencia: 'PED-003' }
-                ],
-                estadisticas: {
-                    demandaPromedio: 150,
-                    tendenciaCrecimiento: '15%',
-                    rotacionStock: '2.5 veces/mes'
-                }
-            };
-        }
-
-        // Función para mostrar modal de historial
-        function mostrarModalHistorial(historial) {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.innerHTML = `
-                <div class="modal-header">
-                    <h3>Historial de ${historial.nombre}</h3>
-                    <button class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="estadisticas">
-                        <h4>Estadísticas</h4>
-                        <p>Demanda Promedio: ${historial.estadisticas.demandaPromedio} unidades/mes</p>
-                        <p>Tendencia de Crecimiento: ${historial.estadisticas.tendenciaCrecimiento}</p>
-                        <p>Rotación de Stock: ${historial.estadisticas.rotacionStock}</p>
-                    </div>
-                    <div class="movimientos">
-                        <h4>Últimos Movimientos</h4>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Tipo</th>
-                                    <th>Cantidad</th>
-                                    <th>Referencia</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${historial.movimientos.map(m => `
-                                    <tr>
-                                        <td>${m.fecha}</td>
-                                        <td>${m.tipo}</td>
-                                        <td>${m.cantidad}</td>
-                                        <td>${m.referencia}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-
-        // Event listeners para los botones de acción
-        document.getElementById('btnMovimiento').addEventListener('click', () => {
-            document.getElementById('movimientoModal').style.display = 'block';
-            document.getElementById('movimientoModalBackdrop').style.display = 'block';
-        });
-
-        document.getElementById('guardarMovimiento').addEventListener('click', () => {
-            const movimiento = {
-                producto: document.getElementById('productoMovimiento').value,
-                tipo: document.getElementById('tipoMovimiento').value,
-                cantidad: document.getElementById('cantidad').value,
-                fecha: document.getElementById('fechaMovimiento').value,
-                referencia: document.getElementById('referencia').value,
-                notas: document.getElementById('notasMovimiento').value
-            };
-            actualizarInventario(movimiento);
-        });
-
-        // Inicializar estado del inventario
-        document.addEventListener('DOMContentLoaded', () => {
-            verificarAlertasStock();
-        });
-
-    </script>
-
+  </div>
 </body>
-</html> 
+</html>
