@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inventario de Molduras</title>
   <!-- Iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <!-- Estilos principales del sistema -->
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/agenda.css" />
@@ -14,74 +14,157 @@
       margin-left: 250px;
       padding: 20px;
     }
-
     form {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
       margin-bottom: 30px;
     }
-
     form input, form button {
       padding: 8px;
       font-size: 14px;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 30px;
     }
-
     th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: center;
     }
-
     th {
       background-color: #f4f4f4;
     }
-
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
-
     .flex-container {
       display: flex;
       gap: 40px;
       flex-wrap: wrap;
     }
-
     .table-wrapper {
       flex: 1 1 45%;
     }
-
     @media (max-width: 800px) {
       .flex-container {
         flex-direction: column;
       }
-
       form {
         grid-template-columns: 1fr;
       }
-
       .main-content {
         margin-left: 0;
       }
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 20px 40px 20px;
+      background: #f9f9f9;
+    }
+    #btnAgregarMoldura {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-weight: bold;
+    }
+    #btnAgregarMoldura:hover {
+      background: #0056b3;
+    }
+    #formAgregarMoldura {
+      position: fixed;
+      top: 60px;
+      left: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      display: none;
+      z-index: 1000;
+      width: 250px;
+    }
+    #formAgregarMoldura input {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #formAgregarMoldura button {
+      padding: 6px 12px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #formAgregarMoldura button[type="button"]:nth-child(7) {
+      background-color: #28a745;
+      color: white;
+    }
+    #formAgregarMoldura button[type="button"]:nth-child(8) {
+      background-color: #dc3545;
+      color: white;
+    }
+    section {
+      margin-top: 80px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 30px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f4f4f4;
+    }
+    .btnEditar {
+      padding: 4px 8px;
+      font-size: 0.9em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #ffc107;
+      color: #212529;
+    }
+    .btnEditar:hover {
+      background-color: #e0a800;
     }
   </style>
   <script src="../assets/js/agenda.js"></script>
 </head>
 <body>
-  <div class="container agenda-page">
-    <!-- Botón de menú para móvil -->
-    <button class="menu-toggle" id="menuToggle">
-      <span class="menu-icon"></span>
-    </button>
-
-    <!-- Menú lateral -->
-    <div class="sidebar" id="sidebar">
+        <div class="sidebar" id="sidebar">
       <div class="logo">FotoStudio</div>
       <nav class="nav-menu">
         <ul>
@@ -99,74 +182,208 @@
       </nav>
     </div>
 
-    <!-- Contenido principal -->
-    <div class="main-content">
-      <h2>Formulario de Moldura</h2>
+  <button id="btnAgregarMoldura" onclick="mostrarFormularioAgregar()">+ Agregar Moldura</button>
 
-      <form>
-        <input type="text" placeholder="Nombre de Moldura" required>
-        <input type="text" placeholder="Color" required>
-        <input type="text" placeholder="Material" required>
-        <input type="number" step="0.1" placeholder="Ancho (cm)" required>
-        <input type="text" placeholder="Estilo" required>
-        <input type="number" placeholder="Cantidad" required>
-        <button type="submit">Agregar</button>
-      </form>
+  <form id="formAgregarMoldura" onsubmit="return false;">
+    <input type="text" id="nombre" placeholder="Nombre" required />
+    <input type="text" id="color" placeholder="Color" required />
+    <input type="text" id="material" placeholder="Material" required />
+    <input type="text" id="ancho" placeholder="Ancho" required />
+    <input type="text" id="estilo" placeholder="Estilo" required />
+    <input type="number" id="cantidad" placeholder="Cantidad (mts)" required min="0" />
+    <button type="button" onclick="agregarMoldura()">Guardar</button>
+    <button type="button" onclick="ocultarFormulario()">Cancelar</button>
+  </form>
 
-      <div class="flex-container">
-        <!-- Tabla: Inventario -->
-        <div class="table-wrapper">
-          <h3>Inventario de Molduras</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Color</th>
-                <th>Material</th>
-                <th>Ancho (cm)</th>
-                <th>Estilo</th>
-                <th>Cantidad Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Molde Clásico 12A</td>
-                <td>Nogal Oscuro</td>
-                <td>Madera</td>
-                <td>3.5</td>
-                <td>Clásico</td>
-                <td>785</td>
-              </tr>
-              <!-- Agrega más si deseas -->
-            </tbody>
-          </table>
-        </div>
+  <div class="main-content">
+    <section>
+      <h2>Inventario de Molduras</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Color</th>
+            <th>Material</th>
+            <th>Ancho</th>
+            <th>Estilo</th>
+            <th>Cantidad Disponible (mts)</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Molde Clásico 12A</td>
+            <td>Negro</td>
+            <td>Madera</td>
+            <td>5 cm</td>
+            <td>Clásico</td>
+            <td>120</td>
+            <td><button class="btnEditar" onclick="editarFila(this)">Editar</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Moderno 9B</td>
+            <td>Plateado</td>
+            <td>Aluminio</td>
+            <td>3 cm</td>
+            <td>Moderno</td>
+            <td>80</td>
+            <td><button class="btnEditar" onclick="editarFila(this)">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-        <!-- Tabla: Stock actual -->
-        <div class="table-wrapper">
-          <h3>Stock Actual en Almacén</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Molde Clásico 12A</td>
-                <td>93</td>
-              </tr>
-              <!-- Agrega más si deseas -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <section>
+      <h2>Producción Estimada de Marcos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Moldura</th>
+            <th>Metros Disponibles</th>
+            <th>Metros por Marco</th>
+            <th>Marcos Posibles de Producir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Molde Clásico 12A</td>
+            <td>120</td>
+            <td>4</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>Moderno 9B</td>
+            <td>80</td>
+            <td>4</td>
+            <td>20</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Inventario de Marcos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre del Marco</th>
+            <th>Dimensiones</th>
+            <th>Estilo</th>
+            <th>Moldura Usada</th>
+            <th>Cantidad Disponible</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Marco Clásico</td>
+            <td>40x50 cm</td>
+            <td>Clásico</td>
+            <td>Molde Clásico 12A</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Marco Moderno</td>
+            <td>35x45 cm</td>
+            <td>Moderno</td>
+            <td>Moderno 9B</td>
+            <td>20</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </div>
+
+<script>
+  // Mostrar y ocultar formulario
+  function mostrarFormularioAgregar() {
+    document.getElementById('formAgregarMoldura').style.display = 'block';
+  }
+  function ocultarFormulario() {
+    document.getElementById('formAgregarMoldura').style.display = 'none';
+    // Limpiar campos
+    ['nombre','color','material','ancho','estilo','cantidad'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+  }
+
+  // Agregar moldura o actualizar stock si ya existe
+  function agregarMoldura() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const color = document.getElementById('color').value.trim();
+    const material = document.getElementById('material').value.trim();
+    const ancho = document.getElementById('ancho').value.trim();
+    const estilo = document.getElementById('estilo').value.trim();
+    const cantidadStr = document.getElementById('cantidad').value.trim();
+    const cantidad = parseFloat(cantidadStr);
+
+    if (!nombre || !color || !material || !ancho || !estilo || isNaN(cantidad) || cantidad <= 0) {
+      alert('Por favor, completa todos los campos correctamente.');
+      return;
+    }
+
+    const tbody = document.querySelector('table tbody');
+    let filaExistente = null;
+
+    // Buscar si ya existe la moldura idéntica (por nombre, color, material, ancho y estilo)
+    for (let fila of tbody.rows) {
+      const cNombre = fila.cells[1].textContent.trim();
+      const cColor = fila.cells[2].textContent.trim();
+      const cMaterial = fila.cells[3].textContent.trim();
+      const cAncho = fila.cells[4].textContent.trim();
+      const cEstilo = fila.cells[5].textContent.trim();
+
+      if (cNombre === nombre && cColor === color && cMaterial === material && cAncho === ancho && cEstilo === estilo) {
+        filaExistente = fila;
+        break;
+      }
+    }
+
+    if (filaExistente) {
+      // Actualizar la cantidad sumando
+      let cantidadActual = parseFloat(filaExistente.cells[6].textContent);
+      filaExistente.cells[6].textContent = cantidadActual + cantidad;
+      alert('Se ha actualizado la cantidad de la moldura existente.');
+    } else {
+      // Agregar nueva fila
+      const nuevaFila = tbody.insertRow();
+      const numero = tbody.rows.length;
+      nuevaFila.insertCell().textContent = numero;
+      nuevaFila.insertCell().textContent = nombre;
+      nuevaFila.insertCell().textContent = color;
+      nuevaFila.insertCell().textContent = material;
+      nuevaFila.insertCell().textContent = ancho;
+      nuevaFila.insertCell().textContent = estilo;
+      nuevaFila.insertCell().textContent = cantidad;
+      const celdaAcciones = nuevaFila.insertCell();
+      const btnEditar = document.createElement('button');
+      btnEditar.textContent = 'Editar';
+      btnEditar.className = 'btnEditar';
+      btnEditar.onclick = function () {
+        editarFila(btnEditar);
+      };
+      celdaAcciones.appendChild(btnEditar);
+      alert('Moldura agregada al inventario.');
+    }
+
+    ocultarFormulario();
+  }
+
+  // Función básica para editar una fila (solo ejemplo simple)
+  function editarFila(boton) {
+    const fila = boton.parentElement.parentElement;
+    const celdas = fila.cells;
+
+    // Puedes extender esta función para mostrar un formulario con datos para editar
+    // Aquí solo mostramos una alerta con info actual
+    alert(`Editar moldura:\nNombre: ${celdas[1].textContent}\nColor: ${celdas[2].textContent}\nMaterial: ${celdas[3].textContent}\nAncho: ${celdas[4].textContent}\nEstilo: ${celdas[5].textContent}\nCantidad: ${celdas[6].textContent}`);
+  }
+</script>
+
 </body>
 </html>
