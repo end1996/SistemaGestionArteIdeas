@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda y Almacén - Sistema de Gestión Fotográfica</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/tienda-almacen.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menuToggle">
+            <span class="menu-icon"></span>
+        </button>
+        
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <div class="logo">FotoStudio</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pedidos.html" class="nav-link">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contratos.html" class="nav-link">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventario.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produccion.html" class="nav-link">Producción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tienda-almacen.html" class="nav-link active">Tienda y Almacén</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Tienda y Almacén</h1>
+                <div class="user-info">
+                    <span class="user-name">Usuario</span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <!-- Sección de Estado de Cuadros -->
+            <section class="estado-cuadros">
+                <h2>Estado de Cuadros</h2>
+                <div class="filtros">
+                    <div class="filtro-grupo">
+                        <label for="filtroEstado">Estado:</label>
+                        <select id="filtroEstado">
+                            <option value="todos">Todos</option>
+                            <option value="tienda">En Tienda</option>
+                            <option value="almacen">En Almacén</option>
+                            <option value="produccion">En Producción</option>
+                        </select>
+                    </div>
+                    <div class="filtro-grupo">
+                        <label for="filtroCliente">Cliente:</label>
+                        <input type="text" id="filtroCliente" placeholder="Buscar por cliente...">
+                    </div>
+                    <button class="btn btn-primary" onclick="aplicarFiltros()">
+                        <i class="fas fa-filter"></i> Aplicar Filtros
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID Cuadro</th>
+                                <th>Cliente</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                                <th>Ubicación</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCuadros">
+                            <!-- Los datos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Sección de Movimientos -->
+            <section class="movimientos">
+                <h2>Registro de Movimientos</h2>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Nuevo Movimiento</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="formMovimiento">
+                            <div class="form-group">
+                                <label for="idCuadro">ID Cuadro:</label>
+                                <input type="text" id="idCuadro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipoMovimiento">Tipo de Movimiento:</label>
+                                <select id="tipoMovimiento" required>
+                                    <option value="tienda">A Tienda</option>
+                                    <option value="almacen">A Almacén</option>
+                                    <option value="produccion">A Producción</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="observacion">Observación:</label>
+                                <textarea id="observacion" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Registrar Movimiento
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/tienda-almacen.js"></script>
+</body>
+</html> 
